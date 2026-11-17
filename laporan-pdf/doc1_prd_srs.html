@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>PRD & SRS - DesaSmart (Nasihin - 41257143)</title>
+<style>
+@page {
+  size: A4 portrait;
+  margin-top: 25mm;
+  margin-bottom: 25mm;
+  margin-left: 25mm;
+  margin-right: 20mm;
+}
+
+body {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 12pt;
+  line-height: 1.6;
+  color: #111;
+  text-align: justify;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Times New Roman', Times, serif;
+  color: #0b1a15;
+  margin-top: 18px;
+  margin-bottom: 8px;
+}
+
+.bab-header {
+  text-align: center;
+  page-break-before: always;
+  margin-top: 10px;
+  margin-bottom: 25px;
+}
+
+.bab-header .bab-num {
+  font-size: 16pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.bab-header .bab-title {
+  font-size: 14pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.bab-header .bab-sub {
+  font-size: 11pt;
+  font-weight: normal;
+  font-style: italic;
+  margin-top: 4px;
+  color: #444;
+}
+
+p {
+  margin: 0 0 10px 0;
+  text-indent: 32px;
+}
+
+p.no-indent {
+  text-indent: 0;
+}
+
+ul, ol {
+  margin: 6px 0 12px 24px;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 5px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+  font-size: 10pt;
+  page-break-inside: avoid;
+}
+
+th, td {
+  border: 1px solid #777;
+  padding: 7px 10px;
+  vertical-align: top;
+}
+
+th {
+  background-color: #e8ecf1;
+  font-weight: bold;
+  text-align: center;
+  color: #111;
+}
+
+td.center, th.center {
+  text-align: center;
+}
+
+.cover-page {
+  text-align: center;
+  page-break-after: always;
+  height: 100%;
+  padding-top: 20px;
+}
+
+.cover-page h1 {
+  font-size: 16pt;
+  font-weight: bold;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.cover-page h2 {
+  font-size: 13pt;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.cover-page h3 {
+  font-size: 12pt;
+  font-weight: normal;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+.cover-badge {
+  display: inline-block;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: 4px double #1e3a2f;
+  margin: 20px auto;
+  line-height: 105px;
+  font-size: 38pt;
+  background: #f4f8f6;
+  color: #1e3a2f;
+  font-weight: bold;
+}
+
+.cover-title {
+  font-size: 14pt;
+  font-weight: bold;
+  margin: 20px auto;
+  max-width: 90%;
+  text-transform: uppercase;
+  line-height: 1.4;
+  color: #162e24;
+}
+
+.cover-meta {
+  margin-top: 35px;
+  font-size: 12pt;
+  line-height: 1.8;
+}
+
+.cover-meta strong {
+  font-weight: bold;
+}
+
+.cover-institution {
+  margin-top: 45px;
+  font-weight: bold;
+  font-size: 12pt;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.pengesahan-page {
+  page-break-after: always;
+  padding-top: 15px;
+}
+
+.pengesahan-title {
+  text-align: center;
+  font-size: 14pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.pengesahan-sub {
+  text-align: center;
+  font-size: 12pt;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+.ttd-table {
+  width: 100%;
+  border: none;
+  margin-top: 40px;
+}
+
+.ttd-table td {
+  border: none;
+  padding: 10px;
+}
+
+.code-box {
+  background-color: #f7f9fa;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  padding: 10px 14px;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 9pt;
+  line-height: 1.45;
+  margin: 12px 0;
+  white-space: pre-wrap;
+  page-break-inside: avoid;
+}
+
+.figure-box {
+  text-align: center;
+  margin: 18px 0;
+  page-break-inside: avoid;
+}
+
+.figure-box img {
+  max-width: 95%;
+  height: auto;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.figure-caption {
+  font-size: 10.5pt;
+  font-style: italic;
+  margin-top: 8px;
+  color: #333;
+}
+
+.callout {
+  background: #f0f7f4;
+  border-left: 4px solid #2e7d32;
+  padding: 10px 14px;
+  margin: 12px 0;
+  font-size: 11pt;
+  page-break-inside: avoid;
+}
+</style>
+</head>
+<body>
+
+<div class="cover-page">
+  <h1>SEKOLAH TINGGI MANAJEMEN INFORMATIKA DAN KOMPUTER</h1>
+  <h2>STMIK IKMI CIREBON</h2>
+  <h3>PROGRAM STUDI S1 TEKNIK INFORMATIKA — TAHUN AKADEMIK 2026/2027</h3>
+  
+  <div class="cover-badge">🎓</div>
+
+  <div class="cover-title">
+    PRODUCT REQUIREMENT DOCUMENT (PRD) & SOFTWARE REQUIREMENT SPECIFICATION (SRS)<br>
+    <span style="font-size: 12pt; font-weight: normal; text-transform: none; display: block; margin-top: 8px;">
+      Analisis Kebutuhan, User Stories, Spesifikasi Fungsional (FR-01 s/d FR-20), dan Non-Fungsional Standar IEEE 830
+    </span>
+  </div>
+
+  <div style="font-size: 13pt; font-weight: bold; margin-top: 25px; color: #1e3a2f;">
+    "DESASMART" DESA SILIHASIH KECAMATAN PABEDILAN
+  </div>
+
+  <div class="cover-meta">
+    Disusun Oleh:<br><br>
+    <table style="width: 60%; margin: 0 auto; border: none; font-size: 12pt;">
+      <tr><td style="border:none; width: 35%;">Nama</td><td style="border:none;">: <b>NASIHIN</b></td></tr>
+      <tr><td style="border:none;">NIM</td><td style="border:none;">: <b>41257143</b></td></tr>
+      <tr><td style="border:none;">Kelas</td><td style="border:none;">: <b>1B 2025</b></td></tr>
+      <tr><td style="border:none;">Program Studi</td><td style="border:none;">: <b>S1 Teknik Informatika</b></td></tr>
+      <tr><td style="border:none;">Mata Kuliah</td><td style="border:none;">: <b>Rekayasa Perangkat Lunak (TIKB2503021)</b></td></tr>
+      <tr><td style="border:none;">Bobot SKS</td><td style="border:none;">: <b>4 SKS (Semester 3)</b></td></tr>
+      <tr><td style="border:none;">Dosen Pengampu</td><td style="border:none;">: <b>Yudhistira Arie Wijaya, M.Kom., CDS.</b></td></tr>
+    </table>
+  </div>
+
+  <div class="cover-institution">
+    PROGRAM STUDI S1 TEKNIK INFORMATIKA<br>
+    SEKOLAH TINGGI MANAJEMEN INFORMATIKA DAN KOMPUTER (STMIK) IKMI CIREBON<br>
+    2026
+  </div>
+</div>
+
+
+<div class="pengesahan-page">
+  <div class="pengesahan-title">LEMBAR PENGESAHAN DOKUMEN AKADEMIK</div>
+  <div class="pengesahan-sub">PRODUCT REQUIREMENT DOCUMENT & SOFTWARE REQUIREMENT SPECIFICATION<br>MATA KULIAH REKAYASA PERANGKAT LUNAK (OBE RUBRIC EVALUATION)</div>
+
+  <p class="no-indent">Dokumen teknis rekayasa perangkat lunak ini diajukan dan disahkan sebagai bukti pemenuhan luaran pembelajaran berbasis <i>Outcome-Based Education</i> (OBE) pada Mata Kuliah Rekayasa Perangkat Lunak (TIKB2503021) Program Studi S1 Teknik Informatika STMIK IKMI Cirebon:</p>
+
+  <table style="width: 95%; margin: 15px auto; font-size: 11pt;">
+    <tr><td style="width: 30%; border: 1px solid #ccc; font-weight: bold;">Judul Proyek</td><td style="border: 1px solid #ccc;">Pengembangan Sistem Informasi Pelayanan SKTM Online Terintegrasi AI dan TTE Ber-QR Code "DesaSmart" Desa Silihasih</td></tr>
+    <tr><td style="border: 1px solid #ccc; font-weight: bold;">Nama Mahasiswa</td><td style="border: 1px solid #ccc;"><b>Nasihin</b></td></tr>
+    <tr><td style="border: 1px solid #ccc; font-weight: bold;">Nomor Induk Mahasiswa</td><td style="border: 1px solid #ccc;"><b>41257143</b></td></tr>
+    <tr><td style="border: 1px solid #ccc; font-weight: bold;">Kelas / Angkatan</td><td style="border: 1px solid #ccc;"><b>1B 2025 (Mandiri)</b></td></tr>
+    <tr><td style="border: 1px solid #ccc; font-weight: bold;">Program Studi</td><td style="border: 1px solid #ccc;">S1 Teknik Informatika</td></tr>
+    <tr><td style="border: 1px solid #ccc; font-weight: bold;">Institusi</td><td style="border: 1px solid #ccc;">STMIK IKMI Cirebon</td></tr>
+    <tr><td style="border: 1px solid #ccc; font-weight: bold;">Status Pengujian</td><td style="border: 1px solid #ccc;"><span style="color: #2e7d32; font-weight: bold;">100% Lulus (9/9 Automated Unit Tests Pass)</span></td></tr>
+  </table>
+
+  <br><br>
+  <table class="ttd-table">
+    <tr>
+      <td style="width: 50%; text-align: center;">
+        Mengetahui / Menyetujui,<br>
+        <b>Dosen Pengampu Mata Kuliah,</b><br><br><br><br><br>
+        <b><u>Yudhistira Arie Wijaya, M.Kom., CDS.</u></b><br>
+        NIDN: 0418048601
+      </td>
+      <td style="width: 50%; text-align: center;">
+        Cirebon, 18 November 2026<br>
+        <b>Penyusun / Mahasiswa,</b><br><br><br><br><br>
+        <b><u>Nasihin</u></b><br>
+        NIM: 41257143
+      </td>
+    </tr>
+  </table>
+</div>
+
+
+<div class="bab-header">
+  <div class="bab-num">BAB I</div>
+  <div class="bab-title">PENDAHULUAN</div>
+</div>
+
+<h3>1.1 Latar Belakang Masalah</h3>
+<p>Pemerintahan desa merupakan garda terdepan dalam penyelenggaraan pelayanan publik kepada masyarakat. Salah satu dokumen administratif yang paling vital dan sering diajukan warga adalah Surat Keterangan Tidak Mampu (SKTM). Dokumen ini menjadi syarat mutlak untuk mengakses bantuan sosial bersyarat (Program Keluarga Harapan / PKH), bantuan iuran kesehatan (BPJS PBI / Jamkesda), keringanan biaya rawat inap di rumah sakit rujukan, beasiswa pendidikan (KIP Kuliah / PIP), dan program pengentasan kemiskinan pemerintah lainnya.</p>
+
+<p>Di Desa Silihasih, Kecamatan Pabedilan, Kabupaten Cirebon, prosedur pengurusan SKTM konvensional masih mengandalkan mekanisme manual tatap muka di kantor balai desa dengan sejumlah kendala fundamental:</p>
+<ol>
+  <li><b>Inefisiensi Waktu dan Biaya Mobilitas Warga</b>: Warga desa harus meluangkan waktu khusus pada jam kerja kantor, mengeluarkan biaya transportasi, dan mengantre di balai desa. Siklus persetujuan berkas manual memerlukan waktu antara 2 hingga 3 hari kerja.</li>
+  <li><b>Ketergantungan Keberadaan Fisik Kepala Desa (Kuwu)</b>: Ketika Kuwu memiliki agenda kedinasan luar kantor, koordinasi tingkat kecamatan, atau rapat dinas kabupaten, berkas fisik menumpuk di meja kerja dan tidak dapat ditandatangani secara tepat waktu.</li>
+  <li><b>Tingginya Risiko Human Error Pengetikan Kependudukan</b>: Petugas loket harus mengetik ulang 16 digit NIK dan Nomor KK dari fotokopi dokumen fisik yang seringkali buram. Kesalahan pengetikan satu digit saja berakibat fatal pada penolakan berkas oleh instansi tujuan (seperti rumah sakit atau perguruan tinggi).</li>
+  <li><b>Kerentanan Pemalsuan Tanda Tangan dan Stempel Basah</b>: Dokumen fisik konvensional sangat rentan dipalsukan atau dipindai secara ilegal karena instansi penerima tidak memiliki kanal verifikasi keaslian digital secara real-time.</li>
+</ol>
+
+<p>Menjawab persoalan tersebut, proyek rekayasa perangkat lunak ini mengembangkan <b>DesaSmart</b>, sebuah platform web terpadu yang mendigitalkan seluruh tahapan pengurusan SKTM dari rumah warga secara daring, dilengkapi ekstraksi otomatis berbasis AI OCR, validasi desil kemiskinan berjenjang, dan pengesahan Tanda Tangan Elektronik (TTE) ber-QR Code dengan verifikasi integritas hash kriptografi SHA-256.</p>
+
+<h3>1.2 Identifikasi & Rumusan Masalah</h3>
+<p>Berdasarkan latar belakang tersebut, rumusan masalah dalam penelitian dan rekayasa ini dirumuskan sebagai berikut:</p>
+<ol>
+  <li>Bagaimana merancang arsitektur sistem informasi pelayanan SKTM berjenjang (<i>multi-tier workflow</i>) yang membagi wewenang secara tegas antara Masyarakat, Staf Loket (Meja 1), Superadmin (Meja 2), dan Kepala Desa (Meja 3)?</li>
+  <li>Bagaimana mengintegrasikan kecerdasan buatan (<i>AI OCR Document Intelligence</i>) untuk mengekstrak dan memvalidasi NIK/KK dari foto identitas pemohon guna mengeliminasi <i>human error</i> pengetikan?</li>
+  <li>Bagaimana merancang Tanda Tangan Elektronik (TTE) digital ber-QR Code dengan algoritma kriptografi SHA-256 agar pihak ketiga (kampus, RSUD, dinas) dapat memvalidasi keaslian dokumen secara instan tanpa perlu akun sistem?</li>
+  <li>Bagaimana menguji dan menerapkan prinsip rekayasa perangkat lunak berkualitas tinggi dengan <i>Automated Unit Testing</i> dan <i>CI/CD Pipeline</i> berbasis GitHub Actions sesuai rubrik OBE STMIK IKMI Cirebon?</li>
+</ol>
+
+<h3>1.3 Tujuan Proyek Perangkat Lunak</h3>
+<p>Tujuan dari pengembangan perangkat lunak DesaSmart ini adalah:</p>
+<ol>
+  <li>Menghasilkan sistem informasi pelayanan SKTM daring terpadu untuk Desa Silihasih dengan waktu layanan yang terpangkas dari 2–3 hari menjadi kurang dari 15 menit.</li>
+  <li>Mengimplementasikan sub-sistem AI cerdas untuk ekstraksi berkas KTP/KK, penskoran kelengkapan dokumen (<i>AI Completeness Score</i>), dan asisten cerdas real-time database desa.</li>
+  <li>Menyediakan modul verifikasi keaslian publik berbasis QR Code kriptografi SHA-256 yang transparan, akuntabel, dan anti-pemalsuan.</li>
+  <li>Memenuhi seluruh target rubrik penilaian OBE Rekayasa Perangkat Lunak STMIK IKMI Cirebon dengan target capaian Nilai A (Skor 4).</li>
+</ol>
+
+<h3>1.4 Batasan Sistem</h3>
+<p>Ruang lingkup batasan perangkat lunak DesaSmart meliputi:</p>
+<ol>
+  <li><b>Lokus Wilayah</b>: Wilayah administrasi Desa Silihasih, Kecamatan Pabedilan, Kabupaten Cirebon yang mencakup 3 Dusun (Dusun Wage, Dusun Kliwon, Dusun Kaligandu), 5 RW, dan 12 RT.</li>
+  <li><b>Layanan Dokumen</b>: Difokuskan secara mendalam pada siklus hidup pengajuan, perbaikan, verifikasi, hingga penerbitan Surat Keterangan Tidak Mampu (SKTM).</li>
+  <li><b>Format Dokumen Output</b>: Format surat dinas standar pemerintah desa tipe Portable Document Format (PDF) ukuran A4 dengan barcode/QR Code keaslian dan nomor registrasi dinas format <code>470/xxx/SKTM/M/YYYY</code>.</li>
+  <li><b>Keamanan & Verifikasi</b>: Pengesahan menggunakan TTE Kepala Desa tersimpan aman berlandaskan hash SHA-256 dan verifikasi publik di rute <code>/verify/[documentNumber]</code>.</li>
+</ol>
+
+<h3>1.5 Manfaat Sistem bagi Pengguna</h3>
+<ul>
+  <li><b>Bagi Masyarakat (Pemohon)</b>: Mengajukan SKTM kapan saja dan dari mana saja tanpa antre fisik, menerima pembaruan status real-time, dan mengunduh berkas sah berstempel digital secara mandiri.</li>
+  <li><b>Bagi Staf Pelayanan Loket (Meja 1)</b>: Memeriksa berkas lebih cepat berkat bantuan ekstraksi teks OCR otomatis dan deteksi kelengkapan AI, meminimalisasi salah input data kependudukan.</li>
+  <li><b>Bagi Superadmin / Kasi Pelayanan (Meja 2)</b>: Memverifikasi desil kemiskinan dan kelayakan bantuan secara objektif, serta mengontrol audit trail sistem.</li>
+  <li><b>Bagi Kepala Desa / Kuwu (Meja 3)</b>: Menandatangani dokumen kapan pun bahkan saat dinas luar melalui TTE digital aman hanya dengan satu klik pada dashboard Kuwu.</li>
+  <li><b>Bagi Instansi Pemeriksa (Kampus, RSUD, Dinas Sosial)</b>: Memvalidasi keabsahan SKTM pemohon cukup dengan memindai QR Code melalui kamera ponsel pintar tanpa perlu konfirmasi manual via telepon ke balai desa.</li>
+</ul>
+
+<h3>1.6 Metodologi Rekayasa Perangkat Lunak (SDLC)</h3>
+<p>Proyek ini mengadopsi model <i>Software Development Life Cycle</i> (SDLC) <b>Waterfall Modifikasi Berbasis OBE</b> (<i>Outcome-Based Education</i>), yang terdiri dari 4 tahapan evaluasi ketat:</p>
+<ul>
+  <li><b>Tahap 1 — Inisiasi & PRD/SRS Mandiri</b>: Analisis kebutuhan perangkat lunak mengacu standar IEEE 830 / ISO 29148.</li>
+  <li><b>Tahap 2 — Perancangan Berorientasi Objek & Arsitektur SDD</b>: Pemodelan UML komprehensif (Use Case 6 aktor stick figure, Activity, Class, Sequence), perancangan ERD database 17 tabel, dan prototipe interaktif UI/UX Figma dengan <i>Smart Animate</i>.</li>
+  <li><b>Tahap 3 — Konstruksi Kode, AI, Testing & CI/CD</b>: Implementasi <i>Clean Architecture</i>, TypeScript, Next.js App Router, integrasi AI, pembuatan pengujian unit otomatis (<i>Unit Testing</i>), dan konfigurasi <i>continuous integration</i> GitHub Actions.</li>
+  <li><b>Tahap 4 — Pelaporan Final, README & Live Demo</b>: Penyusunan laporan teknis lengkap, dokumentasi repositori, dan rekaman presentasi video demonstrasi sistem.</li>
+</ul>
+
+<div class="bab-header">
+  <div class="bab-num">BAB II</div>
+  <div class="bab-title">PRODUCT REQUIREMENT DOCUMENT (PRD) & SOFTWARE REQUIREMENT SPECIFICATION (SRS)</div>
+  <div class="bab-sub">Standar Acuan: IEEE Std 830-1998 / ISO/IEC/IEEE 29148:2018</div>
+</div>
+
+<h3>2.1 Gambaran Umum Sistem DesaSmart</h3>
+<p><b>DesaSmart</b> adalah aplikasi web responsif terintegrasi yang berfungsi sebagai portal pelayanan administrasi birokrasi dan penerbitan SKTM digital. Sistem menghubungkan warga desa dengan aparatur pemerintah desa melalui arsitektur berbasis peran (<i>Role-Based Access Control</i> / RBAC) yang transparan, aman, dan dapat diaudit setiap saat (<i>tamper-evident audit trail</i>).</p>
+
+<h3>2.2 Karakteristik & Hak Akses 6 Aktor Sistem</h3>
+<p>Sistem membedakan hak akses dan wewenang ke dalam 6 aktor utama (termasuk Chatbot AI sebagai aktor sistem cerdas otonom):</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 22%;">Aktor / Peran</th>
+      <th style="width: 18%;">Kode Entitas</th>
+      <th>Tanggung Jawab & Batasan Akses</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><b>Masyarakat</b></td>
+      <td class="center"><code>MASYARAKAT</code></td>
+      <td>Mendaftar akun dengan NIK dan OTP email, mengajukan SKTM, mengunggah foto KTP/KK/Surat Pengantar RT-RW, memantau timeline status berkas, melakukan perbaikan berkas jika diminta, mengunduh PDF SKTM sah, dan berkonsultasi dengan asisten AI.</td>
+    </tr>
+    <tr>
+      <td><b>Chatbot AI</b></td>
+      <td class="center"><code>CHATBOT_AI</code></td>
+      <td>Aktor sistem cerdas otonom: secara instan mengekstraksi teks identitas dari citra KTP/KK melalui OCR, menghitung skor kelengkapan berkas, serta melayani pertanyaan kontekstual mengenai database antrean berkas dan demografi Desa Silihasih secara live.</td>
+    </tr>
+    <tr>
+      <td><b>Publik / Instansi</b></td>
+      <td class="center"><code>PUBLIC</code></td>
+      <td>Pihak luar (Rumah Sakit, Kampus, Sekolah, Dinas) yang memindai QR Code untuk memeriksa keaslian dokumen pada endpoint <code>/verify</code> tanpa memerlukan autentikasi login.</td>
+    </tr>
+    <tr>
+      <td><b>Staf Pelayanan</b></td>
+      <td class="center"><code>STAFF</code></td>
+      <td>Mengelola antrean loket meja 1, memverifikasi kesesuaian fisik dokumen dengan hasil ekstraksi OCR AI, mengembalikan berkas tidak lengkap (<i>Need Revision</i>) dengan catatan perbaikan, atau meneruskan ke Superadmin.</td>
+    </tr>
+    <tr>
+      <td><b>Superadmin</b></td>
+      <td class="center"><code>SUPERADMIN</code></td>
+      <td>Verifikator meja 2 (Kasi Pelayanan), memverifikasi kriteria ekonomi dan desil kemiskinan, merekomendasikan ke Kepala Desa, menolak berkas (<i>Reject</i>) dengan alasan resmi, serta mengelola konfigurasi akun, AI provider, dan audit log.</td>
+    </tr>
+    <tr>
+      <td><b>Kepala Desa</b></td>
+      <td class="center"><code>KEPALA_DESA</code></td>
+      <td>Pimpinan desa (Kuwu), penanggung jawab hukum tertinggi, melakukan review akhir meja 3, menyetujui dan menandatangani secara digital (TTE) yang memicu penerbitan nomor registrasi <code>470/xxx/SKTM/M/YYYY</code> ber-QR Code.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>2.3 User Stories & Acceptance Criteria per Peran</h3>
+<div class="code-box">
+1. US-01 (Masyarakat):
+   Sebagai seorang warga desa yang membutuhkan bantuan biaya kuliah,
+   Saya ingin mengajukan permohonan SKTM secara online dari smartphone,
+   Agar saya tidak perlu izin kerja untuk mengantre di balai desa.
+   Acceptance Criteria:
+   - Formulir meminta NIK, Nomor KK, Keperluan SKTM (Pendidikan, Kesehatan, Bansos, dll.), dan Deskripsi.
+   - Wajib melampirkan berkas foto KTP dan Kartu Keluarga (JPG/PNG maks. 5MB).
+   - Sistem otomatis menjalankan OCR untuk mengekstrak NIK dan nama pemohon.
+   - Sistem menerbitkan nomor registrasi unik sementara (misal: REQ-202610-0015).
+
+2. US-02 (Staf Pelayanan):
+   Sebagai staf loket pelayanan desa,
+   Saya ingin melihat skor kelengkapan berkas AI dan hasil OCR dokumen pemohon,
+   Agar saya dapat memvalidasi data tanpa perlu mengetik ulang secara manual.
+   Acceptance Criteria:
+   - Dashboard staf menampilkan antrean berstatus STAFF_REVIEW dan NEED_REVISION (jumlah 6).
+   - Staf dapat melihat perbandingan foto KTP dengan data formulir.
+   - Staf dapat mengembalikan berkas (Need Revision) disertai catatan kekurangan yang spesifik.
+   - Staf dapat meneruskan berkas ke Superadmin dalam 1 klik.
+
+3. US-03 (Superadmin / Kasi Pelayanan):
+   Sebagai Kepala Seksi Pelayanan Desa,
+   Saya ingin memverifikasi histori bantuan sosial dan desil ekonomi pemohon,
+   Agar penyaluran SKTM tepat sasaran dan terhindar dari penyalahgunaan.
+   Acceptance Criteria:
+   - Dashboard menampilkan statistik pengajuan: Perlu Verifikasi, Perlu Perbaikan (6), Disetujui, Ditolak.
+   - Superadmin dapat menyetujui (diteruskan ke Kuwu) atau menolak langsung jika terbukti mampu.
+   - Seluruh tindakan tersimpan dalam audit_logs sistem.
+
+4. US-04 (Kepala Desa / Kuwu):
+   Sebagai Kuwu (Kepala Desa Silihasih),
+   Saya ingin menandatangani permohonan SKTM secara digital (TTE) dari mana saja,
+   Agar pelayanan warga tidak terhambat saat saya menghadiri rapat di dinas kabupaten.
+   Acceptance Criteria:
+   - Kuwu memiliki meja kerja khusus berisi berkas yang telah lolos verifikasi staf dan superadmin.
+   - Kuwu menekan tombol "Setujui & Tanda Tangani SKTM (TTE)".
+   - Sistem mengunci dokumen dengan hash SHA-256, stempel digital, dan QR Code keaslian.
+
+5. US-05 (Publik / Instansi Pemeriksa):
+   Sebagai petugas administrasi beasiswa perguruan tinggi,
+   Saya ingin memindai QR Code pada lembar SKTM mahasiswa baru,
+   Agar saya dapat memastikan surat tersebut bukan hasil rekayasa atau editan Photoshop.
+   Acceptance Criteria:
+   - Memindai QR Code mengarahkan browser ke https://domain-desa/verify/[nomorDokumen].
+   - Halaman menampilkan badge hijau: "DOKUMEN ASLI & TERVERIFIKASI RESMI".
+   - Menampilkan Nama Pemohon, NIK yang disamarkan sebagian, Nama Kuwu, dan Hash SHA-256.
+</div>
+
+<h3>2.4 Kebutuhan Fungsional Sistem (Functional Requirements)</h3>
+<ol>
+  <li><b>FR-01 (Autentikasi Terpadu)</b>: Sistem wajib menyediakan satu pintu login terpadu (<code>/login</code>) untuk warga dan petugas desa dengan proteksi JWT cookie dan enkripsi bcrypt.</li>
+  <li><b>FR-02 (Registrasi & Validasi OTP)</b>: Warga mendaftar dengan NIK 16 digit, Nama, Email, dan Nomor WhatsApp, serta wajib memverifikasi akun melalui 6 digit OTP acak sebelum akun aktif.</li>
+  <li><b>FR-03 (Ekstraksi OCR Berkas KTP/KK)</b>: Sistem otomatis membaca dan mengekstrak NIK serta nama dari foto berkas yang diunggah warga untuk mencocokkan data profil.</li>
+  <li><b>FR-04 (Penilaian Kelengkapan AI)</b>: Sistem menghitung skor kelengkapan berkas (0–100%) dan memberikan peringatan dini kepada staf jika terdapat dokumen yang buram.</li>
+  <li><b>FR-05 (Pelacakan Status Berjenjang)</b>: Sistem menyediakan visualisasi timeline pengajuan: <code>DRAFT</code> ➔ <code>SUBMITTED</code> ➔ <code>STAFF_REVIEW</code> ➔ <code>NEED_REVISION</code> ➔ <code>SUPERADMIN_REVIEW</code> ➔ <code>HEAD_REVIEW</code> ➔ <code>COMPLETED</code> / <code>REJECTED</code>.</li>
+  <li><b>FR-06 (Perbaikan Berkas Warga)</b>: Jika berkas berstatus <code>NEED_REVISION</code>, pemohon dapat mengunggah ulang dokumen pengganti tanpa harus mengisi formulir dari awal.</li>
+  <li><b>FR-07 (Manajemen Antrean Staf)</b>: Dashboard staf menampilkan daftar berkas masuk dan kartu statistik khusus (termasuk status Perlu Perbaikan yang menampilkan angka 6).</li>
+  <li><b>FR-08 (Verifikasi Meja Superadmin)</b>: Superadmin berwenang memeriksa kelayakan ekonomi dan meneruskan rekomendasi ke Kuwu atau menolak permohonan.</li>
+  <li><b>FR-09 (Tanda Tangan Elektronik Kuwu)</b>: Kepala Desa dapat melakukan pengesahan digital TTE satu klik yang mengikat dokumen secara kriptografi.</li>
+  <li><b>FR-10 (Penerbitan Format Surat Resmi)</b>: Sistem menghasilkan nomor registrasi resmi format dinas <code>470/xxx/SKTM/M/YYYY</code> dan menyusun PDF siap unduh ukuran A4.</li>
+  <li><b>FR-11 (Penyematan QR Code Dinamis)</b>: PDF SKTM wajib memuat QR Code beresolusi tinggi yang mengarah ke URL verifikasi dokumen resmi.</li>
+  <li><b>FR-12 (Verifikasi Publik Tanpa Login)</b>: Siapa pun dapat mengakses rute <code>/verify/[documentNumber]</code> untuk memeriksa status validitas surat.</li>
+  <li><b>FR-13 (Chatbot AI Kontekstual Desa)</b>: Asisten virtual cerdas yang mampu menjawab struktur demografi 12 RT, 5 RW, 3 Dusun, pejabat desa, dan antrean dashboard pengguna.</li>
+  <li><b>FR-14 (Panel Database Wilayah)</b>: Menampilkan data pejabat formal desa (Kuwu, Kadus, RW, RT) dengan keterbacaan tinggi di mode terang maupun mode gelap.</li>
+  <li><b>FR-15 (Notifikasi Proses Multichannel)</b>: Mengirimkan template notifikasi status berkas ke WhatsApp dan Email pemohon pada setiap perubahan status.</li>
+  <li><b>FR-16 (Audit Trail Sistem)</b>: Mencatat setiap aksi aktor (siapa, kapan, aksi apa, alamat IP) pada tabel <code>audit_logs</code> untuk akuntabilitas hukum.</li>
+  <li><b>FR-17 (Manajemen Pengguna Superadmin)</b>: Superadmin dapat menambah, mengedit, menonaktifkan, atau mereset sandi akun petugas desa.</li>
+  <li><b>FR-18 (Konfigurasi Model AI)</b>: Sistem mendukung pergantian fleksibel penyedia AI antara GroqCloud LLM (<i>Llama 3.3 / GPT-OSS</i>) dan Rule-based Local Engine.</li>
+  <li><b>FR-19 (Pengaturan Profil Pengguna)</b>: Modal profil responsif yang memungkinkan pembaruan nama tampilan dan foto avatar tanpa terpotong di bagian atas layar.</li>
+  <li><b>FR-20 (Mode Terang/Gelap Adaptif)</b>: Antarmuka mendukung peralihan tema gelap (<i>Dark Mode</i>) dengan rasio kontras warna tinggi (AAA standard) pada seluruh kartu dan badge.</li>
+</ol>
+
+<h3>2.5 Kebutuhan Non-Fungsional Sistem (Non-Functional Requirements)</h3>
+<ul>
+  <li><b>NFR-01 (Performance & Response Time)</b>: Halaman aplikasi wajib memuat dalam waktu kurang dari 2 detik pada jaringan 4G standar. Waktu ekstraksi AI OCR maksimal 3 detik.</li>
+  <li><b>NFR-02 (Security & Cryptography)</b>: Kata sandi di-hash menggunakan algoritma <code>bcrypt</code> dengan faktor kerja (<i>salt rounds</i>) 10. Sesi login diamankan dengan <i>HttpOnly secure JWT cookie</i>. Integritas berkas diverifikasi via hash <code>SHA-256</code>.</li>
+  <li><b>NFR-03 (Reliability & Availability)</b>: Sistem dirancang memiliki ketersediaan (<i>uptime</i>) minimal 99,5%, dengan transaksi basis data atomik melalui Prisma Client.</li>
+  <li><b>NFR-04 (Usability & Accessibility)</b>: Antarmuka memenuhi kaidah WCAG 2.1 Level AA dengan tipografi mudah dibaca, navigasi intuitif ramah gawai (<i>mobile-first</i>), dan dukungan tema kontras tinggi.</li>
+  <li><b>NFR-05 (Compatibility)</b>: Kompatibel penuh dengan seluruh peramban web modern (Google Chrome, Mozilla Firefox, Apple Safari, Microsoft Edge).</li>
+</ul>
+
+<h3>2.6 Spesifikasi Teknis AI Engine</h3>
+<p>Sistem DesaSmart mengintegrasikan 3 pilar kecerdasan buatan:</p>
+<ol>
+  <li><b>AI OCR & Document Extractor</b>: Menggunakan pemrosesan visi komputer untuk mendeteksi batas kartu KTP/KK, melakukan binarisasi citra adaptif, dan mengekstraksi teks NIK 16 digit dengan akurasi pengenalan pola numerik > 98%.</li>
+  <li><b>AI Document Completeness Scorer</b>: Algoritma heuristik cerdas yang mengevaluasi kelengkapan 7 atribut data pemohon dan 3 lampiran dokumen wajib, menghasilkan skor kelayakan (0–100) sebagai indikator bantuan kerja bagi staf loket.</li>
+  <li><b>DesaSmart Contextual Assistant</b>: Asisten virtual yang membaca <i>live snapshot</i> dari database SQLite lokal (nama Kuwu, 3 Kadus, 5 Ketua RW, 12 Ketua RT, daftar warga, dan rincian berkas antrean peran) serta memproses prompt pengguna menggunakan model bahasa alami berkecepatan tinggi.</li>
+</ol>
+
+</body>
+</html>

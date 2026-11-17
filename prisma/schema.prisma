@@ -1,0 +1,328 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Role {
+  id          String   @id @default(uuid())
+  name        String   @unique // MASYARAKAT, STAFF, SUPERADMIN, KEPALA_DESA
+  displayName String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  users       User[]
+
+  @@map("roles")
+}
+
+model Village {
+  id               String        @id @default(uuid())
+  name             String
+  code             String        @unique
+  district         String        // Kecamatan
+  regency          String        // Kabupaten
+  province         String        // Provinsi
+  postalCode       String
+  address          String
+  phone            String?
+  email            String?
+  website          String?
+  headVillageName  String        // Nama Kepala Desa
+  headVillageNip   String?       // NIP Kepala Desa jika ada
+  logoUrl          String?
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+  users            User[]
+  applications     Application[]
+  rukunWarga       RukunWarga[]
+
+  @@map("villages")
+}
+
+// Daftar resmi Rukun Warga (RW) per dusun — sumber acuan validasi alamat & jawaban AI.
+model RukunWarga {
+  id        String   @id @default(uuid())
+  villageId String
+  dusun     String // contoh "Dusun Wage"
+  code      String // nomor RW, format 3 digit: "001"
+  name      String // label tampil: "RW 001"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  village   Village          @relation(fields: [villageId], references: [id], onDelete: Cascade)
+  rukunTetangga RukunTetangga[]
+
+  @@unique([villageId, code])
+  @@map("rukun_warga")
+}
+
+// Daftar resmi Rukun Tetangga (RT) di bawah setiap RW.
+model RukunTetangga {
+  id        String   @id @default(uuid())
+  rwId      String
+  code      String // nomor RT, format 3 digit: "007"
+  name      String // label tampil: "RT 007"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  rw        RukunWarga @relation(fields: [rwId], references: [id], onDelete: Cascade)
+
+  @@unique([rwId, code])
+  @@map("rukun_tetangga")
+}
+
+model User {
+  id                String                     @id @default(uuid())
+  email             String                     @unique
+  password          String
+  name              String
+  phone             String?
+  roleId            String
+  villageId         String?
+  avatarUrl         String?
+  isActive          Boolean                    @default(true)
+  isVerified        Boolean                    @default(true) // akun lama/petugas = true; daftar masyarakat baru = false sampai OTP benar
+  otpCode           String?                    // hash bcrypt kode OTP 6 digit
+  otpExpiresAt      DateTime?
+  otpSentAt         DateTime?                  // untuk cooldown kirim ulang
+  createdAt         DateTime                   @default(now())
+  updatedAt         DateTime                   @updatedAt
+
+  role              Role                       @relation(fields: [roleId], references: [id])
+  village           Village?                   @relation(fields: [villageId], references: [id])
+  citizen           Citizen?
+  applications      Application[]              @relation("ApplicantApplications")
+  reviews           ApplicationReview[]        @relation("ReviewerUser")
+  statusHistories   ApplicationStatusHistory[] @relation("ActorStatusHistories")
+  notifications     Notification[]
+  aiConversations   AiConversation[]
+  auditLogs         AuditLog[]
+
+  @@map("users")
+}
+
+model Citizen {
+  id                  String        @id @default(uuid())
+  userId              String        @unique
+  nik                 String        @unique
+  noKk                String
+  fullName            String
+  birthPlace          String
+  birthDate           DateTime
+  gender              String        // LAKI_LAKI / PEREMPUAN
+  phone               String?
+  address             String
+  rt                  String
+  rw                  String
+  dusun               String
+  desa                String
+  kecamatan           String
+  kabupaten           String
+  occupation          String
+  monthlyIncome       Int           // Dalam Rupiah
+  familyMembersCount  Int
+  houseCondition      String        // Rumah Pribadi, Kontrak, Menumpang, dll
+  economicDescription String        // Uraian kondisi ekonomi keluarga
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
+
+  user                User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  applications        Application[]
+
+  @@map("citizens")
+}
+
+model Application {
+  id                     String                     @id @default(uuid())
+  applicationNumber      String                     @unique
+  userId                 String
+  citizenId              String
+  villageId              String
+  status                 String                     @default("SUBMITTED") // DRAFT, SUBMITTED, STAFF_REVIEW, NEED_REVISION, SUPERADMIN_REVIEW, SUPERADMIN_APPROVED, HEAD_REVIEW, APPROVED, REJECTED, COMPLETED
+  purposeCategory        String                     // Pendidikan, Kesehatan, Bantuan sosial, Administrasi, Lainnya
+  purposeDescription     String
+  currentStaffNote       String?
+  currentSuperadminNote  String?
+  rejectionReason        String?
+  revisionNotes          String?
+  aiCompletenessScore    Int?                       @default(100)
+  aiAnalysisResult       String?                    // JSON string of AI assessment
+  submittedAt            DateTime?                  @default(now())
+  reviewedByStaffAt      DateTime?
+  reviewedBySuperadminAt DateTime?
+  approvedByHeadAt       DateTime?
+  completedAt            DateTime?
+  createdAt              DateTime                   @default(now())
+  updatedAt              DateTime                   @updatedAt
+
+  user                   User                       @relation("ApplicantApplications", fields: [userId], references: [id])
+  citizen                Citizen                    @relation(fields: [citizenId], references: [id])
+  village                Village                    @relation(fields: [villageId], references: [id])
+  documents              ApplicationDocument[]
+  reviews                ApplicationReview[]
+  statusHistories        ApplicationStatusHistory[]
+  generatedDocument      GeneratedDocument?
+
+  @@map("applications")
+}
+
+model ApplicationDocument {
+  id                String      @id @default(uuid())
+  applicationId     String
+  documentType      String      // KTP, KK, PENDUKUNG
+  fileName          String
+  fileUrl           String      // Path or base64 data
+  fileType          String      // application/pdf, image/jpeg, image/png
+  fileSize          Int         // Dalam bytes
+  ocrExtractedText  String?
+  ocrMatchStatus    String?     @default("MATCH") // MATCH, WARNING, UNCHECKED
+  ocrMismatchReason String?
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+
+  application       Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+
+  @@map("application_documents")
+}
+
+model ApplicationReview {
+  id            String      @id @default(uuid())
+  applicationId String
+  reviewerId    String
+  reviewerRole  String      // STAFF, SUPERADMIN, KEPALA_DESA
+  action        String      // STAFF_CHECK, STAFF_RETURN_REVISION, STAFF_FORWARD_SUPERADMIN, SUPERADMIN_APPROVE, SUPERADMIN_REJECT, SUPERADMIN_RETURN, HEAD_APPROVE, HEAD_REJECT
+  notes         String?
+  createdAt     DateTime    @default(now())
+
+  application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  reviewer      User        @relation("ReviewerUser", fields: [reviewerId], references: [id])
+
+  @@map("application_reviews")
+}
+
+model ApplicationStatusHistory {
+  id            String      @id @default(uuid())
+  applicationId String
+  changedById   String
+  previousStatus String?
+  newStatus     String
+  actionTitle   String
+  comment       String?
+  createdAt     DateTime    @default(now())
+
+  application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  changedBy     User        @relation("ActorStatusHistories", fields: [changedById], references: [id])
+
+  @@map("application_status_histories")
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  title     String
+  message   String
+  type      String   @default("INFO") // INFO, SUCCESS, WARNING, REJECTED
+  isRead    Boolean  @default(false)
+  linkUrl   String?
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("notifications")
+}
+
+model AiConversation {
+  id        String      @id @default(uuid())
+  userId    String
+  title     String      @default("Percakapan Layanan SKTM")
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages  AiMessage[]
+
+  @@map("ai_conversations")
+}
+
+model AiMessage {
+  id             String         @id @default(uuid())
+  conversationId String
+  role           String         // user, assistant, system
+  content        String
+  sources        String?        // JSON of reference topics
+  createdAt      DateTime       @default(now())
+
+  conversation   AiConversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@map("ai_messages")
+}
+
+model AiSetting {
+  id                 String   @id @default("singleton") // satu baris konfigurasi AI global
+  providerName       String?  // provider aktif lama (warisan) — preferensi ke AiCredential
+  baseUrl            String?  // endpoint kompatibel OpenAI, contoh https://api.groq.com/openai/v1
+  model              String?  // nama model chat completion yang dipakai
+  apiKey             String?  // API key aktif (warisan; profil key kini di AiCredential)
+  activeCredentialId String?  // AiCredential terpilih sebagai penyedia aktif
+  updatedById        String?
+  updatedByName      String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@map("ai_settings")
+}
+
+model AiCredential {
+  id           String   @id @default(uuid())
+  providerName String   // GroqCloud, OpenAI, DeepSeek, Google Gemini, OpenRouter, kustom
+  baseUrl      String   // endpoint kompatibel OpenAI
+  model        String   // model yang dipakai bersama key ini
+  apiKey       String   // API key tersimpan; bisa dipilih ulang tanpa salin-tempel
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@unique([providerName, model])
+  @@map("ai_credentials")
+}
+
+model GeneratedDocument {
+  id             String      @id @default(uuid())
+  applicationId  String      @unique
+  documentNumber String      @unique // 470/xxx/SKTM/M/YYYY
+  title          String      @default("SURAT KETERANGAN TIDAK MAMPU")
+  qrCodeData     String      // URL for public verification e.g. /verify/{documentNumber}
+  signedByName   String
+  signedByTitle  String      @default("Kepala Desa")
+  issuedDate     DateTime    @default(now())
+  pdfUrl         String?
+  documentHash   String      // SHA256 integrity hash
+  isValid        Boolean     @default(true)
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+
+  application    Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+
+  @@map("generated_documents")
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  userId    String?
+  userEmail String?
+  userRole  String?
+  action    String   // LOGIN, LOGOUT, CREATE_APPLICATION, UPDATE_APPLICATION, STAFF_REVIEW, SUPERADMIN_VERIFY, HEAD_APPROVE, REJECT, GENERATE_PDF, DOWNLOAD_DOCUMENT, PUBLIC_VERIFY
+  entity    String   // User, Application, Document, System
+  entityId  String?
+  ipAddress String?
+  userAgent String?
+  details   String?  // JSON string
+  createdAt DateTime @default(now())
+
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@map("audit_logs")
+}

@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" fill="none">
+  <defs>
+    <linearGradient id="sky" x1="500" y1="0" x2="500" y2="360" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#91D6DB"/>
+      <stop offset="1" stop-color="#E3F2CB"/>
+    </linearGradient>
+    <linearGradient id="hills" x1="490" y1="185" x2="540" y2="480" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#91BB72"/>
+      <stop offset="1" stop-color="#31765B"/>
+    </linearGradient>
+    <linearGradient id="fields" x1="500" y1="310" x2="500" y2="560" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#82B969"/>
+      <stop offset="1" stop-color="#2D7457"/>
+    </linearGradient>
+    <linearGradient id="road" x1="500" y1="355" x2="500" y2="560" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E4D5A5"/>
+      <stop offset="1" stop-color="#C1A66E"/>
+    </linearGradient>
+    <linearGradient id="house" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#F5E5C5"/>
+      <stop offset="1" stop-color="#D4B989"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#sky)" d="M0 0h1000v560H0z"/>
+  <circle cx="794" cy="112" r="46" fill="#FFE7A3"/>
+  <circle cx="794" cy="112" r="65" fill="#FFE7A3" fill-opacity=".18"/>
+  <g fill="#fff" fill-opacity=".64">
+    <path d="M128 106c5-19 31-24 43-9 15-13 39-5 42 13 16 2 21 24 3 29h-84c-22-4-22-29-4-33Z"/>
+    <path d="M595 75c4-14 23-18 33-7 12-10 30-4 32 10 13 2 16 18 2 22h-64c-17-3-17-21-3-25Z"/>
+  </g>
+  <path fill="#BDD3A2" d="m0 310 145-117 101 81 150-144 133 137 103-82 137 119 105-80 126 96v240H0V310Z"/>
+  <path fill="url(#hills)" d="m0 343 133-98 105 69 154-135 141 122 98-65 151 108 103-84 115 65v235H0V343Z"/>
+  <path fill="#A6C77B" d="M0 359c112-49 187-24 287-4 110 22 159-51 277-37 121 14 181 66 286 39 56-14 101-33 150-16v219H0V359Z"/>
+  <path fill="#6FA85F" d="M0 397c108-37 187-22 282 6 87 25 166-30 269-19 111 12 183 55 292 37 68-11 111-28 157-15v154H0V397Z"/>
+  <g stroke="#B8D48B" stroke-width="3" stroke-opacity=".75">
+    <path d="M0 435c110-33 186-14 276 15 84 27 163-24 270-15 103 9 188 47 290 30 64-11 114-24 164-12"/>
+    <path d="M0 466c110-29 187-9 273 19 82 27 165-19 273-10 104 9 192 41 294 26 62-9 110-20 160-9"/>
+    <path d="M0 498c108-24 184-4 271 23 83 26 167-14 274-6 103 8 194 36 296 22 60-8 111-17 159-7"/>
+  </g>
+  <path fill="url(#road)" d="M455 348c30 37 64 70 91 102 30 47 52 84 77 110H355c35-38 62-74 79-111 17-36 20-69 21-101Z"/>
+  <path stroke="#F6EBC9" stroke-width="5" stroke-dasharray="15 17" d="M489 385c-4 44-33 97-81 151"/>
+  <g>
+    <path fill="#377251" d="M80 325h17v64H80z"/>
+    <circle cx="88" cy="309" r="38" fill="#34775A"/>
+    <circle cx="61" cy="327" r="24" fill="#4C8B5E"/>
+    <circle cx="108" cy="333" r="25" fill="#2E684F"/>
+    <path fill="#377251" d="M910 313h18v72h-18z"/>
+    <circle cx="918" cy="293" r="43" fill="#34775A"/>
+    <circle cx="888" cy="316" r="27" fill="#4C8B5E"/>
+    <circle cx="948" cy="320" r="29" fill="#2E684F"/>
+  </g>
+  <g>
+    <path fill="url(#house)" d="M274 334h91v62h-91z"/>
+    <path fill="#9D6044" d="m260 340 60-47 61 47h-19l-42-31-41 31h-19Z"/>
+    <path fill="#80543C" d="M308 363h22v33h-22z"/>
+    <path fill="#92CBD0" d="M282 349h17v17h-17zM339 349h17v17h-17z"/>
+    <path fill="url(#house)" d="M654 320h105v73H654z"/>
+    <path fill="#85523D" d="m638 327 69-53 69 53h-22l-47-36-48 36h-21Z"/>
+    <path fill="#634636" d="M697 356h24v37h-24z"/>
+    <path fill="#91C7C9" d="M667 339h19v19h-19zM731 339h19v19h-19z"/>
+    <path fill="#E7D7B5" d="M417 329h69v49h-69z"/>
+    <path fill="#936047" d="m407 334 45-35 45 35h-14l-31-24-31 24h-14Z"/>
+    <path fill="#7B553D" d="M444 353h16v25h-16z"/>
+  </g>
+  <g fill="#F0D987">
+    <circle cx="387" cy="381" r="3"/><circle cx="620" cy="367" r="3"/>
+    <circle cx="779" cy="412" r="3"/><circle cx="229" cy="410" r="3"/>
+  </g>
+</svg>

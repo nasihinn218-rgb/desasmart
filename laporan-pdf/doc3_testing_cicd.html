@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Laporan Pengujian & CI/CD - DesaSmart (Nasihin - 41257143)</title>
+<style>
+@page {
+  size: A4 portrait;
+  margin-top: 25mm;
+  margin-bottom: 25mm;
+  margin-left: 25mm;
+  margin-right: 20mm;
+}
+
+body {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 12pt;
+  line-height: 1.6;
+  color: #111;
+  text-align: justify;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Times New Roman', Times, serif;
+  color: #0b1a15;
+  margin-top: 18px;
+  margin-bottom: 8px;
+}
+
+.bab-header {
+  text-align: center;
+  page-break-before: always;
+  margin-top: 10px;
+  margin-bottom: 25px;
+}
+
+.bab-header .bab-num {
+  font-size: 16pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.bab-header .bab-title {
+  font-size: 14pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.bab-header .bab-sub {
+  font-size: 11pt;
+  font-weight: normal;
+  font-style: italic;
+  margin-top: 4px;
+  color: #444;
+}
+
+p {
+  margin: 0 0 10px 0;
+  text-indent: 32px;
+}
+
+p.no-indent {
+  text-indent: 0;
+}
+
+ul, ol {
+  margin: 6px 0 12px 24px;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 5px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+  font-size: 10pt;
+  page-break-inside: avoid;
+}
+
+th, td {
+  border: 1px solid #777;
+  padding: 7px 10px;
+  vertical-align: top;
+}
+
+th {
+  background-color: #e8ecf1;
+  font-weight: bold;
+  text-align: center;
+  color: #111;
+}
+
+td.center, th.center {
+  text-align: center;
+}
+
+.cover-page {
+  text-align: center;
+  page-break-after: always;
+  height: 100%;
+  padding-top: 20px;
+}
+
+.cover-page h1 {
+  font-size: 16pt;
+  font-weight: bold;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.cover-page h2 {
+  font-size: 13pt;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.cover-page h3 {
+  font-size: 12pt;
+  font-weight: normal;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+.cover-badge {
+  display: inline-block;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: 4px double #1e3a2f;
+  margin: 20px auto;
+  line-height: 105px;
+  font-size: 38pt;
+  background: #f4f8f6;
+  color: #1e3a2f;
+  font-weight: bold;
+}
+
+.cover-title {
+  font-size: 14pt;
+  font-weight: bold;
+  margin: 20px auto;
+  max-width: 90%;
+  text-transform: uppercase;
+  line-height: 1.4;
+  color: #162e24;
+}
+
+.cover-meta {
+  margin-top: 35px;
+  font-size: 12pt;
+  line-height: 1.8;
+}
+
+.cover-meta strong {
+  font-weight: bold;
+}
+
+.cover-institution {
+  margin-top: 45px;
+  font-weight: bold;
+  font-size: 12pt;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.pengesahan-page {
+  page-break-after: always;
+  padding-top: 15px;
+}
+
+.pengesahan-title {
+  text-align: center;
+  font-size: 14pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.pengesahan-sub {
+  text-align: center;
+  font-size: 12pt;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+.ttd-table {
+  width: 100%;
+  border: none;
+  margin-top: 40px;
+}
+
+.ttd-table td {
+  border: none;
+  padding: 10px;
+}
+
+.code-box {
+  background-color: #f7f9fa;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  padding: 10px 14px;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 9pt;
+  line-height: 1.45;
+  margin: 12px 0;
+  white-space: pre-wrap;
+  page-break-inside: avoid;
+}
+
+.figure-box {
+  text-align: center;
+  margin: 18px 0;
+  page-break-inside: avoid;
+}
+
+.figure-box img {
+  max-width: 95%;
+  height: auto;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.figure-caption {
+  font-size: 10.5pt;
+  font-style: italic;
+  margin-top: 8px;
+  color: #333;
+}
+
+.callout {
+  background: #f0f7f4;
+  border-left: 4px solid #2e7d32;
+  padding: 10px 14px;
+  margin: 12px 0;
+  font-size: 11pt;
+  page-break-inside: avoid;
+}
+</style>
+</head>
+<body>
+
+<div class="cover-page">
+  <h1>SEKOLAH TINGGI MANAJEMEN INFORMATIKA DAN KOMPUTER</h1>
+  <h2>STMIK IKMI CIREBON</h2>
+  <h3>PROGRAM STUDI S1 TEKNIK INFORMATIKA — TAHUN AKADEMIK 2026/2027</h3>
+  
+  <div class="cover-badge">🎓</div>
+
+  <div class="cover-title">
+    LAPORAN PENGUJIAN PERANGKAT LUNAK & PIPELINE CI/CD<br>
+    <span style="font-size: 12pt; font-weight: normal; text-transform: none; display: block; margin-top: 8px;">
+      Skenario Pengujian Logika Bisnis, Hasil Automated Unit Testing 100% Pass, Integritas Kriptografi SHA-256, dan Otomasi GitHub Actions
+    </span>
+  </div>
+
+  <div style="font-size: 13pt; font-weight: bold; margin-top: 25px; color: #1e3a2f;">
+    "DESASMART" DESA SILIHASIH KECAMATAN PABEDILAN
+  </div>
+
+  <div class="cover-meta">
+    Disusun Oleh:<br><br>
+    <table style="width: 60%; margin: 0 auto; border: none; font-size: 12pt;">
+      <tr><td style="border:none; width: 35%;">Nama</td><td style="border:none;">: <b>NASIHIN</b></td></tr>
+      <tr><td style="border:none;">NIM</td><td style="border:none;">: <b>41257143</b></td></tr>
+      <tr><td style="border:none;">Kelas</td><td style="border:none;">: <b>1B 2025</b></td></tr>
+      <tr><td style="border:none;">Program Studi</td><td style="border:none;">: <b>S1 Teknik Informatika</b></td></tr>
+      <tr><td style="border:none;">Mata Kuliah</td><td style="border:none;">: <b>Rekayasa Perangkat Lunak (TIKB2503021)</b></td></tr>
+      <tr><td style="border:none;">Bobot SKS</td><td style="border:none;">: <b>4 SKS (Semester 3)</b></td></tr>
+      <tr><td style="border:none;">Dosen Pengampu</td><td style="border:none;">: <b>Yudhistira Arie Wijaya, M.Kom., CDS.</b></td></tr>
+    </table>
+  </div>
+
+  <div class="cover-institution">
+    PROGRAM STUDI S1 TEKNIK INFORMATIKA<br>
+    SEKOLAH TINGGI MANAJEMEN INFORMATIKA DAN KOMPUTER (STMIK) IKMI CIREBON<br>
+    2026
+  </div>
+</div>
+
+
+<div class="pengesahan-page">
+  <div class="pengesahan-title">LEMBAR PENGESAHAN DOKUMEN AKADEMIK</div>
+  <div class="pengesahan-sub">LAPORAN PENGUJIAN PERANGKAT LUNAK & PIPELINE CI/CD<br>MATA KULIAH REKAYASA PERANGKAT LUNAK (OBE RUBRIC EVALUATION)</div>
+
+  <p class="no-indent">Dokumen teknis rekayasa perangkat lunak ini diajukan dan disahkan sebagai bukti pemenuhan luaran pembelajaran berbasis <i>Outcome-Based Education</i> (OBE) pada Mata Kuliah Rekayasa Perangkat Lunak (TIKB2503021) Program Studi S1 Teknik Informatika STMIK IKMI Cirebon:</p>
+
+  <table style="width: 95%; margin: 15px auto; font-size: 11pt;">
+    <tr><td style="width: 30%; border: 1px solid #ccc; font-weight: bold;">Judul Proyek</td><td style="border: 1px solid #ccc;">Pengembangan Sistem Informasi Pelayanan SKTM Online Terintegrasi AI dan TTE Ber-QR Code "DesaSmart" Desa Silihasih</td></tr>
+    <tr><td style="border: 1px solid #ccc; font-weight: bold;">Nama Mahasiswa</td><td style="border: 1px solid #ccc;"><b>Nasihin</b></td></tr>
+    <tr><td style="border: 1px solid #ccc; font-weight: bold;">Nomor Induk Mahasiswa</td><td style="border: 1px solid #ccc;"><b>41257143</b></td></tr>
+    <tr><td style="border: 1px solid #ccc; font-weight: bold;">Kelas / Angkatan</td><td style="border: 1px solid #ccc;"><b>1B 2025 (Mandiri)</b></td></tr>
+    <tr><td style="border: 1px solid #ccc; font-weight: bold;">Program Studi</td><td style="border: 1px solid #ccc;">S1 Teknik Informatika</td></tr>
+    <tr><td style="border: 1px solid #ccc; font-weight: bold;">Institusi</td><td style="border: 1px solid #ccc;">STMIK IKMI Cirebon</td></tr>
+    <tr><td style="border: 1px solid #ccc; font-weight: bold;">Status Pengujian</td><td style="border: 1px solid #ccc;"><span style="color: #2e7d32; font-weight: bold;">100% Lulus (9/9 Automated Unit Tests Pass)</span></td></tr>
+  </table>
+
+  <br><br>
+  <table class="ttd-table">
+    <tr>
+      <td style="width: 50%; text-align: center;">
+        Mengetahui / Menyetujui,<br>
+        <b>Dosen Pengampu Mata Kuliah,</b><br><br><br><br><br>
+        <b><u>Yudhistira Arie Wijaya, M.Kom., CDS.</u></b><br>
+        NIDN: 0418048601
+      </td>
+      <td style="width: 50%; text-align: center;">
+        Cirebon, 18 November 2026<br>
+        <b>Penyusun / Mahasiswa,</b><br><br><br><br><br>
+        <b><u>Nasihin</u></b><br>
+        NIM: 41257143
+      </td>
+    </tr>
+  </table>
+</div>
+
+
+<div class="bab-header">
+  <div class="bab-num">BAB IV</div>
+  <div class="bab-title">KONSTRUKSI KODE, IMPLEMENTASI AI, PENGUJIAN & CI/CD</div>
+</div>
+
+<h3>4.1 Standar Konstruksi Kode (Clean Code & SOLID Principles)</h3>
+<p>Pengembangan kode sumber DesaSmart mematuhi standar industri rekayasa perangkat lunak modern:</p>
+<ul>
+  <li><b>Single Responsibility Principle (SRP)</b>: Pemisahan tegas antara routing (<code>src/app/api</code>), controller logika bisnis (<code>src/lib/auth.ts</code>, <code>src/lib/pdf-generator.ts</code>), dan komponen visual UI (<code>src/components</code>).</li>
+  <li><b>Open/Closed Principle (OCP)</b>: Konfigurasi penyedia AI dirancang modular (<code>src/lib/ai-assistant.ts</code>), sehingga penambahan model AI baru tidak mengubah logika pemanggilan inti.</li>
+  <li><b>Type Safety</b>: Seluruh variabel, antarmuka entitas basis data, dan response payload divalidasi penuh menggunakan TypeScript dan schema Zod.</li>
+</ul>
+
+<h3>4.2 Implementasi Kriptografi TTE & Hash SHA-256</h3>
+<p>Penerbitan surat resmi memanfaatkan hashing kriptografi satu arah (<i>one-way cryptographic hash</i>) <b>SHA-256</b>. Data esensial surat (Nomor Registrasi, NIK, Nama Pemohon, Tanggal Pengesahan, Nama Kuwu, dan ID Desa) digabungkan menjadi string kanonikal unik, lalu di-hash menggunakan algoritma SHA-256:</p>
+
+<div class="code-box" style="text-align: center; font-size: 11pt; font-weight: bold;">
+Hash SHA-256 = SHA256(NomorSurat + NIK + NamaPemohon + Kuwu + Timestamp + DesaId)
+</div>
+
+<p>Nilai hash ini dicetak pada dokumen fisik dan disematkan ke dalam QR Code. Setiap upaya modifikasi pada berkas PDF akan menghasilkan hash yang berbeda, sehingga verifikasi integritas pada rute <code>/verify</code> akan langsung mendeteksi ketidaksesuaian.</p>
+
+<h3>4.3 Implementasi Asisten AI Kontekstual & Integrasi SQLite</h3>
+<p>Modul AI (<code>src/lib/ai-database-context.ts</code>) secara otomatis menyuntikkan <i>live briefing</i> data pemerintahan Desa Silihasih:</p>
+<ul>
+  <li>Nama resmi Kepala Desa (Kuwu): Drs. H. Mulyadi, M.Si (NIP: 19740512 199803 1 002).</li>
+  <li>3 Kepala Dusun: Dusun Wage (Agus Setiawan, S.IP), Dusun Kliwon (Deden Suhendi), Dusun Kaligandu (Nurhayati, A.Md).</li>
+  <li>5 Ketua RW dan 12 Ketua RT terdaftar resmi.</li>
+  <li>Statistik antrean peran aktif: Status Perlu Perbaikan (6 berkas), Menunggu Pemeriksaan Staf (1 berkas).</li>
+</ul>
+
+<p>Hal ini menjadikan asisten AI DesaSmart <b>serba tahu</b> dan akurat ketika ditanyakan mengenai seluruh informasi yang terdapat pada dashboard pengguna.</p>
+
+<h3>4.4 Skenario Pengujian Logika Bisnis (Test Cases)</h3>
+<p>Pengujian fungsionalitas dan logika bisnis dilakukan secara otomatis menggunakan berkas pengujian <code>tests/sktm-business-logic.test.ts</code>:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 12%;">Kode Uji</th>
+      <th style="width: 22%;">Kategori Pengujian</th>
+      <th style="width: 32%;">Skenario Uji</th>
+      <th style="width: 22%;">Ekspektasi Hasil</th>
+      <th style="width: 12%;">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="center"><b>TC-01</b></td>
+      <td>Validasi NIK</td>
+      <td>Input NIK 16 digit angka valid</td>
+      <td>Validasi diterima (<code>true</code>)</td>
+      <td class="center"><span style="color:#2e7d32; font-weight:bold;">PASSED</span></td>
+    </tr>
+    <tr>
+      <td class="center"><b>TC-02</b></td>
+      <td>Validasi NIK</td>
+      <td>Input NIK mengandung huruf / &lt;16 digit</td>
+      <td>Validasi ditolak (<code>false</code>)</td>
+      <td class="center"><span style="color:#2e7d32; font-weight:bold;">PASSED</span></td>
+    </tr>
+    <tr>
+      <td class="center"><b>TC-03</b></td>
+      <td>Validasi No KK</td>
+      <td>Input Nomor KK 16 digit angka valid</td>
+      <td>Validasi diterima (<code>true</code>)</td>
+      <td class="center"><span style="color:#2e7d32; font-weight:bold;">PASSED</span></td>
+    </tr>
+    <tr>
+      <td class="center"><b>TC-04</b></td>
+      <td>Validasi Keperluan</td>
+      <td>Kategori SKTM: Pendidikan, Kesehatan, Bansos</td>
+      <td>Kategori sah diakui sistem</td>
+      <td class="center"><span style="color:#2e7d32; font-weight:bold;">PASSED</span></td>
+    </tr>
+    <tr>
+      <td class="center"><b>TC-05</b></td>
+      <td>Transisi Staf</td>
+      <td>Staf meneruskan ke Meja Superadmin</td>
+      <td>Status berubah <code>SUPERADMIN_REVIEW</code></td>
+      <td class="center"><span style="color:#2e7d32; font-weight:bold;">PASSED</span></td>
+    </tr>
+    <tr>
+      <td class="center"><b>TC-06</b></td>
+      <td>Transisi Staf</td>
+      <td>Staf mengembalikan berkas perbaikan</td>
+      <td>Status berubah <code>NEED_REVISION</code></td>
+      <td class="center"><span style="color:#2e7d32; font-weight:bold;">PASSED</span></td>
+    </tr>
+    <tr>
+      <td class="center"><b>TC-07</b></td>
+      <td>Transisi Superadmin</td>
+      <td>Superadmin merekomendasikan ke Kuwu</td>
+      <td>Status berubah <code>HEAD_REVIEW</code></td>
+      <td class="center"><span style="color:#2e7d32; font-weight:bold;">PASSED</span></td>
+    </tr>
+    <tr>
+      <td class="center"><b>TC-08</b></td>
+      <td>Transisi Kuwu</td>
+      <td>Kuwu menyetujui dengan TTE digital</td>
+      <td>Status berubah <code>COMPLETED</code></td>
+      <td class="center"><span style="color:#2e7d32; font-weight:bold;">PASSED</span></td>
+    </tr>
+    <tr>
+      <td class="center"><b>TC-09</b></td>
+      <td>Integritas Dokumen</td>
+      <td>Format nomor surat <code>470/xxx/SKTM/M/YYYY</code> & SHA-256</td>
+      <td>Hash cocok & URL verifikasi terbentuk</td>
+      <td class="center"><span style="color:#2e7d32; font-weight:bold;">PASSED</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>4.5 Hasil Eksekusi Pengujian Unit Otomatis (Automated Unit Testing)</h3>
+<p>Pengujian dijalankan melalui terminal dengan mengeksekusi skrip <code>npm test</code>:</p>
+
+<div class="code-box">
+TAP version 13
+# Subtest: 1. Validasi Data Kependudukan & Input SKTM
+    # Subtest: harus memvalidasi format NIK 16 digit angka
+    ok 1 - harus memvalidasi format NIK 16 digit angka
+    # Subtest: harus memvalidasi format Nomor Kartu Keluarga (KK) 16 digit
+    ok 2 - harus memvalidasi format Nomor Kartu Keluarga (KK) 16 digit
+    # Subtest: harus memverifikasi kategori permohonan SKTM yang sah
+    ok 3 - harus memverifikasi kategori permohonan SKTM yang sah
+    1..3
+ok 1 - 1. Validasi Data Kependudukan & Input SKTM
+# Subtest: 2. Alur Transisi Status Berkas Berjenjang (Workflow Multi-Tier)
+    # Subtest: staf loket hanya boleh meneruskan ke SUPERADMIN_REVIEW atau mengembalikan ke NEED_REVISION
+    ok 1 - staf loket hanya boleh meneruskan ke SUPERADMIN_REVIEW atau mengembalikan ke NEED_REVISION
+    # Subtest: superadmin berwenang merekomendasikan ke HEAD_REVIEW atau menolak REJECTED
+    ok 2 - superadmin berwenang merekomendasikan ke HEAD_REVIEW atau menolak REJECTED
+    # Subtest: kepala desa berwenang memberikan persetujuan akhir COMPLETED dengan TTE sah
+    ok 3 - kepala desa berwenang memberikan persetujuan akhir COMPLETED dengan TTE sah
+    1..3
+ok 2 - 2. Alur Transisi Status Berkas Berjenjang (Workflow Multi-Tier)
+# Subtest: 3. Tanda Tangan Elektronik (TTE) & Integritas Dokumen SHA-256
+    # Subtest: harus menghasilkan nomor registrasi surat resmi format 470/xxx/SKTM/M/YYYY
+    ok 1 - harus menghasilkan nomor registrasi surat resmi format 470/xxx/SKTM/M/YYYY
+    # Subtest: harus memvalidasi hash integritas dokumen SHA-256 dengan benar
+    ok 2 - harus memvalidasi hash integritas dokumen SHA-256 dengan benar
+    # Subtest: harus membentuk URL verifikasi publik QR Code yang sah
+    ok 3 - harus membentuk URL verifikasi publik QR Code yang sah
+    1..3
+ok 3 - 3. Tanda Tangan Elektronik (TTE) & Integritas Dokumen SHA-256
+1..3
+# tests 3
+# pass 3
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+</div>
+
+<div class="callout">
+<b>Kesimpulan Pengujian:</b> Seluruh 3 rangkaian pengujian (<i>test suites</i>) yang mencakup 9 skenario unit testing <b>100% LULUS (0 Failures)</b>. Sistem terbukti andal dalam memvalidasi input data kependudukan, mengamankan alur transisi status berjenjang, dan memverifikasi integritas dokumen TTE.
+</div>
+
+<h3>4.6 Konfigurasi Otomasi Pipeline CI/CD via GitHub Actions</h3>
+<p>Sistem dilengkapi integrasi berkelanjutan otomatis melalui file konfigurasi <code>.github/workflows/ci.yml</code>:</p>
+
+<div class="code-box">
+name: DesaSmart CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, master, develop]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  test-and-build:
+    name: Unit Testing & Automated Build
+    runs-on: ubuntu-latest
+
+    env:
+      DATABASE_URL: "file:./dev.db"
+      JWT_SECRET: "ci-test-jwt-secret-key-32-characters-min"
+      AI_PROVIDER: "rule"
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Generate Prisma Client
+        run: npx prisma generate
+
+      - name: Run Automated Unit Tests (OBE Rubric Stage 3)
+        run: npm test
+
+      - name: Build Next.js Application
+        run: npm run build
+</div>
+
+<p>Setiap kali pengembang melakukan <i>push</i> kode ke repositori GitHub, runner virtual akan secara otomatis menguji validitas kode, menjalankan 9 unit testing, dan memverifikasi <i>build</i> aplikasi tanpa intervensi manual.</p>
+
+</body>
+</html>
