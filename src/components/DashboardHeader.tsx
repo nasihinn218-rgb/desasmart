@@ -6,11 +6,10 @@ import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { 
-  Home, 
-  LogOut, 
-  User, 
-  Shield, 
+import {
+  LogOut,
+  User,
+  Shield,
   Camera,
   X,
   Loader2,
@@ -23,6 +22,7 @@ import {
 import NotificationBell from './NotificationBell';
 import ThemeToggle from './ThemeToggle';
 import { DESA } from '@/lib/desa-config';
+
 
 interface DashboardHeaderProps {
   user: {

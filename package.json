@@ -4,13 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && next build",
+    "build": "node scripts/ensure-env.js && prisma generate && next build",
     "start": "next start",
     "lint": "eslint",
     "test": "tsx --test tests/**/*.test.ts",
     "db:seed": "tsx prisma/seed.ts",
     "db:sync-wilayah": "tsx scripts/sync-wilayah.ts",
-    "postinstall": "prisma generate"
+    "postinstall": "node scripts/ensure-env.js && prisma generate"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
