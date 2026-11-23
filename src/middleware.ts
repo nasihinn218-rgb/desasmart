@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { jwtVerify } from 'jose';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'desasmart-fallback-secret-2026';
+const JWT_SECRET = process.env.JWT_SECRET || 'desasmart-super-secure-secret-key-indonesia-2026-sktm';
 const COOKIE_NAME = 'desasmart_session';
 
 // Role → dashboard path

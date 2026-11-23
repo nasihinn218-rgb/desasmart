@@ -2,7 +2,7 @@ import { cookies } from 'next/headers';
 import jwt from 'jsonwebtoken';
 import { prisma } from './prisma';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'desasmart-fallback-secret-2026';
+const JWT_SECRET = process.env.JWT_SECRET || 'desasmart-super-secure-secret-key-indonesia-2026-sktm';
 const COOKIE_NAME = 'desasmart_session';
 
 export interface TokenPayload {
