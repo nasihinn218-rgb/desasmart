@@ -104,33 +104,35 @@ export default function NotificationBell() {
   return (
     <div className="relative" ref={dropdownRef}>
       <button
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="relative p-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+        className="neu-raised-sm relative flex h-11 w-11 shrink-0 items-center justify-center text-[var(--ink)] cursor-pointer active:shadow-[inset_3px_3px_6px_var(--shadow-dark),inset_-3px_-3px_6px_var(--shadow-light)]"
         aria-label="Notifikasi"
       >
         <Bell className="w-5 h-5" />
         {unreadCount > 0 && (
-          <span className="absolute top-1.5 right-1.5 flex h-4 min-w-[16px] px-1 items-center justify-center rounded-full bg-rose-600 text-[10px] font-bold text-white ring-2 ring-white animate-pulse">
+          <span className="absolute top-1 right-1 flex h-4 min-w-[16px] px-1 items-center justify-center rounded-full bg-rose-600 text-[10px] font-bold text-white shadow-sm">
             {unreadCount > 9 ? '9+' : unreadCount}
           </span>
         )}
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 z-50 overflow-hidden animate-in fade-in zoom-in-95 duration-150">
-          <div className="px-4 py-3 bg-slate-50 dark:bg-slate-800/60 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+        <div className="fixed inset-x-3 top-20 sm:absolute sm:inset-auto sm:right-0 sm:top-full sm:mt-3 w-auto sm:w-96 neu-raised bg-[var(--bg)] z-50 overflow-hidden text-left p-1.5 animate-in fade-in zoom-in-95 duration-150 shadow-2xl max-h-[calc(100vh-6rem)] flex flex-col">
+          <div className="px-4 py-3 border-b border-[var(--shadow-dark)]/20 flex items-center justify-between shrink-0">
             <div className="flex items-center gap-2">
-              <span className="font-semibold text-sm text-slate-800 dark:text-slate-100">Notifikasi</span>
+              <span className="font-extrabold text-sm text-[var(--ink)]">Notifikasi</span>
               {unreadCount > 0 && (
-                <span className="text-[11px] bg-rose-100 text-rose-700 font-bold px-2 py-0.5 rounded-full">
+                <span className="neu-status-badge stat-val-blue text-[10px]">
                   {unreadCount} baru
                 </span>
               )}
             </div>
             {unreadCount > 0 && (
               <button
+                type="button"
                 onClick={markAllRead}
-                className="text-xs text-emerald-600 hover:text-emerald-700 font-medium flex items-center gap-1 cursor-pointer"
+                className="text-xs text-[var(--accent)] hover:underline font-bold flex items-center gap-1 cursor-pointer"
               >
                 <CheckCheck className="w-3.5 h-3.5" />
                 Tandai dibaca
@@ -138,9 +140,9 @@ export default function NotificationBell() {
             )}
           </div>
 
-          <div className="max-h-80 overflow-y-auto divide-y divide-slate-100 dark:divide-slate-800">
+          <div className="max-h-80 overflow-y-auto divide-y divide-[var(--shadow-dark)]/15">
             {notifications.length === 0 ? (
-              <div className="p-6 text-center text-xs text-slate-400">
+              <div className="p-6 text-center text-xs text-[var(--muted)]">
                 Belum ada notifikasi terkini.
               </div>
             ) : (
@@ -148,20 +150,20 @@ export default function NotificationBell() {
                 <div
                   key={item.id}
                   onClick={() => !item.isRead && markOneRead(item.id)}
-                  className={`p-3.5 hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition-colors flex gap-3 ${
-                    !item.isRead ? 'bg-emerald-50/40 dark:bg-emerald-950/20' : ''
+                  className={`p-3.5 hover:bg-[var(--accent)]/5 transition-colors flex gap-3 ${
+                    !item.isRead ? 'bg-[var(--accent)]/10' : ''
                   }`}
                 >
                   <div className="shrink-0 mt-0.5">{getIcon(item.type)}</div>
                   <div className="flex-1">
-                    <p className="text-xs font-semibold text-slate-800 dark:text-slate-200">
+                    <p className="text-xs font-semibold text-[var(--ink)]">
                       {item.title}
                     </p>
-                    <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-0.5 leading-relaxed">
+                    <p className="text-[11px] text-[var(--muted)] mt-0.5 leading-relaxed">
                       {item.message}
                     </p>
                     <div className="flex items-center justify-between mt-2 pt-1">
-                      <span className="text-[10px] text-slate-400">
+                      <span className="text-[10px] text-[var(--muted)]">
                         {new Date(item.createdAt).toLocaleDateString('id-ID', {
                           day: 'numeric',
                           month: 'short',
@@ -173,7 +175,7 @@ export default function NotificationBell() {
                         <Link
                           href={item.linkUrl}
                           onClick={() => setIsOpen(false)}
-                          className="text-[11px] text-emerald-600 hover:text-emerald-700 font-medium flex items-center gap-0.5"
+                          className="text-[11px] text-[var(--accent)] hover:underline font-semibold flex items-center gap-1"
                         >
                           Lihat <ExternalLink className="w-3 h-3" />
                         </Link>

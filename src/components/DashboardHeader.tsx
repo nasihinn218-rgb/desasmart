@@ -16,7 +16,9 @@ import {
   Loader2,
   Save,
   Phone,
-  Mail
+  Mail,
+  Menu,
+  Trash2
 } from 'lucide-react';
 import NotificationBell from './NotificationBell';
 import ThemeToggle from './ThemeToggle';
@@ -138,67 +140,65 @@ export default function DashboardHeader({ user }: DashboardHeaderProps) {
     }
   };
 
-  const getRoleBadgeColor = (role: string) => {
-    switch (role) {
-      case 'KEPALA_DESA':
-        return 'bg-amber-100 text-amber-900 border-amber-300 dark:bg-amber-900/60 dark:text-amber-100 dark:border-amber-600/70';
-      case 'SUPERADMIN':
-        return 'bg-purple-100 text-purple-900 border-purple-300 dark:bg-purple-900/60 dark:text-purple-100 dark:border-purple-600/70';
-      case 'STAFF':
-        return 'bg-sky-100 text-sky-900 border-sky-300 dark:bg-sky-900/60 dark:text-sky-100 dark:border-sky-600/70';
-      case 'MASYARAKAT':
-      case 'CITIZEN':
-      default:
-        return 'bg-emerald-100 text-emerald-900 border-emerald-300 dark:bg-emerald-800/80 dark:text-emerald-50 dark:border-emerald-500/70';
-    }
-  };
-
   return (
-    <header className="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm border-b border-slate-200 dark:border-slate-800 transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        {/* Brand & Village Identity */}
+    <header className="sticky top-0 z-30 w-full neu-raised-sm !rounded-none backdrop-blur-md transition-all">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between gap-3">
+        {/* Sisi Kiri: Hamburger & Brand */}
         <div className="flex items-center gap-3">
-          <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-[var(--accent-mint)] shadow-md group-hover:scale-105 transition-transform">
-              <Home className="w-5 h-5" />
+          {/* Tombol Hamburger di kiri sebelum logo */}
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new CustomEvent('toggle-desasmart-drawer'))}
+            aria-label="Buka menu navigasi"
+            title="Buka menu navigasi"
+            className="neu-raised-sm flex h-11 w-11 shrink-0 items-center justify-center text-[var(--ink)] cursor-pointer active:shadow-[inset_3px_3px_6px_var(--shadow-dark),inset_-3px_-3px_6px_var(--shadow-light)]"
+          >
+            <Menu className="h-5 w-5" />
+          </button>
+
+          {/* Brand & Village Identity */}
+          <Link href="/" className="flex items-center gap-2.5 no-underline">
+            <div
+              className="neu-raised-sm flex h-11 w-11 shrink-0 items-center justify-center font-extrabold text-xl text-[var(--accent)]"
+              aria-hidden="true"
+            >
+              D
             </div>
             <div>
               <div className="flex items-center gap-1.5">
-                <span className="font-extrabold text-base tracking-tight text-slate-900 dark:text-white">
-                  Pelayanan Desa
+                <span className="font-extrabold text-sm sm:text-base tracking-tight text-[var(--ink)]">
+                  DesaSmart
                 </span>
-                <span className="bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 text-[10px] font-bold px-1.5 py-0.5 rounded border border-emerald-200 dark:border-emerald-800">
+                <span className="neu-status-badge stat-val-green !text-[9px] !py-0.5 !px-2">
                   SKTM + AI
                 </span>
               </div>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Pemerintah {DESA.nama}</p>
+              <p className="text-[11px] text-[var(--muted)] font-medium">Pemerintah {DESA.nama}</p>
             </div>
           </Link>
         </div>
 
-        {/* User Profile & Actions */}
-        <div className="flex items-center gap-3 sm:gap-4">
+        {/* Sisi Kanan: Action Buttons seragam raised-sm */}
+        <div className="flex items-center gap-2 sm:gap-3">
           <Link
             href="/verify"
-            className="hidden md:flex items-center gap-1 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-emerald-700 dark:hover:text-emerald-400 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+            className="neu-raised-sm hidden md:inline-flex items-center gap-1.5 min-h-[44px] px-3.5 py-2 text-xs font-bold text-[var(--ink)] no-underline active:shadow-[inset_3px_3px_6px_var(--shadow-dark),inset_-3px_-3px_6px_var(--shadow-light)]"
           >
-            <Shield className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-            Cek Keaslian SKTM
+            <Shield className="h-4 w-4 text-[var(--accent)]" />
+            <span>Cek keaslian surat</span>
           </Link>
 
           {/* Notifikasi */}
           <NotificationBell />
 
           {/* Mode terang/gelap */}
-          <ThemeToggle />
+          <ThemeToggle className="neu-raised-sm !h-11 !w-11 !min-h-[44px] !min-w-[44px] !p-0 !border-none text-[var(--ink)]" />
 
-          <div className="h-6 w-[1px] bg-slate-200 dark:bg-slate-800" />
-
-          {/* User Profile Card */}
+          {/* Profil Button */}
           <button
             type="button"
             onClick={openProfile}
-            className="flex items-center gap-2.5 rounded-xl p-1.5 text-left transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/80 focus-visible:outline-2 focus-visible:outline-emerald-600"
+            className="neu-raised-sm flex min-h-[44px] items-center gap-2.5 px-3 py-1 text-left cursor-pointer active:shadow-[inset_3px_3px_6px_var(--shadow-dark),inset_-3px_-3px_6px_var(--shadow-light)]"
             aria-label="Buka pengaturan profil"
           >
             {user.avatarUrl ? (
@@ -208,41 +208,28 @@ export default function DashboardHeader({ user }: DashboardHeaderProps) {
                 width={32}
                 height={32}
                 unoptimized
-                className="h-8 w-8 rounded-full border border-slate-200 dark:border-slate-700 object-cover"
+                className="h-8 w-8 rounded-full object-cover"
               />
             ) : (
-              <div className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 dark:border-slate-700 bg-[var(--accent-mint)] text-xs font-bold text-slate-900">
+              <div className="neu-circle-inset-sm !h-8 !w-8 text-xs font-bold">
                 {user.name.charAt(0).toUpperCase()}
               </div>
             )}
             <div className="hidden sm:block text-left">
-              <p className="text-xs font-bold text-slate-900 dark:text-white leading-tight">{user.name}</p>
-              <span
-                className={`inline-block text-[10px] font-bold px-2 py-0.5 rounded-md border mt-0.5 shadow-xs whitespace-nowrap ${getRoleBadgeColor(
-                  user.role
-                )}`}
-              >
+              <p className="text-xs font-extrabold text-[var(--ink)] leading-tight">{user.name}</p>
+              <span className="text-[10px] text-[var(--muted)] font-semibold">
                 {user.roleDisplayName || user.role}
               </span>
             </div>
           </button>
-
-          {/* Logout Button */}
-          <button
-            onClick={handleLogout}
-            className="p-2 rounded-xl text-slate-500 dark:text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors cursor-pointer"
-            title="Keluar dari Akun"
-            aria-label="Logout"
-          >
-            <LogOut className="w-4 h-4" />
-          </button>
         </div>
       </div>
 
+      {/* Modal Pengaturan Profil */}
       {profileOpen &&
         createPortal(
           <div
-            className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/70 p-4 sm:p-6 backdrop-blur-sm"
+            className="fixed inset-0 z-50 overflow-y-auto bg-[#0a100d]/50 p-4 sm:p-6 backdrop-blur-sm"
             onMouseDown={(event) => {
               if (event.target === event.currentTarget) setProfileOpen(false);
             }}
@@ -250,140 +237,167 @@ export default function DashboardHeader({ user }: DashboardHeaderProps) {
             <div className="flex min-h-full items-center justify-center py-6 sm:py-10">
               <form
                 onSubmit={saveProfile}
-                className="w-full max-w-md my-auto flex flex-col max-h-[calc(100vh-3rem)] sm:max-h-[calc(100vh-5rem)] rounded-3xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-2xl overflow-hidden text-left"
+                className="w-full max-w-md my-auto flex flex-col max-h-[calc(100vh-3rem)] sm:max-h-[calc(100vh-5rem)] neu-raised p-6 sm:p-7 overflow-hidden text-left"
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="profile-dialog-title"
               >
-            <div className="shrink-0 flex items-start justify-between border-b border-slate-100 dark:border-slate-800 px-6 py-4 bg-white dark:bg-slate-900">
-              <div>
-                <h2 id="profile-dialog-title" className="text-lg font-black text-slate-900 dark:text-white">
-                  Pengaturan Profil
-                </h2>
-                <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">Perbarui informasi profil akun Anda.</p>
-              </div>
-              <button
-                type="button"
-                onClick={() => setProfileOpen(false)}
-                className="rounded-lg p-2 text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-700 dark:hover:text-slate-200 transition-colors"
-                aria-label="Tutup pengaturan profil"
-              >
-                <X className="h-4 w-4" />
-              </button>
-            </div>
-
-            <div className="overflow-y-auto px-6 py-5 space-y-4 text-slate-700 dark:text-slate-200">
-              <div className="flex items-center gap-4">
-                {profileAvatar ? (
-                  <Image
-                    src={profileAvatar}
-                    alt="Pratinjau foto profil"
-                    width={64}
-                    height={64}
-                    unoptimized
-                    className="h-16 w-16 rounded-full border border-slate-200 dark:border-slate-700 object-cover"
-                  />
-                ) : (
-                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-50 dark:bg-emerald-950/80 text-xl font-black text-emerald-700 dark:text-emerald-300">
-                    {(profileName.trim().charAt(0) || user.name.charAt(0)).toUpperCase()}
+                <div className="shrink-0 flex items-start justify-between pb-4 border-b border-[var(--shadow-dark)]/20">
+                  <div>
+                    <h2 id="profile-dialog-title" className="text-lg font-black text-[var(--ink)]">
+                      Pengaturan Profil
+                    </h2>
+                    <p className="mt-1 text-xs text-[var(--muted)]">Perbarui informasi profil akun Anda.</p>
                   </div>
-                )}
-                <div>
-                  <input
-                    ref={avatarInput}
-                    type="file"
-                    accept="image/jpeg,image/png,image/webp"
-                    onChange={handleAvatarChange}
-                    className="hidden"
-                  />
                   <button
                     type="button"
-                    onClick={() => avatarInput.current?.click()}
-                    className="inline-flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700 px-3 py-2 text-xs font-bold text-slate-700 dark:text-slate-200 transition-colors hover:bg-slate-50 dark:hover:bg-slate-800"
+                    onClick={() => setProfileOpen(false)}
+                    className="neu-raised-sm flex h-11 w-11 shrink-0 items-center justify-center text-[var(--muted)] cursor-pointer active:shadow-[inset_3px_3px_6px_var(--shadow-dark),inset_-3px_-3px_6px_var(--shadow-light)]"
+                    aria-label="Tutup pengaturan profil"
                   >
-                    <Camera className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
-                    Pilih foto
+                    <X className="h-4 w-4" />
                   </button>
-                  <p className="mt-1.5 text-[11px] text-slate-500 dark:text-slate-400">JPG, PNG, atau WebP · maksimal 5 MB</p>
                 </div>
-              </div>
 
-              <label className="block space-y-1.5">
-                <span className="text-xs font-bold text-slate-700 dark:text-slate-300">Nama tampilan</span>
-                <span className="relative block">
-                  <User className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-                  <input
-                    value={profileName}
-                    onChange={(event) => setProfileName(event.target.value)}
-                    maxLength={80}
-                    required
-                    className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 py-2.5 pl-10 pr-3 text-sm text-slate-900 dark:text-white outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 dark:focus:ring-emerald-900/40"
-                  />
-                </span>
-                <span className="block text-[11px] text-slate-500 dark:text-slate-400">
-                  Hanya mengubah nama tampilan akun, bukan nama resmi pada data pengajuan.
-                </span>
-              </label>
+                <div className="overflow-y-auto py-5 space-y-4 text-[var(--ink)]">
+                  <div className="flex items-center gap-4">
+                    {profileAvatar ? (
+                      <Image
+                        src={profileAvatar}
+                        alt="Pratinjau foto profil"
+                        width={64}
+                        height={64}
+                        unoptimized
+                        className="h-16 w-16 rounded-full object-cover neu-raised-sm"
+                      />
+                    ) : (
+                      <div className="neu-circle-inset !h-16 !w-16 text-xl font-black">
+                        {(profileName.trim().charAt(0) || user.name.charAt(0)).toUpperCase()}
+                      </div>
+                    )}
+                    <div className="space-y-2">
+                      <input
+                        ref={avatarInput}
+                        type="file"
+                        accept="image/jpeg,image/png,image/webp"
+                        onChange={handleAvatarChange}
+                        className="hidden"
+                      />
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <button
+                          type="button"
+                          onClick={() => avatarInput.current?.click()}
+                          className="neu-raised-sm inline-flex items-center gap-2 px-3 py-2 text-xs font-bold text-[var(--ink)] cursor-pointer active:shadow-[inset_3px_3px_6px_var(--shadow-dark),inset_-3px_-3px_6px_var(--shadow-light)]"
+                        >
+                          <Camera className="h-4 w-4 text-[var(--accent)]" />
+                          {profileAvatar ? 'Ganti foto' : 'Pilih foto'}
+                        </button>
+                        {profileAvatar && (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setProfileAvatar('');
+                              if (avatarInput.current) avatarInput.current.value = '';
+                            }}
+                            className="neu-raised-sm inline-flex items-center gap-1.5 px-3 py-2 text-xs font-bold text-rose-600 hover:text-rose-700 cursor-pointer active:shadow-[inset_3px_3px_6px_var(--shadow-dark),inset_-3px_-3px_6px_var(--shadow-light)]"
+                            title="Hapus foto profil"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                            Hapus foto
+                          </button>
+                        )}
+                      </div>
+                      <p className="text-[11px] text-[var(--muted)]">JPG, PNG, atau WebP · maksimal 5 MB</p>
+                    </div>
+                  </div>
 
-              <label className="block space-y-1.5">
-                <span className="text-xs font-bold text-slate-700 dark:text-slate-300">Nomor telepon</span>
-                <span className="relative block">
-                  <Phone className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-                  <input
-                    type="tel"
-                    value={profilePhone}
-                    onChange={(event) => setProfilePhone(event.target.value)}
-                    maxLength={20}
-                    placeholder="Contoh: 081234567890"
-                    className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 py-2.5 pl-10 pr-3 text-sm text-slate-900 dark:text-white outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 dark:focus:ring-emerald-900/40"
-                  />
-                </span>
-              </label>
+                  <label className="block space-y-1.5">
+                    <span className="text-xs font-bold text-[var(--ink)]">Nama tampilan</span>
+                    <span className="relative block">
+                      <User className="absolute left-3.5 top-3.5 h-4 w-4 text-[var(--muted)]" />
+                      <input
+                        value={profileName}
+                        onChange={(event) => setProfileName(event.target.value)}
+                        maxLength={80}
+                        required
+                        className="neu-inset w-full min-h-[46px] py-2.5 pl-10 pr-3 text-sm text-[var(--ink)] outline-none"
+                      />
+                    </span>
+                    <span className="block text-[11px] text-[var(--muted)]">
+                      Hanya mengubah nama tampilan akun, bukan nama resmi pada data pengajuan.
+                    </span>
+                  </label>
 
-              <label className="block space-y-1.5">
-                <span className="text-xs font-bold text-slate-700 dark:text-slate-300">Email</span>
-                <span className="relative block">
-                  <Mail className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-                  <input
-                    type="email"
-                    value={profileEmail}
-                    onChange={(event) => setProfileEmail(event.target.value)}
-                    maxLength={120}
-                    required
-                    placeholder="nama@email.com"
-                    className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 py-2.5 pl-10 pr-3 text-sm text-slate-900 dark:text-white outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 dark:focus:ring-emerald-900/40"
-                  />
-                </span>
-                <span className="block text-[11px] text-slate-500 dark:text-slate-400">
-                  Email dipakai untuk login dan notifikasi — pastikan alamat aktif.
-                </span>
-              </label>
+                  <label className="block space-y-1.5">
+                    <span className="text-xs font-bold text-[var(--ink)]">Nomor telepon</span>
+                    <span className="relative block">
+                      <Phone className="absolute left-3.5 top-3.5 h-4 w-4 text-[var(--muted)]" />
+                      <input
+                        type="tel"
+                        value={profilePhone}
+                        onChange={(event) => setProfilePhone(event.target.value)}
+                        maxLength={20}
+                        placeholder="Contoh: 081234567890"
+                        className="neu-inset w-full min-h-[46px] py-2.5 pl-10 pr-3 text-sm text-[var(--ink)] outline-none"
+                      />
+                    </span>
+                  </label>
 
-              {profileError && (
-                <p role="alert" className="rounded-xl bg-rose-50 dark:bg-rose-950/60 px-3 py-2 text-xs font-medium text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800/60">
-                  {profileError}
-                </p>
-              )}
-            </div>
+                  <label className="block space-y-1.5">
+                    <span className="text-xs font-bold text-[var(--ink)]">Email</span>
+                    <span className="relative block">
+                      <Mail className="absolute left-3.5 top-3.5 h-4 w-4 text-[var(--muted)]" />
+                      <input
+                        type="email"
+                        value={profileEmail}
+                        onChange={(event) => setProfileEmail(event.target.value)}
+                        maxLength={120}
+                        required
+                        placeholder="nama@email.com"
+                        className="neu-inset w-full min-h-[46px] py-2.5 pl-10 pr-3 text-sm text-[var(--ink)] outline-none"
+                      />
+                    </span>
+                    <span className="block text-[11px] text-[var(--muted)]">
+                      Email dipakai untuk login dan notifikasi — pastikan alamat aktif.
+                    </span>
+                  </label>
 
-            <div className="shrink-0 flex justify-end gap-2 border-t border-slate-100 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-900/90 px-6 py-3.5">
-              <button
-                type="button"
-                onClick={() => setProfileOpen(false)}
-                className="rounded-xl px-4 py-2.5 text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-200/70 dark:hover:bg-slate-800 transition-colors"
-              >
-                Batal
-              </button>
-              <button
-                type="submit"
-                disabled={profileSaving}
-                className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-4 py-2.5 text-xs font-bold text-white transition-colors hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-60"
-              >
-                {profileSaving ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
-                Simpan profil
-              </button>
-            </div>
-          </form>
+                  {profileError && (
+                    <p role="alert" className="neu-inset-sm p-3 text-xs font-medium stat-val-red">
+                      {profileError}
+                    </p>
+                  )}
+                </div>
+
+                <div className="shrink-0 flex items-center justify-between pt-4 border-t border-[var(--shadow-dark)]/20">
+                  <button
+                    type="button"
+                    onClick={handleLogout}
+                    className="neu-raised-sm inline-flex items-center gap-1.5 px-3 py-2 text-xs font-bold text-rose-600 hover:text-rose-700 cursor-pointer active:shadow-[inset_3px_3px_6px_var(--shadow-dark),inset_-3px_-3px_6px_var(--shadow-light)]"
+                    title="Keluar dari akun ini"
+                  >
+                    <LogOut className="h-3.5 w-3.5" />
+                    Keluar akun
+                  </button>
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setProfileOpen(false)}
+                      className="neu-raised-sm px-4 py-2 text-xs font-bold text-[var(--muted)] cursor-pointer"
+                    >
+                      Batal
+                    </button>
+                    <button
+                      type="submit"
+                      disabled={profileSaving}
+                      className="neu-btn-primary !min-h-[42px] !py-2 !px-5 text-xs"
+                    >
+                      {profileSaving ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
+                      Simpan profil
+                    </button>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>,
           document.body

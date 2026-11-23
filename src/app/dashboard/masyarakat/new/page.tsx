@@ -20,6 +20,7 @@ import {
   Bot
 } from 'lucide-react';
 import DashboardHeader from '@/components/DashboardHeader';
+import AdminSidebar from '@/components/AdminSidebar';
 import { DESA, findRtWilayah, findRwWilayah } from '@/lib/desa-config';
 
 export default function NewApplicationPage() {
@@ -272,53 +273,53 @@ export default function NewApplicationPage() {
   };
 
   return (
-    <div className="relative isolate min-h-screen overflow-hidden bg-gradient-to-br from-emerald-50 via-slate-50 to-cyan-50 font-sans pb-16">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute -top-32 right-[-5rem] h-96 w-96 rounded-full bg-cyan-300/25 blur-3xl" />
-        <div className="absolute top-[34rem] -left-32 h-80 w-80 rounded-full bg-cyan-300/20 blur-3xl" />
-      </div>
+    <div className="min-h-screen font-sans pb-16" style={{ backgroundColor: 'var(--bg)', color: 'var(--ink)' }}>
       <DashboardHeader user={user || { name: 'Warga', email: '', role: 'MASYARAKAT' }} />
+      <AdminSidebar role="MASYARAKAT" />
 
       <main className="mx-auto max-w-6xl space-y-7 px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
         <div className="flex items-center justify-between">
           <Link
             href="/dashboard/masyarakat"
-            className="group inline-flex items-center gap-2 rounded-full border border-white/80 bg-white/75 px-4 py-2.5 text-sm font-semibold text-slate-600 shadow-sm backdrop-blur transition hover:-translate-y-0.5 hover:border-emerald-200 hover:text-emerald-700 hover:shadow-md"
+            className="neu-pill px-4 py-2.5 text-sm font-semibold text-[var(--ink)] inline-flex items-center gap-2"
           >
             <ArrowLeft className="w-3.5 h-3.5" /> Kembali ke Dashboard
           </Link>
 
-          <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200/80 bg-white/80 px-3.5 py-2 text-xs font-bold text-emerald-800 shadow-sm backdrop-blur">
-            <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.8)]" />
+          <span className="neu-pill-inset px-3.5 py-2 text-xs font-bold text-[var(--accent)] inline-flex items-center gap-2">
+            <span className="h-2 w-2 rounded-full bg-[var(--accent)]" />
             Formulir SKTM Online
           </span>
         </div>
 
-        <div className="overflow-hidden rounded-[2rem] border border-white/80 bg-white/85 p-4 shadow-[0_24px_80px_-24px_rgba(15,118,110,0.28)] backdrop-blur-xl sm:p-7 lg:p-9">
-          <div className="relative mb-8 overflow-hidden rounded-[1.6rem] bg-gradient-to-br from-emerald-700 via-teal-700 to-cyan-800 px-6 py-7 text-white shadow-xl shadow-emerald-900/20 sm:px-9 sm:py-9">
-            <div aria-hidden="true" className="absolute -right-12 -top-20 h-64 w-64 rounded-full border-[28px] border-white/10" />
-            <div aria-hidden="true" className="absolute -bottom-24 right-36 h-48 w-48 rounded-full bg-cyan-400/20 blur-2xl" />
-            <div className="relative max-w-3xl">
-              <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-semibold text-emerald-50 backdrop-blur">
-                <Sparkles className="h-3.5 w-3.5 text-cyan-200" />
-                Layanan digital {DESA.nama}
-              </span>
-              <h1 className="text-2xl font-black leading-tight tracking-tight sm:text-3xl lg:text-4xl">
-                Permohonan Surat Keterangan Tidak Mampu
-              </h1>
-              <p className="mt-3 max-w-2xl text-sm leading-relaxed text-emerald-50/90 sm:text-base">
-                Lengkapi data diri dan kondisi keluarga dengan benar. Petugas desa akan memeriksa permohonan Anda secara bertahap.
-              </p>
-              <div className="mt-6 flex flex-wrap gap-2 text-xs font-semibold text-white/90">
-                <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1.5">01 · Data keperluan</span>
-                <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1.5">02 · Data pemohon</span>
-                <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1.5">03 · Dokumen & pemeriksaan</span>
+        <div className="neu-raised p-4 sm:p-7 lg:p-9 overflow-hidden">
+          <div className="neu-raised p-6 sm:p-8 space-y-3 mb-8">
+            <div className="flex items-center gap-3">
+              <div className="neu-circle-inset flex items-center justify-center text-[var(--accent)] shrink-0">
+                <Sparkles className="h-6 w-6" />
               </div>
+              <div>
+                <span className="neu-pill-inset px-3 py-1 text-xs font-semibold text-[var(--accent)] inline-flex items-center gap-1.5 mb-1.5">
+                  <Sparkles className="h-3 w-3" /> Layanan Digital {DESA.nama}
+                </span>
+                <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--ink)]">
+                  Permohonan Surat Keterangan Tidak Mampu
+                </h1>
+                <p className="mt-1 text-sm text-[var(--muted)]">
+                  Lengkapi data diri dan kondisi keluarga dengan benar. Petugas desa akan memeriksa permohonan Anda secara bertahap.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 flex flex-wrap gap-2 text-xs font-semibold">
+              <span className="neu-pill-inset px-3 py-1 text-[var(--muted)]">01 · Data keperluan</span>
+              <span className="neu-pill-inset px-3 py-1 text-[var(--muted)]">02 · Data pemohon</span>
+              <span className="neu-pill-inset px-3 py-1 text-[var(--muted)]">03 · Kondisi ekonomi</span>
+              <span className="neu-pill-inset px-3 py-1 text-[var(--muted)]">04 · Dokumen pendukung</span>
             </div>
           </div>
 
           {error && (
-            <div className="mb-6 flex items-center gap-3 rounded-2xl border border-rose-200 bg-rose-50 p-4 text-sm text-rose-700 shadow-sm">
+            <div className="mb-6 flex items-center gap-3 p-4 neu-inset-sm text-sm text-[var(--stat-red)]">
               <AlertTriangle className="w-4 h-4 shrink-0" />
               <span>{error}</span>
             </div>
@@ -326,22 +327,22 @@ export default function NewApplicationPage() {
 
           <form onSubmit={handleSubmit} className="sktm-form space-y-6 sm:space-y-7">
             {/* Bagian 1: Keperluan */}
-            <div className="group space-y-5 rounded-3xl border border-emerald-100 bg-gradient-to-br from-white via-white to-emerald-50/60 p-5 shadow-lg shadow-emerald-950/[0.04] transition duration-300 hover:border-emerald-200 hover:shadow-xl hover:shadow-emerald-900/[0.08] sm:p-7">
-              <h3 className="flex items-center gap-3 text-sm font-extrabold tracking-wide text-slate-800 sm:text-base">
-                <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-lg shadow-emerald-600/25">
+            <div className="neu-raised p-5 sm:p-7 space-y-5">
+              <h3 className="flex items-center gap-3 text-sm font-extrabold tracking-wide text-[var(--ink)] sm:text-base">
+                <div className="neu-circle-inset-sm flex items-center justify-center text-[var(--accent)]">
                   <FileText className="h-5 w-5" />
-                </span>
-                <span><span className="mr-2 text-emerald-600">01</span> Keperluan Pengajuan SKTM</span>
+                </div>
+                <span><span className="mr-2 text-[var(--accent)]">01</span> Keperluan Pengajuan SKTM</span>
               </h3>
 
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-3 sm:gap-6">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Kategori Keperluan *</label>
+                  <label className="block text-xs font-bold text-[var(--ink)] mb-1">Kategori Keperluan *</label>
                   <select
                     name="purposeCategory"
                     value={formData.purposeCategory}
                     onChange={handleInputChange}
-                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
+                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm neu-inset text-[var(--ink)]"
                   >
                     <option value="Pendidikan">Pendidikan (KIP-K / Beasiswa Sekolah)</option>
                     <option value="Kesehatan">Kesehatan (Keringanan RS / BPJS PBI)</option>
@@ -352,7 +353,7 @@ export default function NewApplicationPage() {
                 </div>
 
                 <div className="sm:col-span-2">
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                  <label className="block text-xs font-bold text-[var(--ink)] mb-1">
                     Keterangan Rinci Keperluan *
                   </label>
                   <input
@@ -362,24 +363,24 @@ export default function NewApplicationPage() {
                     onChange={handleInputChange}
                     placeholder="Contoh: Pengajuan beasiswa KIP Kuliah untuk anak pertama diterima di perguruan tinggi"
                     required
-                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
+                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm neu-inset text-[var(--ink)] placeholder:text-[var(--muted)]"
                   />
                 </div>
               </div>
             </div>
 
             {/* Bagian 2: Data Pemohon */}
-            <div className="group space-y-5 rounded-3xl border border-cyan-100 bg-gradient-to-br from-white via-white to-cyan-50/60 p-5 shadow-lg shadow-cyan-950/[0.04] transition duration-300 hover:border-cyan-200 hover:shadow-xl hover:shadow-cyan-900/[0.08] sm:p-7">
-              <h3 className="flex items-center gap-3 text-sm font-extrabold tracking-wide text-slate-800 sm:text-base">
-                <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-600/25">
+            <div className="neu-raised p-5 sm:p-7 space-y-5">
+              <h3 className="flex items-center gap-3 text-sm font-extrabold tracking-wide text-[var(--ink)] sm:text-base">
+                <div className="neu-circle-inset-sm flex items-center justify-center text-[var(--accent)]">
                   <IdCard className="h-5 w-5" />
-                </span>
-                <span><span className="mr-2 text-cyan-600">02</span> Data Pemohon <span className="font-medium text-slate-500">(Kependudukan)</span></span>
+                </div>
+                <span><span className="mr-2 text-[var(--accent)]">02</span> Data Pemohon <span className="font-medium text-[var(--muted)]">(Kependudukan)</span></span>
               </h3>
 
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-3 sm:gap-6">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Nomor Induk Kependudukan (NIK 16 Digit) *</label>
+                  <label className="block text-xs font-bold text-[var(--ink)] mb-1">Nomor Induk Kependudukan (NIK 16 Digit) *</label>
                   <input
                     type="text"
                     name="nik"
@@ -387,12 +388,12 @@ export default function NewApplicationPage() {
                     value={formData.nik}
                     onChange={handleInputChange}
                     required
-                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm bg-white border border-slate-300 rounded-xl font-mono focus:border-emerald-500"
+                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm neu-inset font-mono text-[var(--ink)]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Nomor Kartu Keluarga (KK 16 Digit) *</label>
+                  <label className="block text-xs font-bold text-[var(--ink)] mb-1">Nomor Kartu Keluarga (KK 16 Digit) *</label>
                   <input
                     type="text"
                     name="noKk"
@@ -400,51 +401,51 @@ export default function NewApplicationPage() {
                     value={formData.noKk}
                     onChange={handleInputChange}
                     required
-                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm bg-white border border-slate-300 rounded-xl font-mono focus:border-emerald-500"
+                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm neu-inset font-mono text-[var(--ink)]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Nama Lengkap Sesuai KTP *</label>
+                  <label className="block text-xs font-bold text-[var(--ink)] mb-1">Nama Lengkap Sesuai KTP *</label>
                   <input
                     type="text"
                     name="fullName"
                     value={formData.fullName}
                     onChange={handleInputChange}
                     required
-                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm bg-white border border-slate-300 rounded-xl"
+                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm neu-inset text-[var(--ink)]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Tempat Lahir</label>
+                  <label className="block text-xs font-bold text-[var(--ink)] mb-1">Tempat Lahir</label>
                   <input
                     type="text"
                     name="birthPlace"
                     value={formData.birthPlace}
                     onChange={handleInputChange}
-                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm bg-white border border-slate-300 rounded-xl"
+                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm neu-inset text-[var(--ink)]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Tanggal Lahir</label>
+                  <label className="block text-xs font-bold text-[var(--ink)] mb-1">Tanggal Lahir</label>
                   <input
                     type="date"
                     name="birthDate"
                     value={formData.birthDate}
                     onChange={handleInputChange}
-                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm bg-white border border-slate-300 rounded-xl"
+                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm neu-inset text-[var(--ink)]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Jenis Kelamin</label>
+                  <label className="block text-xs font-bold text-[var(--ink)] mb-1">Jenis Kelamin</label>
                   <select
                     name="gender"
                     value={formData.gender}
                     onChange={handleInputChange}
-                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm bg-white border border-slate-300 rounded-xl"
+                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm neu-inset text-[var(--ink)]"
                   >
                     <option value="LAKI_LAKI">Laki-laki</option>
                     <option value="PEREMPUAN">Perempuan</option>
@@ -452,23 +453,23 @@ export default function NewApplicationPage() {
                 </div>
 
                 <div className="sm:col-span-3">
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Alamat Tempat Tinggal</label>
+                  <label className="block text-xs font-bold text-[var(--ink)] mb-1">Alamat Tempat Tinggal</label>
                   <input
                     type="text"
                     name="address"
                     value={formData.address}
                     onChange={handleInputChange}
-                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm bg-white border border-slate-300 rounded-xl"
+                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm neu-inset text-[var(--ink)]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">RT</label>
+                  <label className="block text-xs font-bold text-[var(--ink)] mb-1">RT</label>
                   <select
                     name="rt"
                     value={formData.rt}
                     onChange={handleWilayahChange}
-                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm bg-white border border-slate-300 rounded-xl"
+                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm neu-inset text-[var(--ink)]"
                   >
                     {rtOptions.map((rt) => (
                       <option key={rt} value={rt}>
@@ -479,12 +480,12 @@ export default function NewApplicationPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">RW</label>
+                  <label className="block text-xs font-bold text-[var(--ink)] mb-1">RW</label>
                   <select
                     name="rw"
                     value={formData.rw}
                     onChange={handleWilayahChange}
-                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm bg-white border border-slate-300 rounded-xl"
+                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm neu-inset text-[var(--ink)]"
                   >
                     {DESA.petaRWRT.map((row) => (
                       <option key={row.rw} value={row.rw}>
@@ -495,12 +496,12 @@ export default function NewApplicationPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Dusun</label>
+                  <label className="block text-xs font-bold text-[var(--ink)] mb-1">Dusun</label>
                   <select
                     name="dusun"
                     value={formData.dusun}
                     onChange={handleInputChange}
-                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm bg-white border border-slate-300 rounded-xl"
+                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm neu-inset text-[var(--ink)]"
                   >
                     {dusunOptions.map((nama) => (
                       <option key={nama} value={nama}>
@@ -513,133 +514,133 @@ export default function NewApplicationPage() {
             </div>
 
             {/* Bagian 3: Data Sosial & Ekonomi */}
-            <div className="group space-y-5 rounded-3xl border border-violet-100 bg-gradient-to-br from-white via-white to-violet-50/60 p-5 shadow-lg shadow-violet-950/[0.04] transition duration-300 hover:border-violet-200 hover:shadow-xl hover:shadow-violet-900/[0.08] sm:p-7">
-              <h3 className="flex items-center gap-3 text-sm font-extrabold tracking-wide text-slate-800 sm:text-base">
-                <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-500 to-fuchsia-600 text-white shadow-lg shadow-violet-600/25">
+            <div className="neu-raised p-5 sm:p-7 space-y-5">
+              <h3 className="flex items-center gap-3 text-sm font-extrabold tracking-wide text-[var(--ink)] sm:text-base">
+                <div className="neu-circle-inset-sm flex items-center justify-center text-[var(--accent)]">
                   <Briefcase className="h-5 w-5" />
-                </span>
-                <span><span className="mr-2 text-violet-600">03</span> Data Kondisi Ekonomi Keluarga</span>
+                </div>
+                <span><span className="mr-2 text-[var(--accent)]">03</span> Data Kondisi Ekonomi Keluarga</span>
               </h3>
 
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-3 sm:gap-6">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Pekerjaan Pemohon *</label>
+                  <label className="block text-xs font-bold text-[var(--ink)] mb-1">Pekerjaan Pemohon *</label>
                   <input
                     type="text"
                     name="occupation"
                     value={formData.occupation}
                     onChange={handleInputChange}
                     required
-                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm bg-white border border-slate-300 rounded-xl"
+                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm neu-inset text-[var(--ink)]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Penghasilan Rata-rata per Bulan (Rp) *</label>
+                  <label className="block text-xs font-bold text-[var(--ink)] mb-1">Penghasilan Rata-rata per Bulan (Rp) *</label>
                   <input
                     type="number"
                     name="monthlyIncome"
                     value={formData.monthlyIncome}
                     onChange={handleInputChange}
                     required
-                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm bg-white border border-slate-300 rounded-xl font-mono"
+                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm neu-inset font-mono text-[var(--ink)]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Jumlah Anggota Keluarga / Tanggungan *</label>
+                  <label className="block text-xs font-bold text-[var(--ink)] mb-1">Jumlah Anggota Keluarga / Tanggungan *</label>
                   <input
                     type="number"
                     name="familyMembersCount"
                     value={formData.familyMembersCount}
                     onChange={handleInputChange}
                     required
-                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm bg-white border border-slate-300 rounded-xl font-mono"
+                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm neu-inset font-mono text-[var(--ink)]"
                   />
                 </div>
 
                 <div className="sm:col-span-3">
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Kondisi Tempat Tinggal</label>
+                  <label className="block text-xs font-bold text-[var(--ink)] mb-1">Kondisi Tempat Tinggal</label>
                   <input
                     type="text"
                     name="houseCondition"
                     value={formData.houseCondition}
                     onChange={handleInputChange}
                     placeholder="Contoh: Menumpang rumah keluarga / Sewa kontrakan 1 petak"
-                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm bg-white border border-slate-300 rounded-xl"
+                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm neu-inset text-[var(--ink)] placeholder:text-[var(--muted)]"
                   />
                 </div>
 
                 <div className="sm:col-span-3">
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Keterangan Kondisi Ekonomi Keluarga</label>
+                  <label className="block text-xs font-bold text-[var(--ink)] mb-1">Keterangan Kondisi Ekonomi Keluarga</label>
                   <textarea
                     rows={2}
                     name="economicDescription"
                     value={formData.economicDescription}
                     onChange={handleInputChange}
-                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm bg-white border border-slate-300 rounded-xl"
+                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm neu-inset text-[var(--ink)] placeholder:text-[var(--muted)]"
                   />
                 </div>
               </div>
             </div>
 
             {/* Bagian 4: Upload Dokumen */}
-            <div className="group space-y-5 rounded-3xl border border-amber-100 bg-gradient-to-br from-white via-white to-amber-50/60 p-5 shadow-lg shadow-amber-950/[0.04] transition duration-300 hover:border-amber-200 hover:shadow-xl hover:shadow-amber-900/[0.08] sm:p-7">
-              <h3 className="flex items-center gap-3 text-sm font-extrabold tracking-wide text-slate-800 sm:text-base">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 text-white shadow-lg shadow-amber-600/25">
+            <div className="neu-raised p-5 sm:p-7 space-y-5">
+              <h3 className="flex items-center gap-3 text-sm font-extrabold tracking-wide text-[var(--ink)] sm:text-base">
+                <div className="neu-circle-inset-sm flex items-center justify-center text-[var(--accent)]">
                   <Upload className="h-5 w-5" />
-                </span>
-                <span><span className="mr-2 text-amber-600">04</span> Unggah Dokumen Pendukung <span className="block pt-1 text-xs font-medium text-slate-500 sm:inline sm:pt-0">(PDF, JPG, PNG maks. 5MB)</span></span>
+                </div>
+                <span><span className="mr-2 text-[var(--accent)]">04</span> Unggah Dokumen Pendukung <span className="block pt-1 text-xs font-medium text-[var(--muted)] sm:inline sm:pt-0">(PDF, JPG, PNG maks. 5MB)</span></span>
               </h3>
 
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-5">
                 {/* KTP */}
-                <div className="space-y-3 rounded-2xl border border-slate-200/80 bg-white/90 p-4 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-emerald-200 hover:shadow-lg hover:shadow-emerald-900/10 sm:p-5">
+                <div className="space-y-3 neu-inset-sm p-4 sm:p-5">
                   <div className="flex items-center justify-between">
-                    <span className="font-bold text-xs text-slate-800">Foto KTP Asli *</span>
-                    <span className="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-bold">Wajib</span>
+                    <span className="font-bold text-xs text-[var(--ink)]">Foto KTP Asli *</span>
+                    <span className="text-[10px] neu-pill-inset px-2 py-0.5 text-[var(--accent)] font-bold">Wajib</span>
                   </div>
                   <input
                     type="file"
                     accept=".pdf,.jpg,.jpeg,.png"
                     onChange={(e) => handleFileUpload('KTP', e)}
-                    className="text-xs w-full file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-[11px] file:bg-slate-100 file:text-slate-700"
+                    className="text-xs w-full file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-[11px] file:bg-[var(--shadow-dark)]/20 file:text-[var(--ink)]"
                   />
-                  <p className="text-[11px] text-slate-400">
+                  <p className="text-[11px] text-[var(--muted)]">
                     File saat ini: {documents.find((d) => d.documentType === 'KTP')?.fileName || 'Belum diunggah'}
                   </p>
                 </div>
 
                 {/* KK */}
-                <div className="space-y-3 rounded-2xl border border-slate-200/80 bg-white/90 p-4 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-emerald-200 hover:shadow-lg hover:shadow-emerald-900/10 sm:p-5">
+                <div className="space-y-3 neu-inset-sm p-4 sm:p-5">
                   <div className="flex items-center justify-between">
-                    <span className="font-bold text-xs text-slate-800">Kartu Keluarga (KK) *</span>
-                    <span className="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-bold">Wajib</span>
+                    <span className="font-bold text-xs text-[var(--ink)]">Kartu Keluarga (KK) *</span>
+                    <span className="text-[10px] neu-pill-inset px-2 py-0.5 text-[var(--accent)] font-bold">Wajib</span>
                   </div>
                   <input
                     type="file"
                     accept=".pdf,.jpg,.jpeg,.png"
                     onChange={(e) => handleFileUpload('KK', e)}
-                    className="text-xs w-full file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-[11px] file:bg-slate-100 file:text-slate-700"
+                    className="text-xs w-full file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-[11px] file:bg-[var(--shadow-dark)]/20 file:text-[var(--ink)]"
                   />
-                  <p className="text-[11px] text-slate-400">
+                  <p className="text-[11px] text-[var(--muted)]">
                     File saat ini: {documents.find((d) => d.documentType === 'KK')?.fileName || 'Belum diunggah'}
                   </p>
                 </div>
 
                 {/* Surat Pengantar */}
-                <div className="space-y-3 rounded-2xl border border-slate-200/80 bg-white/90 p-4 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-emerald-200 hover:shadow-lg hover:shadow-emerald-900/10 sm:p-5">
+                <div className="space-y-3 neu-inset-sm p-4 sm:p-5">
                   <div className="flex items-center justify-between">
-                    <span className="font-bold text-xs text-slate-800">Surat Pengantar RT/RW</span>
-                    <span className="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-semibold">Dianjurkan</span>
+                    <span className="font-bold text-xs text-[var(--ink)]">Surat Pengantar RT/RW</span>
+                    <span className="text-[10px] neu-pill-inset px-2 py-0.5 text-[var(--muted)] font-semibold">Dianjurkan</span>
                   </div>
                   <input
                     type="file"
                     accept=".pdf,.jpg,.jpeg,.png"
                     onChange={(e) => handleFileUpload('PENDUKUNG', e)}
-                    className="text-xs w-full file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-[11px] file:bg-slate-100 file:text-slate-700"
+                    className="text-xs w-full file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-[11px] file:bg-[var(--shadow-dark)]/20 file:text-[var(--ink)]"
                   />
-                  <p className="text-[11px] text-slate-400">
+                  <p className="text-[11px] text-[var(--muted)]">
                     File saat ini: {documents.find((d) => d.documentType === 'PENDUKUNG')?.fileName || 'Belum diunggah'}
                   </p>
                 </div>
@@ -647,17 +648,15 @@ export default function NewApplicationPage() {
             </div>
 
             {/* AI Assistant Checker Card */}
-            <div className="relative overflow-hidden rounded-3xl border border-emerald-300/20 bg-gradient-to-br from-slate-950 via-emerald-950 to-teal-900 p-5 text-white shadow-xl shadow-emerald-950/20 sm:p-7">
-              <div aria-hidden="true" className="absolute -right-10 -top-16 h-48 w-48 rounded-full bg-cyan-400/20 blur-3xl" />
-              <div className="relative space-y-4">
+            <div className="neu-raised p-5 sm:p-7 space-y-4">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-emerald-300/30 bg-emerald-400/15 text-emerald-300 shadow-[0_0_24px_rgba(52,211,153,0.16)]">
+                <div className="flex items-center gap-3">
+                  <div className="neu-circle-inset-sm flex items-center justify-center text-[var(--accent)]">
                     <Sparkles className="h-5 w-5" />
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold sm:text-base">Pemeriksaan Awal Asisten AI</h4>
-                    <p className="mt-1 text-xs text-emerald-100/70">Verifikasi kelengkapan format & dokumen otomatis</p>
+                    <h4 className="text-sm font-bold sm:text-base text-[var(--ink)]">Pemeriksaan Awal Asisten AI</h4>
+                    <p className="mt-0.5 text-xs text-[var(--muted)]">Verifikasi kelengkapan format & dokumen otomatis</p>
                   </div>
                 </div>
 
@@ -665,7 +664,7 @@ export default function NewApplicationPage() {
                   type="button"
                   onClick={handleRunAiCheck}
                   disabled={checkingAi}
-                  className="inline-flex items-center gap-2 rounded-xl border border-emerald-300/30 bg-emerald-400 px-4 py-2.5 text-xs font-extrabold text-emerald-950 shadow-lg shadow-emerald-500/20 transition hover:-translate-y-0.5 hover:bg-emerald-300 hover:shadow-emerald-400/30 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="neu-btn-primary px-4 py-2 text-xs font-bold inline-flex items-center gap-2 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   {checkingAi ? (
                     <>
@@ -682,17 +681,17 @@ export default function NewApplicationPage() {
               </div>
 
               {aiAnalysis && (
-                <div className="pt-3 border-t border-slate-700 space-y-2 text-xs">
+                <div className="pt-3 border-t border-[var(--shadow-dark)]/20 space-y-2 text-xs">
                   <div className="flex items-center justify-between">
-                    <span className="text-slate-300">Skor Kelengkapan Berkas:</span>
-                    <span className="font-mono font-bold text-emerald-400 text-sm">
+                    <span className="text-[var(--muted)]">Skor Kelengkapan Berkas:</span>
+                    <span className="font-mono font-bold text-[var(--stat-green)] text-sm">
                       {aiAnalysis.score}%
                     </span>
                   </div>
 
                   {aiAnalysis.warnings.length > 0 && (
-                    <div className="p-2.5 bg-amber-950/40 border border-amber-600/40 rounded-xl text-amber-200 text-[11px] space-y-1">
-                      <strong className="text-amber-400 block">Peringatan AI:</strong>
+                    <div className="p-3 neu-inset-sm text-[var(--stat-orange)] text-[11px] space-y-1">
+                      <strong className="block font-bold">Peringatan AI:</strong>
                       {aiAnalysis.warnings.map((w: string, idx: number) => (
                         <p key={idx}>• {w}</p>
                       ))}
@@ -700,8 +699,8 @@ export default function NewApplicationPage() {
                   )}
 
                   {aiAnalysis.recommendations.length > 0 && (
-                    <div className="p-2.5 bg-emerald-950/40 border border-emerald-600/40 rounded-xl text-emerald-200 text-[11px]">
-                      <strong className="text-emerald-400 block">Catatan Rekomendasi AI:</strong>
+                    <div className="p-3 neu-inset-sm text-[var(--stat-green)] text-[11px]">
+                      <strong className="block font-bold">Catatan Rekomendasi AI:</strong>
                       {aiAnalysis.recommendations.map((r: string, idx: number) => (
                         <p key={idx}>• {r}</p>
                       ))}
@@ -709,14 +708,13 @@ export default function NewApplicationPage() {
                   )}
                 </div>
               )}
-              </div>
             </div>
 
             {/* Submit Action */}
-            <div className="flex flex-col-reverse items-stretch justify-end gap-3 border-t border-slate-200/80 pt-6 sm:flex-row sm:items-center">
+            <div className="flex flex-col-reverse items-stretch justify-end gap-3 border-t border-[var(--shadow-dark)]/20 pt-6 sm:flex-row sm:items-center">
               <Link
                 href="/dashboard/masyarakat"
-                className="inline-flex justify-center rounded-xl border border-slate-200 bg-white px-6 py-3.5 text-sm font-bold text-slate-600 transition hover:border-slate-300 hover:bg-slate-50"
+                className="neu-pill px-6 py-3.5 text-sm font-bold text-[var(--muted)] hover:text-[var(--ink)] text-center"
               >
                 Batal
               </Link>
@@ -724,7 +722,7 @@ export default function NewApplicationPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 px-7 py-4 text-sm font-black text-white shadow-xl shadow-emerald-700/25 transition duration-300 hover:-translate-y-0.5 hover:from-emerald-500 hover:via-teal-500 hover:to-cyan-500 hover:shadow-2xl hover:shadow-emerald-700/30 disabled:cursor-not-allowed disabled:opacity-50 sm:text-base"
+                className="neu-btn-primary px-7 py-3.5 text-sm sm:text-base font-bold inline-flex items-center justify-center gap-2 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {loading ? (
                   <>

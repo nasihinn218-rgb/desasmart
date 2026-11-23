@@ -176,16 +176,16 @@ export default function AiChatWidget() {
         if (!isCurrent) return;
         const user =
           data.authenticated &&
-          typeof data.user?.name === 'string' &&
-          typeof data.user?.roleDisplayName === 'string'
+            typeof data.user?.name === 'string' &&
+            typeof data.user?.roleDisplayName === 'string'
             ? {
-                name: data.user.name,
-                roleDisplayName: data.user.roleDisplayName,
-                villageName:
-                  typeof data.user.villageName === 'string'
-                    ? data.user.villageName
-                    : null,
-              }
+              name: data.user.name,
+              roleDisplayName: data.user.roleDisplayName,
+              villageName:
+                typeof data.user.villageName === 'string'
+                  ? data.user.villageName
+                  : null,
+            }
             : null;
 
         setCurrentUser(user);
@@ -333,32 +333,30 @@ export default function AiChatWidget() {
             setError('');
             setIsOpen(true);
           }}
-          className="group flex items-center gap-2.5 rounded-full border border-[var(--border)] bg-[var(--surface-dark)] px-4 py-3 font-medium text-[var(--accent-mint)] shadow-xl shadow-black/25 transition-all hover:-translate-y-1 hover:bg-[#26332f] hover:shadow-2xl hover:shadow-black/35"
+          className="group neu-btn-primary flex items-center gap-2.5 !rounded-full !px-5 !py-3.5 shadow-xl transition-all hover:-translate-y-1 cursor-pointer dark:!bg-gradient-to-r dark:!from-emerald-700 dark:!via-teal-700 dark:!to-emerald-800 dark:!text-white dark:border dark:border-emerald-400/30 dark:shadow-2xl dark:shadow-emerald-950/80"
           aria-label="Buka AI Assistant"
         >
           <span className="relative">
-            <Bot className="h-5 w-5 text-[var(--accent-mint)] transition-transform group-hover:rotate-12 group-hover:scale-110" />
+            <Bot className="h-5 w-5 text-white transition-transform group-hover:rotate-12 group-hover:scale-110" />
             <span className="absolute -right-1 -top-1 flex h-2.5 w-2.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-300 opacity-75" />
               <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
             </span>
           </span>
-          <span className="text-sm font-semibold tracking-wide">Tanya AI Desa</span>
-          <Sparkles className="h-4 w-4 text-[var(--accent-peach)] transition-transform group-hover:rotate-12" />
+          <span className="text-sm font-bold tracking-wide text-white">Tanya AI Desa</span>
+          <Sparkles className="h-4 w-4 text-emerald-200 transition-transform group-hover:rotate-12" />
         </button>
       )}
 
       {isOpen && (
-        <section className="fixed bottom-4 right-4 z-50 flex h-[min(30rem,70dvh)] w-[min(24rem,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface-dark)] text-white shadow-2xl shadow-black/40">
-          <div className="relative isolate flex min-h-0 flex-1 flex-col overflow-hidden bg-gradient-to-br from-[#111817] via-[#1d2825] to-[#26332f]">
-            <div aria-hidden="true" className="pointer-events-none absolute -right-28 -top-32 h-96 w-96 rounded-full bg-emerald-400/10 blur-3xl" />
-            <div aria-hidden="true" className="pointer-events-none absolute -bottom-40 -left-28 h-96 w-96 rounded-full bg-teal-300/10 blur-3xl" />
-            <header className="relative z-10 flex h-14 shrink-0 items-center justify-between border-b border-white/10 bg-[#111817]/80 px-3 shadow-lg shadow-black/10 backdrop-blur-xl sm:px-4">
+        <section className="fixed bottom-4 right-4 z-50 flex h-[min(34rem,75dvh)] w-[min(26rem,calc(100vw-2rem))] flex-col overflow-hidden neu-raised bg-[var(--bg)] text-[var(--ink)] shadow-2xl">
+          <div className="relative isolate flex min-h-0 flex-1 flex-col overflow-hidden bg-[var(--bg)]">
+            <header className="relative z-10 flex h-16 shrink-0 items-center justify-between border-b border-[var(--shadow-dark)]/20 bg-[var(--bg)] px-4">
               <div className="flex min-w-0 items-center gap-2">
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-700 text-white shadow-lg shadow-emerald-500/20">
-                  <Sparkles className="h-4 w-4" />
+                <div className="neu-circle-inset-sm !h-8 !w-8 flex items-center justify-center">
+                  <Sparkles className="h-4 w-4 text-[var(--accent)]" />
                 </div>
-                <span className="truncate text-sm font-extrabold tracking-tight text-white">DesaSmart AI</span>
+                <span className="truncate text-sm font-extrabold tracking-tight text-[var(--ink)]">DesaSmart AI</span>
                 {modelProfiles.length > 0 ? (
                   <button
                     type="button"
@@ -369,7 +367,7 @@ export default function AiChatWidget() {
                     aria-expanded={pickerOpen}
                     aria-haspopup="listbox"
                     title="Pilih model AI tersimpan sebelum bertanya"
-                    className="inline-flex max-w-[10rem] shrink-0 items-center gap-1 rounded-full border border-emerald-300/20 bg-emerald-300/10 px-2 py-1 text-[10px] font-bold text-emerald-300 transition-colors hover:border-emerald-200/50 hover:bg-emerald-300/20"
+                    className="inline-flex max-w-[10rem] shrink-0 items-center gap-1 rounded-full neu-inset-sm px-2 py-1 text-[10px] font-bold text-[var(--accent)] transition-colors"
                   >
                     <Cpu className="h-3 w-3 shrink-0" />
                     <span className="truncate">
@@ -381,19 +379,19 @@ export default function AiChatWidget() {
                     />
                   </button>
                 ) : (
-                  <span className="hidden rounded-full border border-emerald-300/20 bg-emerald-300/10 px-2 py-1 text-[10px] font-bold text-emerald-300 sm:inline-flex">
+                  <span className="hidden rounded-full neu-inset-sm px-2 py-1 text-[10px] font-bold text-[var(--accent)] sm:inline-flex">
                     ✦ {providerName.toUpperCase()}
                     {modelName ? ` · ${modelName}` : ''}
                   </span>
                 )}
               </div>
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-2">
                 <button
                   type="button"
                   onClick={startNewChat}
                   disabled={loading}
                   title="Reset percakapan ini. Riwayat tersimpan tidak dihapus."
-                  className="inline-flex items-center gap-1.5 rounded-lg px-2 py-2 text-xs font-bold text-slate-300 transition-colors hover:bg-white/10 hover:text-emerald-200 disabled:cursor-not-allowed disabled:opacity-40"
+                  className="neu-raised-sm flex h-9 w-9 items-center justify-center text-[var(--muted)] cursor-pointer active:shadow-[inset_2px_2px_4px_var(--shadow-dark),inset_-2px_-2px_4px_var(--shadow-light)] disabled:cursor-not-allowed disabled:opacity-40"
                   aria-label="Reset chat"
                 >
                   <RotateCcw className="h-4 w-4" />
@@ -401,10 +399,10 @@ export default function AiChatWidget() {
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}
-                  className="rounded-lg p-2 text-slate-300 transition-colors hover:bg-rose-400/10 hover:text-rose-300"
+                  className="neu-raised-sm flex h-9 w-9 items-center justify-center text-[var(--muted)] hover:text-rose-600 transition-colors cursor-pointer active:shadow-[inset_2px_2px_4px_var(--shadow-dark),inset_-2px_-2px_4px_var(--shadow-light)]"
                   aria-label="Tutup AI"
                 >
-                  <X className="h-5 w-5" />
+                  <X className="h-4 w-4" />
                 </button>
               </div>
             </header>
@@ -413,9 +411,9 @@ export default function AiChatWidget() {
               <div
                 role="listbox"
                 aria-label="Pilih model AI"
-                className="absolute inset-x-2 top-16 z-20 max-h-[65%] overflow-y-auto rounded-2xl border border-white/15 bg-[#141d1b]/95 p-2 shadow-2xl shadow-black/50 backdrop-blur-xl"
+                className="absolute inset-x-2 top-16 z-20 max-h-[65%] overflow-y-auto rounded-2xl border border-[var(--shadow-dark)]/30 bg-[var(--bg)] p-2 shadow-2xl neu-raised backdrop-blur-xl"
               >
-                <p className="px-1.5 pb-1.5 pt-1 text-[10px] font-extrabold uppercase tracking-[0.18em] text-slate-400">
+                <p className="px-1.5 pb-1.5 pt-1 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[var(--muted)]">
                   Pilih model AI sebelum bertanya
                 </p>
                 {modelProfiles.map((profile) => (
@@ -426,38 +424,37 @@ export default function AiChatWidget() {
                     aria-selected={profile.isActive}
                     disabled={switchingId !== null}
                     onClick={() => void switchModel(profile)}
-                    className={`flex w-full cursor-pointer items-start gap-2 rounded-xl border px-2.5 py-2 text-left transition disabled:cursor-not-allowed disabled:opacity-60 ${
-                      profile.isActive
-                        ? 'border-emerald-300/40 bg-emerald-400/15'
-                        : 'border-white/10 bg-white/[0.03] hover:border-white/25 hover:bg-white/[0.07]'
-                    }`}
+                    className={`flex w-full cursor-pointer items-start gap-2 rounded-xl border px-2.5 py-2 text-left transition disabled:cursor-not-allowed disabled:opacity-60 ${profile.isActive
+                      ? 'border-[var(--accent)]/50 bg-[var(--accent)]/15'
+                      : 'border-[var(--shadow-dark)]/20 bg-[var(--bg)] hover:border-[var(--accent)]/30 neu-raised-sm'
+                      }`}
                   >
                     <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center">
                       {switchingId === profile.id ? (
-                        <Loader2 className="h-3.5 w-3.5 animate-spin text-emerald-200" />
+                        <Loader2 className="h-3.5 w-3.5 animate-spin text-[var(--accent)]" />
                       ) : profile.isActive ? (
-                        <Check className="h-3.5 w-3.5 text-emerald-300" />
+                        <Check className="h-3.5 w-3.5 text-[var(--accent)]" />
                       ) : null}
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="block truncate text-xs font-extrabold text-white">
+                      <span className="block truncate text-xs font-extrabold text-[var(--ink)]">
                         {profile.providerName}
                       </span>
-                      <span className="block truncate font-mono text-[11px] text-emerald-100/80">
+                      <span className="block truncate font-mono text-[11px] text-[var(--accent)]">
                         {profile.model}
                       </span>
-                      <span className="block truncate font-mono text-[10px] text-slate-400">
+                      <span className="block truncate font-mono text-[10px] text-[var(--muted)]">
                         {profile.maskedKey}
                       </span>
                     </span>
                     {profile.isActive && (
-                      <span className="shrink-0 rounded-full bg-emerald-400/20 px-1.5 py-0.5 text-[9px] font-extrabold uppercase tracking-wide text-emerald-200">
+                      <span className="shrink-0 rounded-full bg-[var(--accent)]/20 px-1.5 py-0.5 text-[9px] font-extrabold uppercase tracking-wide text-[var(--accent)]">
                         Aktif
                       </span>
                     )}
                   </button>
                 ))}
-                <p className="px-1.5 pb-1 pt-1.5 text-[10px] leading-relaxed text-slate-400">
+                <p className="px-1.5 pb-1 pt-1.5 text-[10px] leading-relaxed text-[var(--muted)]">
                   Kunci baru ditambahkan lewat panel Pengaturan AI di dashboard staf/superadmin.
                 </p>
               </div>
@@ -473,29 +470,33 @@ export default function AiChatWidget() {
                 {messages.length === 1 && messages[0].id === 'welcome' ? (
                   <div className="mx-auto flex min-h-full w-full max-w-xl flex-col justify-center px-4 pb-6 pt-6 sm:px-5">
                     <div className="mb-5 text-center">
-                      <div className="mx-auto mb-3 flex h-12 w-12 rotate-3 items-center justify-center rounded-2xl border border-emerald-200/30 bg-gradient-to-br from-emerald-500 via-teal-500 to-emerald-700 text-white shadow-xl shadow-emerald-500/30 transition-transform hover:rotate-0 hover:scale-105">
+                      <div className="mx-auto mb-3 flex h-12 w-12 rotate-3 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-600 via-teal-600 to-emerald-800 text-white shadow-lg shadow-emerald-950/20 transition-transform hover:rotate-0 hover:scale-105">
                         <Sparkles className="h-6 w-6" />
                       </div>
-                      <span className="mb-3 inline-flex rounded-full border border-amber-200/25 bg-amber-200/10 px-3 py-1 text-[10px] font-extrabold uppercase tracking-[0.22em] text-amber-200">
+                      <span className="mb-2.5 inline-flex items-center gap-1.5 rounded-full neu-pill-inset px-3 py-1 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[var(--accent)]">
                         Asisten DesaSmart
                       </span>
-                      <h1 className="bg-gradient-to-r from-emerald-200 via-white to-amber-100 bg-clip-text text-xl font-black tracking-tight text-transparent sm:text-2xl">
+                      <h1 className="text-xl font-black tracking-tight text-[var(--ink)] sm:text-2xl">
                         Ada yang bisa saya bantu?
                       </h1>
-                      <p className="mt-2 text-xs text-slate-300">
+                      <p className="mt-1.5 text-xs text-[var(--muted)] font-medium">
                         Pilih topik atau tanyakan langsung kepada AI DesaSmart.
                       </p>
                     </div>
-                    <div className="grid gap-2 sm:grid-cols-2">
+                    <div className="grid gap-2.5 sm:grid-cols-2">
                       {SUGGESTIONS.map((suggestion) => (
                         <button
                           key={suggestion.title}
                           type="button"
                           onClick={() => void handleSend(suggestion.prompt)}
-                          className="group rounded-xl border border-emerald-300/25 bg-emerald-400/[0.08] p-3 text-left shadow-lg shadow-emerald-950/20 transition-all duration-200 hover:-translate-y-1 hover:border-emerald-200/60 hover:bg-emerald-400/[0.14] hover:shadow-xl hover:shadow-emerald-500/10"
+                          className="group neu-raised-sm p-3.5 text-left border border-[var(--shadow-dark)]/25 bg-[var(--bg)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--accent)]/50 hover:shadow-md cursor-pointer active:shadow-[inset_2px_2px_4px_var(--shadow-dark),inset_-2px_-2px_4px_var(--shadow-light)]"
                         >
-                          <span className="block text-xs font-extrabold text-white transition-colors group-hover:text-emerald-100">{suggestion.title}</span>
-                          <span className="mt-1 block text-[11px] leading-relaxed text-slate-300">{suggestion.prompt}</span>
+                          <span className="block text-xs font-extrabold text-[var(--ink)] transition-colors group-hover:text-[var(--accent)]">
+                            {suggestion.title}
+                          </span>
+                          <span className="mt-1 block text-[11px] leading-relaxed text-[var(--muted)] font-medium">
+                            {suggestion.prompt}
+                          </span>
                         </button>
                       ))}
                     </div>
@@ -508,24 +509,25 @@ export default function AiChatWidget() {
                         className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                       >
                         {message.role === 'assistant' && (
-                          <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl border border-emerald-200/30 bg-gradient-to-br from-emerald-500 to-teal-700 text-white shadow-lg shadow-emerald-950/30">
+                          <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-600 to-teal-800 text-white shadow-md">
                             <Sparkles className="h-4 w-4" />
                           </div>
                         )}
                         <div
-                          className={`max-w-[88%] ${
-                            message.role === 'user'
-                              ? 'relative rounded-3xl rounded-br-md border border-violet-300/30 bg-gradient-to-br from-violet-500 via-violet-600 to-violet-700 px-4 py-3 text-white shadow-lg shadow-violet-950/30 before:absolute before:-right-1.5 before:top-4 before:h-3 before:w-3 before:rotate-45 before:border-r before:border-t before:border-violet-300/30 before:bg-violet-600 sm:max-w-[78%]'
-                              : `min-w-0 flex-1 rounded-2xl border px-4 py-3 ${
-                                  message.isError
-                                    ? 'relative rounded-tl-md border-amber-300/40 bg-amber-400/15 shadow-lg shadow-amber-950/20'
-                                    : 'relative rounded-tl-md border-white/15 bg-gradient-to-br from-[#2a3531] via-[#232d2a] to-[#1d2624] shadow-lg shadow-black/25 before:absolute before:-left-1.5 before:top-4 before:h-3 before:w-3 before:-rotate-45 before:border-l before:border-t before:border-white/15 before:bg-[#232d2a]'
-                                }`
-                          }`}
+                          className={`max-w-[88%] ${message.role === 'user'
+                            ? 'relative rounded-2xl rounded-br-sm neu-btn-primary !p-3.5 text-[var(--accent-ink)] shadow-md sm:max-w-[78%]'
+                            : `min-w-0 flex-1 rounded-2xl p-4 neu-raised-sm border border-[var(--shadow-dark)]/25 bg-[var(--bg)] ${message.isError
+                              ? 'border-amber-400/50 bg-amber-500/10 text-amber-900 dark:text-amber-100'
+                              : 'text-[var(--ink)]'
+                            }`
+                            }`}
                         >
-                          <p className={`whitespace-pre-wrap break-words text-sm leading-6 ${
-                            message.role === 'user' || !message.isError ? 'text-white' : 'text-amber-50'
-                          }`}>
+                          <p className={`whitespace-pre-wrap break-words text-sm leading-6 ${message.role === 'user'
+                            ? 'text-[var(--accent-ink)]'
+                            : message.isError
+                              ? 'text-amber-900 dark:text-amber-100'
+                              : 'text-[var(--ink)]'
+                            }`}>
                             {message.content}
                           </p>
                           {message.role === 'user' && editingId === message.id && (
@@ -561,37 +563,39 @@ export default function AiChatWidget() {
                               type="button"
                               onClick={() => beginEdit(message)}
                               disabled={loading}
-                              className="mt-2 inline-flex items-center gap-1 text-[11px] font-semibold text-white/70 transition-colors hover:text-white disabled:opacity-40"
+                              className="mt-2 inline-flex items-center gap-1 text-[11px] font-semibold text-[var(--accent-ink)]/80 transition-colors hover:text-[var(--accent-ink)] disabled:opacity-40"
                             >
                               <Pencil className="h-3 w-3" /> Edit
                             </button>
                           )}
                           {message.source && (
-                            <p className="mt-2 text-[10px] font-medium text-white/75">{message.source}</p>
+                            <p className={`mt-2 text-[10px] font-medium ${message.role === 'user' ? 'text-[var(--accent-ink)]/80' : 'text-[var(--muted)]'}`}>
+                              {message.source}
+                            </p>
                           )}
                           {message.isError && (
                             <button
                               type="button"
                               onClick={() => message.retryText && void handleSend(message.retryText)}
                               disabled={loading}
-                              className="mt-2 rounded-lg border border-amber-200/40 bg-amber-200/10 px-2.5 py-1 text-xs font-semibold text-amber-100 transition-colors hover:bg-amber-200/20 disabled:opacity-50"
+                              className="mt-2 rounded-lg border border-amber-300/40 bg-amber-400/15 px-2.5 py-1 text-xs font-semibold text-amber-800 dark:text-amber-200 transition-colors hover:bg-amber-400/25 disabled:opacity-50"
                             >
                               Coba lagi
                             </button>
                           )}
                           {message.role === 'assistant' && (
-                            <div className="mt-1 text-[10px] font-medium text-white/75">{message.time}</div>
+                            <div className="mt-1 text-[10px] font-medium text-[var(--muted)]">{message.time}</div>
                           )}
                         </div>
                       </article>
                     ))}
                     {loading && (
-                      <div className="flex gap-3 items-center text-sm font-medium text-emerald-100">
-                        <div className="flex h-9 w-9 items-center justify-center rounded-2xl border border-emerald-200/30 bg-gradient-to-br from-emerald-500 to-teal-700 text-white shadow-lg shadow-emerald-950/30">
+                      <div className="flex gap-3 items-center text-sm font-semibold text-[var(--accent)]">
+                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-600 to-teal-800 text-white shadow-md">
                           <Sparkles className="h-4 w-4 animate-pulse" />
                         </div>
                         <span className="inline-flex items-center gap-2">
-                          <Loader2 className="h-4 w-4 animate-spin" />
+                          <Loader2 className="h-4 w-4 animate-spin text-[var(--accent)]" />
                           Sedang menyiapkan jawaban...
                         </span>
                       </div>
@@ -600,27 +604,27 @@ export default function AiChatWidget() {
                 )}
               </div>
 
-              <div className="shrink-0 border-t border-white/10 bg-gradient-to-t from-[#111817]/95 via-[#1d2825]/95 to-[#26332f]/90 px-3 pb-2 pt-2 backdrop-blur-xl sm:px-6 sm:pb-3 sm:pt-2">
+              <div className="shrink-0 border-t border-[var(--shadow-dark)]/20 bg-[var(--bg)] px-3 pb-2 pt-2 sm:px-4 sm:pb-3 sm:pt-2">
                 <div className="mx-auto max-w-xl">
                   {modelNote && (
-                    <div className="mb-2 flex items-start justify-between gap-3 rounded-xl border border-emerald-300/25 bg-emerald-400/10 px-3 py-2 text-xs text-emerald-100">
+                    <div className="mb-2 flex items-start justify-between gap-3 rounded-xl border border-[var(--accent)]/30 bg-[var(--accent)]/10 px-3 py-2 text-xs text-[var(--accent)]">
                       <span>{modelNote}</span>
-                      <button type="button" onClick={() => setModelNote('')} aria-label="Tutup info model" className="shrink-0 text-emerald-200 hover:text-white">
+                      <button type="button" onClick={() => setModelNote('')} aria-label="Tutup info model" className="shrink-0 text-[var(--accent)] hover:opacity-75">
                         <X className="h-3.5 w-3.5" />
                       </button>
                     </div>
                   )}
                   {error && (
-                    <div role="alert" className="mb-2 flex items-start justify-between gap-3 rounded-xl border border-amber-300/30 bg-amber-400/10 px-3 py-2 text-xs text-amber-100">
+                    <div role="alert" className="mb-2 flex items-start justify-between gap-3 rounded-xl border border-rose-500/30 bg-rose-500/10 px-3 py-2 text-xs text-rose-700 dark:text-rose-300">
                       <span>{error}</span>
-                      <button type="button" onClick={() => setError('')} aria-label="Tutup pesan" className="shrink-0 text-amber-200 hover:text-white">
+                      <button type="button" onClick={() => setError('')} aria-label="Tutup pesan" className="shrink-0 text-rose-700 dark:text-rose-300 hover:opacity-75">
                         <X className="h-3.5 w-3.5" />
                       </button>
                     </div>
                   )}
                   <form
                     onSubmit={handleSubmit}
-                    className="rounded-3xl border border-emerald-300/25 bg-[#1d2624]/95 p-1.5 shadow-xl shadow-black/30 transition-all focus-within:border-emerald-300/70 focus-within:shadow-black/40"
+                    className="neu-inset p-2 flex items-center gap-2"
                   >
                     <textarea
                       ref={textareaRef}
@@ -636,31 +640,24 @@ export default function AiChatWidget() {
                       maxLength={4000}
                       rows={1}
                       disabled={loading}
-                      className="max-h-16 min-h-9 w-full resize-none overflow-y-auto border-0 bg-transparent px-3 py-1.5 text-sm leading-5 text-white outline-none placeholder:text-slate-400 focus:ring-0 disabled:opacity-60"
+                      className="max-h-16 min-h-9 flex-1 resize-none overflow-y-auto border-0 bg-transparent px-3 py-1.5 text-sm leading-5 text-[var(--ink)] outline-none placeholder:text-[var(--muted)] focus:ring-0 disabled:opacity-60"
                       aria-label="Pesan untuk AI DesaSmart"
                     />
-                    <div className="flex items-center justify-between px-1 pb-0.5">
-                      {messages.length === 1 && messages[0].id === 'welcome' && (
-                        <span className="hidden pl-2 text-[10px] text-slate-400 sm:inline">
-                          Enter untuk kirim · Shift+Enter untuk baris baru
-                        </span>
+                    <button
+                      type="submit"
+                      disabled={!input.trim() || input.length > 4000 || loading}
+                      title="Kirim pesan"
+                      className="neu-btn-primary flex h-10 w-10 shrink-0 items-center justify-center !p-0 !rounded-full cursor-pointer disabled:opacity-40 dark:!bg-emerald-600 dark:hover:!bg-emerald-500"
+                      aria-label="Kirim pesan"
+                    >
+                      {loading ? (
+                        <Loader2 className="h-4 w-4 animate-spin text-white" />
+                      ) : (
+                        <Send className="h-4 w-4 text-white" strokeWidth={2.5} />
                       )}
-                      <button
-                        type="submit"
-                        disabled={!input.trim() || input.length > 4000 || loading}
-                        title="Kirim pesan"
-                        className="ml-auto flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-emerald-600 to-teal-600 text-white shadow-lg shadow-emerald-950/40 transition-all hover:scale-105 hover:shadow-emerald-500/30 disabled:cursor-not-allowed disabled:from-emerald-900 disabled:via-emerald-900 disabled:to-teal-900 disabled:text-white disabled:opacity-100"
-                        aria-label="Kirim pesan"
-                      >
-                        {loading ? (
-                          <Loader2 className="h-5 w-5 animate-spin" />
-                        ) : (
-                          <Send className="h-5 w-5" strokeWidth={2.5} />
-                        )}
-                      </button>
-                    </div>
+                    </button>
                   </form>
-                  <p className="mt-2 text-center text-[10px] leading-relaxed text-slate-400">
+                  <p className="mt-2 text-center text-[10px] leading-relaxed text-[var(--muted)]">
                     AI dapat keliru. Jangan bagikan kata sandi, API key, atau data pribadi sensitif.
                   </p>
                 </div>

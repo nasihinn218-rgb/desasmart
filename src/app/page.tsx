@@ -130,19 +130,19 @@ export default function LandingPage() {
             </Link>
           </div>
 
-          {/* Tiga Poin Kepercayaan */}
-          <ul className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2.5 p-0 text-sm font-semibold text-[var(--muted)] sm:text-base list-none">
-            <li className="flex items-center gap-1.5">
+          {/* Tiga Poin Kepercayaan (Pill Inset) */}
+          <ul className="mt-8 flex flex-wrap items-center justify-center gap-3 p-0 list-none">
+            <li className="neu-pill-inset">
               <CheckCircle2 className="h-4 w-4 text-[var(--accent)]" />
-              Selesai 1–2 hari kerja
+              <span>Selesai 1–2 hari kerja</span>
             </li>
-            <li className="flex items-center gap-1.5">
+            <li className="neu-pill-inset">
               <CheckCircle2 className="h-4 w-4 text-[var(--accent)]" />
-              Diperiksa staf dan Kepala Desa
+              <span>Diperiksa staf dan Kepala Desa</span>
             </li>
-            <li className="flex items-center gap-1.5">
+            <li className="neu-pill-inset">
               <CheckCircle2 className="h-4 w-4 text-[var(--accent)]" />
-              Bebas pungli
+              <span>Bebas pungli</span>
             </li>
           </ul>
         </section>
@@ -165,7 +165,7 @@ export default function LandingPage() {
                 key={step.step}
                 className="neu-raised flex flex-col items-start p-6 text-left"
               >
-                <div className="neu-circle-inset mb-4">
+                <div className="neu-circle-inset mb-4 flex items-center justify-center">
                   {step.step}
                 </div>
                 <b className="mb-2 block text-base font-bold text-[var(--ink)] sm:text-lg">
@@ -197,7 +197,7 @@ export default function LandingPage() {
                 key={item.title}
                 className="neu-raised p-6 text-left"
               >
-                <div className="neu-circle-inset-sm mb-4">
+                <div className="neu-circle-inset-sm mb-4 flex items-center justify-center">
                   <item.icon className="h-5 w-5" />
                 </div>
                 <b className="mb-2 block text-base font-bold text-[var(--ink)] sm:text-lg">

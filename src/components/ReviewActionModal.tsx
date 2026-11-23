@@ -129,35 +129,37 @@ export default function ReviewActionModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-150">
-      <div className="w-full max-w-lg animate-in zoom-in-95 rounded-3xl border border-white/80 bg-white p-5 shadow-2xl duration-150 sm:p-7">
-        <div className="flex items-start justify-between border-b border-slate-100 pb-4">
-          <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded-xl bg-slate-100">{config.icon}</div>
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0a100d]/50 backdrop-blur-sm animate-in fade-in duration-150">
+      <div className="w-full max-w-lg neu-raised bg-[var(--bg)] p-6 sm:p-7 duration-150 text-[var(--ink)] text-left">
+        <div className="flex items-start justify-between border-b border-[var(--shadow-dark)]/20 pb-4">
+          <div className="flex items-center gap-3">
+            <div className="neu-circle-inset-sm">{config.icon}</div>
             <div>
-              <h3 className="font-bold text-base text-slate-900">{config.title}</h3>
-              <p className="text-xs text-slate-500">{applicationNumber}</p>
+              <h3 className="font-extrabold text-base text-[var(--ink)]">{config.title}</h3>
+              <p className="text-xs text-[var(--muted)]">{applicationNumber}</p>
             </div>
           </div>
           <button
+            type="button"
             onClick={onClose}
             disabled={loading}
-            className="p-1 rounded-lg text-slate-400 hover:text-slate-700 transition-colors cursor-pointer"
+            className="neu-raised-sm flex h-11 w-11 shrink-0 items-center justify-center text-[var(--muted)] hover:text-[var(--ink)] transition-colors cursor-pointer active:shadow-[inset_3px_3px_6px_var(--shadow-dark),inset_-3px_-3px_6px_var(--shadow-light)]"
+            aria-label="Tutup dialog"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="mt-4 space-y-4">
-          <div className="rounded-2xl border border-slate-200/80 bg-gradient-to-br from-slate-50 to-white p-4 text-sm leading-relaxed text-slate-700">
+        <form onSubmit={handleSubmit} className="mt-5 space-y-4">
+          <div className="neu-inset-sm p-4 text-sm leading-relaxed text-[var(--ink)]">
             {config.desc}
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center justify-between">
+            <label className="block text-xs font-bold text-[var(--ink)] mb-2 flex items-center justify-between">
               <span>Catatan / Alasan Petugas</span>
               {config.isMandatoryText && (
-                <span className="text-rose-600 text-[11px] font-semibold">* Wajib Diisi</span>
+                <span className="stat-val-red text-[11px] font-bold">* Wajib Diisi</span>
               )}
             </label>
             <textarea
@@ -168,30 +170,30 @@ export default function ReviewActionModal({
                 if (error) setError('');
               }}
               placeholder={config.placeholder}
-              className="w-full rounded-2xl border border-slate-300 bg-white p-4 text-sm text-slate-800 outline-none transition-all placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10"
+              className="neu-inset w-full p-4 text-sm text-[var(--ink)] outline-none placeholder:text-[var(--muted)]"
             />
           </div>
 
           {error && (
-            <div className="p-3 bg-rose-50 border border-rose-200 text-rose-700 text-xs rounded-xl flex items-center gap-2">
+            <div className="neu-inset-sm p-3 text-xs font-bold stat-val-red flex items-center gap-2">
               <AlertTriangle className="w-4 h-4 shrink-0" />
               <span>{error}</span>
             </div>
           )}
 
-          <div className="flex flex-col-reverse items-stretch justify-end gap-2.5 pt-2 sm:flex-row sm:items-center">
+          <div className="flex flex-col-reverse items-stretch justify-end gap-3 pt-3 sm:flex-row sm:items-center">
             <button
               type="button"
               onClick={onClose}
               disabled={loading}
-              className="cursor-pointer rounded-xl border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-600 transition-colors hover:bg-slate-50"
+              className="neu-raised-sm px-5 py-3 text-sm font-semibold text-[var(--muted)] cursor-pointer"
             >
               Batal
             </button>
             <button
               type="submit"
               disabled={loading}
-              className={`inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-bold shadow-md transition-all disabled:cursor-not-allowed disabled:opacity-50 ${config.buttonClass}`}
+              className="neu-btn-primary !py-3 !px-6 text-sm font-bold disabled:cursor-not-allowed disabled:opacity-50"
             >
               {loading && <Loader2 className="w-4 h-4 animate-spin" />}
               {config.buttonLabel}

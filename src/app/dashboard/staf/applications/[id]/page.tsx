@@ -22,6 +22,7 @@ import {
   Clock
 } from 'lucide-react';
 import DashboardHeader from '@/components/DashboardHeader';
+import AdminSidebar from '@/components/AdminSidebar';
 import StatusBadge from '@/components/StatusBadge';
 import AiVerificationCard from '@/components/AiVerificationCard';
 import ApplicationTimeline from '@/components/ApplicationTimeline';
@@ -114,6 +115,7 @@ export default function StaffApplicationReviewPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-slate-50 to-cyan-50 font-sans pb-16">
       <DashboardHeader user={user || { name: 'Staf Pelayanan', email: '', role: 'STAFF' }} />
+      <AdminSidebar role="STAFF" />
 
       <main className="mx-auto max-w-7xl space-y-6 px-4 py-7 sm:px-6 lg:px-8">
         {/* Header Breadcrumb & Actions */}

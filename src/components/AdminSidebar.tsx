@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { 
   LayoutDashboard, 
   FileCheck2, 
@@ -11,13 +11,14 @@ import {
   ShieldAlert,
   UserCog,
   BellRing,
-  Menu,
-  X
+  X,
+  Home,
+  LogOut
 } from 'lucide-react';
 import { DESA } from '@/lib/desa-config';
 
 interface AdminSidebarProps {
-  role: 'STAFF' | 'SUPERADMIN' | 'KEPALA_DESA';
+  role: 'STAFF' | 'SUPERADMIN' | 'KEPALA_DESA' | 'MASYARAKAT';
   counts?: {
     pendingReview?: number;
     pendingSuperadmin?: number;
@@ -27,7 +28,35 @@ interface AdminSidebarProps {
 
 export default function AdminSidebar({ role, counts }: AdminSidebarProps) {
   const pathname = usePathname();
+  const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [loggingOut, setLoggingOut] = useState(false);
+
+  const handleLogout = async () => {
+    if (loggingOut) return;
+    setLoggingOut(true);
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' });
+      router.push('/login');
+      router.refresh();
+    } catch (e) {
+      console.error(e);
+      setLoggingOut(false);
+    }
+  };
+
+  useEffect(() => {
+    const handleToggle = () => setMenuOpen((prev) => !prev);
+    const handleClose = () => setMenuOpen(false);
+
+    window.addEventListener('toggle-desasmart-drawer', handleToggle);
+    window.addEventListener('close-desasmart-drawer', handleClose);
+
+    return () => {
+      window.removeEventListener('toggle-desasmart-drawer', handleToggle);
+      window.removeEventListener('close-desasmart-drawer', handleClose);
+    };
+  }, []);
 
   const getMenuItems = () => {
     if (role === 'STAFF') {
@@ -44,7 +73,7 @@ export default function AdminSidebar({ role, counts }: AdminSidebarProps) {
           icon: <BellRing className="w-4 h-4" />,
         },
         {
-          label: 'Cek Verifikasi Publik',
+          label: 'Cek Keaslian Surat',
           href: '/verify',
           icon: <Search className="w-4 h-4" />,
         },
@@ -78,7 +107,7 @@ export default function AdminSidebar({ role, counts }: AdminSidebarProps) {
           icon: <BellRing className="w-4 h-4" />,
         },
         {
-          label: 'Cek Verifikasi Publik',
+          label: 'Cek Keaslian Surat',
           href: '/verify',
           icon: <Search className="w-4 h-4" />,
         },
@@ -88,8 +117,7 @@ export default function AdminSidebar({ role, counts }: AdminSidebarProps) {
           icon: <ShieldAlert className="w-4 h-4" />,
         },
       ];
-    } else {
-      // KEPALA_DESA
+    } else if (role === 'KEPALA_DESA') {
       return [
         {
           label: 'Dashboard & Persetujuan',
@@ -103,7 +131,7 @@ export default function AdminSidebar({ role, counts }: AdminSidebarProps) {
           icon: <BellRing className="w-4 h-4" />,
         },
         {
-          label: 'Cek Verifikasi Publik',
+          label: 'Cek Keaslian Surat',
           href: '/verify',
           icon: <Search className="w-4 h-4" />,
         },
@@ -113,111 +141,160 @@ export default function AdminSidebar({ role, counts }: AdminSidebarProps) {
           icon: <ShieldAlert className="w-4 h-4" />,
         },
       ];
+    } else {
+      return [
+        {
+          label: 'Dashboard Warga',
+          href: '/dashboard/masyarakat',
+          icon: <LayoutDashboard className="w-4 h-4" />,
+        },
+        {
+          label: 'Ajukan SKTM Baru',
+          href: '/dashboard/masyarakat/new',
+          icon: <FileCheck2 className="w-4 h-4" />,
+        },
+        {
+          label: 'Cek Keaslian Surat',
+          href: '/verify',
+          icon: <Search className="w-4 h-4" />,
+        },
+      ];
     }
   };
 
   const menuItems = getMenuItems();
 
   return (
-    <aside
-      className={`flex shrink-0 flex-col gap-3 overflow-hidden bg-slate-950 p-3 text-slate-300 transition-[width] duration-150 ease-out lg:sticky lg:top-16 lg:h-[calc(100vh-4rem)] lg:self-start lg:overflow-y-auto lg:p-4 ${
-        menuOpen ? 'w-full lg:w-64' : 'w-full lg:w-20'
-      }`}
-    >
-      {/* Toggle: menu disembunyikan kesamping, muncul saat garis tiga ditekan */}
-      <button
-        type="button"
-        onClick={() => setMenuOpen((open) => !open)}
-        aria-expanded={menuOpen}
-        aria-controls="sidebar-nav-panel"
-        aria-label={menuOpen ? 'Tutup menu navigasi' : 'Buka menu navigasi'}
-        title={menuOpen ? 'Tutup menu navigasi' : 'Buka menu navigasi'}
-        className={`flex cursor-pointer items-center rounded-2xl border border-white/10 bg-white/[0.04] transition-colors hover:bg-white/10 ${
-          menuOpen
-            ? 'w-full justify-between px-3 py-2'
-            : 'w-full justify-between px-3 py-2 lg:justify-center lg:rounded-xl lg:p-2.5'
-        }`}
-      >
-        <span
-          className={`flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-slate-400 ${
-            menuOpen ? '' : 'lg:hidden'
-          }`}
-        >
-          <LayoutDashboard className="h-3.5 w-3.5 text-emerald-400" />
-          Menu Navigasi
-        </span>
-        {menuOpen ? (
-          <X className="h-4 w-4 shrink-0 text-slate-300" />
-        ) : (
-          <Menu className="h-4 w-4 shrink-0 text-slate-300 lg:h-5 lg:w-5" />
-        )}
-      </button>
-
+    <>
+      {/* Scrim Overlay */}
       <div
+        className={`fixed inset-0 z-40 bg-[#0a100d]/50 backdrop-blur-xs transition-opacity duration-300 ${
+          menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+        onClick={() => setMenuOpen(false)}
+        aria-hidden="true"
+      />
+
+      {/* Drawer Kiri (Semua Ukuran Layar: Fixed, min(320px, 86vw), Latar --bg, Animasi translateX) */}
+      <aside
         id="sidebar-nav-panel"
-        className={`grid transition-all duration-150 ease-out ${
-          menuOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+        aria-label="Menu navigasi utama"
+        className={`fixed top-0 left-0 bottom-0 z-50 flex w-[min(320px,86vw)] flex-col justify-between overflow-y-auto p-5 neu-drawer transition-transform duration-400 ease-in-out ${
+          menuOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        <div className="overflow-hidden">
-          <div className="space-y-4 lg:space-y-6">
-        {/* Role Portal Header */}
-        <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-slate-800 to-slate-900 px-4 py-3 shadow-lg shadow-black/10">
-          <p className="text-[11px] font-bold tracking-wider text-slate-400 uppercase">
-            Portal Administrasi
-          </p>
-          <p className="mt-1 text-sm font-bold text-white">
-            {role === 'KEPALA_DESA'
-              ? `Kepala ${DESA.nama}`
-              : role === 'SUPERADMIN'
-              ? 'Kasi Pelayanan (Superadmin)'
-              : 'Staf Loket Pelayanan'}
-          </p>
+        <div className="space-y-5">
+          {/* Header Drawer */}
+          <div className="flex items-center justify-between pb-2">
+            <Link
+              href="/"
+              onClick={() => setMenuOpen(false)}
+              className="flex items-center gap-3 no-underline"
+            >
+              <div
+                className="neu-raised-sm flex h-11 w-11 shrink-0 items-center justify-center font-extrabold text-lg text-[var(--accent)]"
+                aria-hidden="true"
+              >
+                D
+              </div>
+              <div>
+                <b className="block text-sm font-extrabold leading-tight text-[var(--ink)]">
+                  DesaSmart
+                </b>
+                <span className="block text-[11px] text-[var(--muted)]">
+                  {DESA.nama}
+                </span>
+              </div>
+            </Link>
+
+            <button
+              type="button"
+              onClick={() => setMenuOpen(false)}
+              aria-label="Tutup menu navigasi"
+              className="neu-raised-sm flex h-11 w-11 items-center justify-center text-[var(--ink)] cursor-pointer active:shadow-[inset_3px_3px_6px_var(--shadow-dark),inset_-3px_-3px_6px_var(--shadow-light)]"
+            >
+              <X className="h-5 w-5" />
+            </button>
+          </div>
+
+          {/* Kartu Peran: Inset */}
+          <div className="neu-inset p-4 rounded-[18px]">
+            <p className="text-[11px] font-bold tracking-wider text-[var(--muted)]">
+              Portal Administrasi
+            </p>
+            <p className="mt-1 text-sm font-extrabold text-[var(--ink)]">
+              {role === 'KEPALA_DESA'
+                ? `Kepala ${DESA.nama}`
+                : role === 'SUPERADMIN'
+                ? 'Kasi Pelayanan (Superadmin)'
+                : role === 'STAFF'
+                ? 'Staf Loket Pelayanan'
+                : 'Masyarakat Desa'}
+            </p>
+          </div>
+
+          {/* Nav Items */}
+          <nav className="flex flex-col space-y-2.5">
+            {menuItems.map((item) => {
+              const isDashboardRoot = [
+                '/dashboard/staf',
+                '/dashboard/superadmin',
+                '/dashboard/kades',
+                '/dashboard/masyarakat',
+              ].includes(item.href);
+              const isActive =
+                pathname === item.href ||
+                (isDashboardRoot
+                  ? pathname.startsWith(`${item.href}/applications/`)
+                  : pathname.startsWith(`${item.href}/`));
+
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMenuOpen(false)}
+                  className={`neu-drawer-item ${isActive ? 'neu-drawer-item-active' : ''}`}
+                >
+                  <div className="flex items-center gap-3">
+                    <span className={isActive ? 'text-[var(--accent)]' : 'text-[var(--muted)]'}>
+                      {item.icon}
+                    </span>
+                    <span>{item.label}</span>
+                  </div>
+                  {item.badge !== undefined && item.badge > 0 && (
+                    <span className="neu-status-badge stat-val-blue text-[10px]">
+                      {item.badge}
+                    </span>
+                  )}
+                </Link>
+              );
+            })}
+          </nav>
         </div>
 
-        {/* Navigation items */}
-        <nav className="flex flex-wrap gap-2 pb-1 lg:flex-col lg:space-y-1 lg:overflow-visible lg:pb-0">
-          {menuItems.map((item) => {
-            const isDashboardRoot = [
-              '/dashboard/staf',
-              '/dashboard/superadmin',
-              '/dashboard/kades',
-            ].includes(item.href);
-            const isActive =
-              pathname === item.href ||
-              (isDashboardRoot
-                ? pathname.startsWith(`${item.href}/applications/`)
-                : pathname.startsWith(`${item.href}/`));
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`flex min-w-max items-center justify-between gap-3 rounded-xl px-3.5 py-3 text-xs font-semibold transition-all lg:w-full ${
-                  isActive
-                    ? 'bg-[var(--accent-mint)] text-slate-900 shadow-lg shadow-black/10'
-                    : 'border border-white/5 bg-white/[0.04] text-slate-300 hover:bg-white/10 hover:text-white'
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  {item.icon}
-                  <span>{item.label}</span>
-                </div>
-                {item.badge !== undefined && item.badge > 0 && (
-                  <span
-                    className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                      isActive ? 'bg-slate-900 text-white' : 'bg-emerald-500/20 text-emerald-300'
-                    }`}
-                  >
-                    {item.badge}
-                  </span>
-                )}
-              </Link>
-            );
-          })}
-        </nav>
+        {/* Footer info & Logout di dalam drawer */}
+        <div className="pt-4 border-t border-[var(--shadow-dark)]/20 space-y-3">
+          <button
+            type="button"
+            onClick={handleLogout}
+            disabled={loggingOut}
+            className="neu-drawer-item w-full !text-rose-600 hover:!text-rose-700 cursor-pointer transition-colors disabled:opacity-50"
+          >
+            <div className="flex items-center gap-3">
+              <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-rose-500/10 text-rose-600">
+                <LogOut className="w-4 h-4" />
+              </span>
+              <span className="font-bold text-sm">
+                {loggingOut ? 'Sedang keluar...' : 'Keluar dari Akun'}
+              </span>
+            </div>
+          </button>
+
+          <div className="text-center text-[11px] text-[var(--muted)]">
+            &copy; {new Date().getFullYear()} Pemerintah {DESA.nama}
           </div>
         </div>
-      </div>
-    </aside>
+      </aside>
+    </>
   );
 }

@@ -12,9 +12,11 @@ import {
   Eye, 
   Sparkles,
   Loader2,
-  Layers
+  Layers,
+  Home
 } from 'lucide-react';
 import DashboardHeader from '@/components/DashboardHeader';
+import AdminSidebar from '@/components/AdminSidebar';
 import StatusBadge from '@/components/StatusBadge';
 import ApplicationTaskbar from '@/components/ApplicationTaskbar';
 import RowActionMenu from '@/components/RowActionMenu';
@@ -92,67 +94,57 @@ export default function MasyarakatDashboard() {
   const completedApps = applications.filter((a) => a.status === 'COMPLETED');
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans">
+    <div className="min-h-screen font-sans bg-[var(--bg)] text-[var(--ink)] flex flex-col">
       <DashboardHeader user={user || { id: '', name: 'Warga', email: '', role: 'MASYARAKAT' }} />
+      <AdminSidebar role="MASYARAKAT" />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-        {/* Welcome Banner */}
-        <div className="relative flex flex-col gap-6 overflow-hidden rounded-3xl border border-white/80 bg-gradient-to-r from-emerald-900 via-emerald-800 to-teal-900 p-5 text-white shadow-xl shadow-emerald-950/15 sm:p-7 lg:flex-row lg:items-center">
-          <div aria-hidden="true" className="absolute -right-10 -top-20 h-64 w-64 rounded-full border-[30px] border-white/10" />
-          <div className="relative z-10 min-w-0 flex-1 space-y-3">
-            <div className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 text-xs font-semibold text-emerald-100 backdrop-blur-md">
-              <Sparkles className="h-3.5 w-3.5 text-emerald-300" />
-              Portal Layanan Surat {DESA.nama}
+      <main className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 flex-1">
+        {/* Welcome Banner (Kartu Raised berlatar --bg, judul besar, ikon inset, label normal) */}
+        <div className="neu-raised p-6 sm:p-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+          <div className="space-y-3 max-w-2xl">
+            <div className="inline-flex items-center gap-2 neu-pill-inset">
+              <Sparkles className="h-4 w-4 text-[var(--accent)]" />
+              <span>Portal layanan surat {DESA.nama}</span>
             </div>
-            <h1 className="text-2xl font-black tracking-tight sm:text-3xl">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-[var(--ink)]">
               Selamat datang, {user?.name || 'Warga'}!
             </h1>
-            <p className="max-w-xl text-xs leading-relaxed text-emerald-100/90 sm:text-sm">
-              Ajukan Surat Keterangan Tidak Mampu (SKTM) secara online kapan saja. Pantau proses verifikasi dari staf hingga tanda tangan Kepala Desa secara transparan.
+            <p className="text-sm leading-relaxed text-[var(--muted)]">
+              Ajukan Surat Keterangan Tidak Mampu (SKTM) secara online kapan saja. Pantau proses pemeriksaan dari staf hingga tanda tangan Kepala Desa secara transparan.
             </p>
-            <Link
-              href="/dashboard/masyarakat/new"
-              className="inline-flex items-center gap-2 rounded-2xl bg-white px-5 py-3 text-xs font-extrabold text-emerald-800 shadow-lg shadow-black/10 transition-all hover:-translate-y-0.5 hover:bg-emerald-50 sm:text-sm"
-            >
-              <PlusCircle className="h-4 w-4 text-emerald-600" />
-              Ajukan SKTM Baru
-            </Link>
+            <div className="pt-1">
+              <Link
+                href="/dashboard/masyarakat/new"
+                className="neu-btn-primary"
+              >
+                <PlusCircle className="h-4 w-4" />
+                <span>Ajukan SKTM baru</span>
+              </Link>
+            </div>
+          </div>
+          <div className="hidden lg:flex items-center justify-center neu-circle-inset !w-24 !h-24 shrink-0">
+            <Home className="h-10 w-10 text-[var(--accent)]" />
           </div>
         </div>
 
-        {/* 3 Summary Cards */}
+        {/* 3 Summary Cards (Raised, Angka besar di tengah atas, label di bawah) */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-          <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs flex items-center justify-between">
-            <div>
-              <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">Pengajuan Aktif</p>
-              <h3 className="text-3xl font-black text-slate-900 mt-1">{activeApps.length}</h3>
-              <p className="text-[11px] text-slate-400 mt-0.5">Sedang dalam proses</p>
-            </div>
-            <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center">
-              <Layers className="w-6 h-6" />
-            </div>
+          <div className="neu-raised p-6 text-center space-y-1">
+            <h3 className="text-4xl font-extrabold stat-val-blue">{activeApps.length}</h3>
+            <p className="text-xs font-bold text-[var(--muted)]">Pengajuan Aktif</p>
+            <p className="text-[11px] text-[var(--muted)]">Sedang dalam proses</p>
           </div>
 
-          <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs flex items-center justify-between">
-            <div>
-              <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">Menunggu Pemeriksaan</p>
-              <h3 className="text-3xl font-black text-slate-900 mt-1">{waitingReview.length}</h3>
-              <p className="text-[11px] text-slate-400 mt-0.5">Staf / Superadmin / Kades</p>
-            </div>
-            <div className="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center">
-              <Clock className="w-6 h-6" />
-            </div>
+          <div className="neu-raised p-6 text-center space-y-1">
+            <h3 className="text-4xl font-extrabold stat-val-orange">{waitingReview.length}</h3>
+            <p className="text-xs font-bold text-[var(--muted)]">Menunggu Pemeriksaan</p>
+            <p className="text-[11px] text-[var(--muted)]">Staf / Superadmin / Kades</p>
           </div>
 
-          <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs flex items-center justify-between">
-            <div>
-              <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">SKTM Selesai</p>
-              <h3 className="text-3xl font-black text-emerald-600 mt-1">{completedApps.length}</h3>
-              <p className="text-[11px] text-slate-400 mt-0.5">Siap diunduh / cetak</p>
-            </div>
-            <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
-              <CheckCircle2 className="w-6 h-6" />
-            </div>
+          <div className="neu-raised p-6 text-center space-y-1">
+            <h3 className="text-4xl font-extrabold stat-val-green">{completedApps.length}</h3>
+            <p className="text-xs font-bold text-[var(--muted)]">SKTM Selesai</p>
+            <p className="text-[11px] text-[var(--muted)]">Siap diunduh / dicetak</p>
           </div>
         </div>
 
@@ -161,14 +153,14 @@ export default function MasyarakatDashboard() {
 
         {/* Action Alert Banner for NEED_REVISION if any */}
         {applications.some((a) => a.status === 'NEED_REVISION') && (
-          <div className="p-4 bg-amber-50 border border-amber-300 rounded-2xl flex items-center justify-between gap-4">
+          <div className="neu-raised p-5 flex items-center justify-between gap-4 border-l-4 border-amber-500">
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-xl bg-amber-100 text-amber-800">
-                <AlertTriangle className="w-5 h-5" />
+              <div className="neu-circle-inset-sm">
+                <AlertTriangle className="w-5 h-5 stat-val-orange" />
               </div>
               <div>
-                <p className="text-xs font-bold text-amber-900">Perhatian: Ada Pengajuan Perlu Perbaikan</p>
-                <p className="text-[11px] text-amber-700">
+                <p className="text-xs font-bold stat-val-orange">Perhatian: Ada Pengajuan Perlu Perbaikan</p>
+                <p className="text-[11px] text-[var(--muted)]">
                   Petugas loket desa meminta Anda melengkapi atau memperbaiki dokumen. Silakan buka detail pengajuan untuk membaca instruksi.
                 </p>
               </div>
@@ -176,17 +168,17 @@ export default function MasyarakatDashboard() {
           </div>
         )}
 
-        {/* Applications List */}
-        <div className="bg-white rounded-3xl border border-slate-200 shadow-xs overflow-hidden">
-          <div className="p-5 sm:p-6 border-b border-slate-100 flex items-center justify-between">
+        {/* Applications List (Panel Raised seluruh tabel, Header Inset tipis, antarbaris dipisah border tipis) */}
+        <div className="neu-table-panel p-5 sm:p-7 space-y-5">
+          <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-base font-bold text-slate-900">Riwayat Pengajuan SKTM Anda</h3>
-              <p className="text-xs text-slate-500">Daftar permohonan surat yang pernah Anda buat</p>
+              <h3 className="text-base sm:text-lg font-extrabold text-[var(--ink)]">Riwayat Pengajuan SKTM Anda</h3>
+              <p className="text-xs text-[var(--muted)]">Daftar permohonan surat yang pernah Anda buat</p>
             </div>
 
             <Link
               href="/dashboard/masyarakat/new"
-              className="text-xs font-bold text-emerald-700 hover:text-emerald-800 flex items-center gap-1"
+              className="neu-pill !min-h-[40px] !py-2 !px-4 text-xs font-bold"
             >
               + Pengajuan Baru
             </Link>
@@ -195,14 +187,14 @@ export default function MasyarakatDashboard() {
           <div className="overflow-x-auto">
             {applications.length === 0 ? (
               <div className="p-12 text-center space-y-3">
-                <FileText className="w-10 h-10 text-slate-300 mx-auto" />
-                <p className="text-sm font-semibold text-slate-700">Belum Ada Pengajuan SKTM</p>
-                <p className="text-xs text-slate-500 max-w-sm mx-auto">
+                <FileText className="w-10 h-10 text-[var(--muted)] mx-auto" />
+                <p className="text-sm font-semibold text-[var(--ink)]">Belum Ada Pengajuan SKTM</p>
+                <p className="text-xs text-[var(--muted)] max-w-sm mx-auto">
                   Anda belum pernah mengajukan Surat Keterangan Tidak Mampu secara online. Klik tombol di bawah untuk memulai.
                 </p>
                 <Link
                   href="/dashboard/masyarakat/new"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-emerald-600 text-white text-xs font-bold mt-2"
+                  className="neu-btn-primary !min-h-[42px] !py-2 !px-4 text-xs mt-2"
                 >
                   Ajukan SKTM Sekarang
                 </Link>
@@ -210,7 +202,7 @@ export default function MasyarakatDashboard() {
             ) : (
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="bg-slate-50 border-b border-slate-100 text-[11px] font-bold uppercase tracking-wider text-slate-500">
+                  <tr className="neu-table-header text-[11px] font-bold uppercase tracking-wider text-[var(--muted)]">
                     <th className="py-3 px-4">No. Pengajuan</th>
                     <th className="py-3 px-4">Pemohon</th>
                     <th className="py-3 px-4">Tanggal Buat</th>
@@ -219,7 +211,7 @@ export default function MasyarakatDashboard() {
                     <th className="py-3 px-4 text-right">Aksi</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100 text-xs text-slate-700">
+                <tbody className="divide-y divide-[var(--shadow-dark)]/15 text-xs text-[var(--ink)]">
                   {applications.map((app) => (
                     <tr key={app.id} className="hover:bg-slate-50/70 transition-colors">
                       <td className="py-3.5 px-4 font-mono font-bold text-slate-900">

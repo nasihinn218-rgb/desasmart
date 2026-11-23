@@ -21,6 +21,7 @@ import {
   Clock
 } from 'lucide-react';
 import DashboardHeader from '@/components/DashboardHeader';
+import AdminSidebar from '@/components/AdminSidebar';
 import StatusBadge from '@/components/StatusBadge';
 import AiVerificationCard from '@/components/AiVerificationCard';
 import ApplicationTimeline from '@/components/ApplicationTimeline';
@@ -149,6 +150,7 @@ export default function ApplicationDetailPage() {
   return (
     <div className="min-h-screen bg-slate-50 font-sans pb-16">
       <DashboardHeader user={user || { name: 'Warga', email: '', role: 'MASYARAKAT' }} />
+      <AdminSidebar role="MASYARAKAT" />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
         {/* Navigation Breadcrumb & Actions */}

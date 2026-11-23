@@ -19,6 +19,7 @@ import {
   UserCheck
 } from 'lucide-react';
 import DashboardHeader from '@/components/DashboardHeader';
+import AdminSidebar from '@/components/AdminSidebar';
 import StatusBadge from '@/components/StatusBadge';
 import AiVerificationCard from '@/components/AiVerificationCard';
 import ApplicationTimeline from '@/components/ApplicationTimeline';
@@ -109,6 +110,7 @@ export default function SuperadminApplicationReviewPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-violet-50 via-slate-50 to-indigo-50 font-sans pb-16">
       <DashboardHeader user={user || { name: 'Superadmin', email: '', role: 'SUPERADMIN' }} />
+      <AdminSidebar role="SUPERADMIN" />
 
       <main className="mx-auto max-w-7xl space-y-6 px-4 py-7 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">

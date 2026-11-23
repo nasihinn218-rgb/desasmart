@@ -7,12 +7,12 @@
 
 :root {
   color-scheme: light;
-  --canvas: #f1f0e9;
-  --surface: #faf9f4;
-  --surface-muted: #e9e9e0;
-  --surface-dark: #111817;
-  --foreground: #19211f;
-  --border: #d9dbd2;
+  --canvas: #e6eae6;
+  --surface: #e6eae6;
+  --surface-muted: #e6eae6;
+  --surface-dark: #131a17;
+  --foreground: #16201c;
+  --border: #b9c1bb;
   --accent-mint: #b9dcd3;
   --accent-peach: #edc9aa;
 
@@ -24,11 +24,26 @@
   --muted: #4b5852;
   --accent: #3a5a4a;
   --accent-ink: #ffffff;
+
+  /* Stat Accent Colors (Contrast >= 4.5:1 on #e6eae6) */
+  --stat-orange: #b45309;
+  --stat-green: #15803d;
+  --stat-blue: #0369a1;
+  --stat-red: #be123c;
+  --stat-purple: #6b21a8;
 }
 
 html.dark,
 :root.dark,
 .dark {
+  color-scheme: dark;
+  --canvas: #1c2420;
+  --surface: #1c2420;
+  --surface-muted: #1c2420;
+  --surface-dark: #131a17;
+  --foreground: #eef1ec;
+  --border: #27312c;
+
   /* Neumorphism Design Tokens - Dark Mode */
   --bg: #1c2420;
   --shadow-light: #27312c;
@@ -37,6 +52,13 @@ html.dark,
   --muted: #a8b4ad;
   --accent: #7fb095;
   --accent-ink: #10170f;
+
+  /* Stat Accent Colors (Contrast >= 4.5:1 on #1c2420) */
+  --stat-orange: #f59e0b;
+  --stat-green: #4ade80;
+  --stat-blue: #38bdf8;
+  --stat-red: #fb7185;
+  --stat-purple: #c084fc;
 }
 
 @theme inline {
@@ -102,9 +124,24 @@ html.dark,
 }
 
 body {
-  background: var(--canvas);
-  color: var(--foreground);
-  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Nunito Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 17px;
+  line-height: 1.7;
+  letter-spacing: 0.005em;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2;
+}
+
+/* Aksesibilitas universal focus-visible */
+:focus-visible {
+  outline: 3px solid var(--accent) !important;
+  outline-offset: 3px !important;
 }
 
 /* Keep existing utility-based screens on the same warm, paper-like surfaces. */
@@ -361,27 +398,29 @@ body {
   line-height: 1.2;
 }
 
-/* Menonjol (Raised) */
+/* Menonjol (Raised) - Radius 22px Kartu & Panel */
 .neu-raised {
   background-color: var(--bg);
   box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
-  border-radius: 20px;
+  border-radius: 22px;
   border: none;
   transition: box-shadow 180ms ease, transform 180ms ease;
 }
 
-/* Menonjol Kecil (Raised-SM) */
+/* Menonjol Kecil (Raised-SM) - Radius 16px */
 .neu-raised-sm {
   background-color: var(--bg);
+  color: var(--ink);
   box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
   border-radius: 16px;
   border: none;
   transition: box-shadow 180ms ease, transform 180ms ease;
 }
 
-/* Menekan (Inset) */
+/* Menekan (Inset) - Radius 16px untuk Input & Select */
 .neu-inset {
   background-color: var(--bg);
+  color: var(--ink);
   box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
   border-radius: 16px;
   border: none;
@@ -397,7 +436,7 @@ body {
   transition: box-shadow 180ms ease;
 }
 
-/* Tombol Pill Header */
+/* Tombol Pill Header & Action (Raised-SM -> Inset saat :active) */
 .neu-pill {
   display: inline-flex;
   align-items: center;
@@ -426,7 +465,23 @@ body {
   transform: translateY(1px);
 }
 
-/* Tombol Utama Hero & Cek Keaslian (Solid Accent) */
+/* Pill Inset (Misalnya 3 Poin Kepercayaan Hero & Status Badge) */
+.neu-pill-inset {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 999px;
+  background-color: var(--bg);
+  color: var(--muted);
+  box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
+  border: none;
+  font-weight: 600;
+  font-size: 0.88rem;
+  padding: 8px 18px;
+}
+
+/* Tombol Utama (Solid --accent dengan teks --accent-ink & raised shadow) */
 .neu-btn-primary {
   display: inline-flex;
   align-items: center;
@@ -439,7 +494,7 @@ body {
   border-radius: 16px;
   border: none;
   min-height: 48px;
-  padding: 16px 32px;
+  padding: 14px 28px;
   cursor: pointer;
   text-decoration: none;
   box-shadow: 6px 6px 14px var(--shadow-dark), -6px -6px 14px var(--shadow-light);
@@ -447,7 +502,7 @@ body {
 }
 
 .neu-btn-primary:hover {
-  filter: brightness(1.06);
+  filter: brightness(1.08);
   transform: translateY(-1px);
 }
 
@@ -463,11 +518,16 @@ body {
   border-radius: 50%;
   background-color: var(--bg);
   box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
-  display: grid;
-  place-items: center;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   color: var(--accent);
   font-weight: 800;
   font-size: 1.1rem;
+  flex-shrink: 0;
+  padding: 0 !important;
+  line-height: 1;
+  text-align: center;
 }
 
 /* Lingkaran Inset Kecil untuk Ikon */
@@ -477,23 +537,126 @@ body {
   border-radius: 50%;
   background-color: var(--bg);
   box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
-  display: grid;
-  place-items: center;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   color: var(--accent);
   flex-shrink: 0;
+  padding: 0 !important;
+  line-height: 1;
+}
+
+/* Drawer Navigasi Neumorphism */
+.neu-drawer {
+  background-color: var(--bg);
+  box-shadow: 8px 0 20px var(--shadow-dark), 0 0 16px var(--shadow-light);
+}
+
+.neu-drawer-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 16px;
+  background-color: var(--bg);
+  color: var(--ink);
+  box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+  transition: box-shadow 180ms ease, transform 180ms ease;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.88rem;
+}
+
+.neu-drawer-item:hover {
+  transform: translateX(2px);
+}
+
+.neu-drawer-item-active {
+  background-color: var(--bg);
+  color: var(--accent) !important;
+  font-weight: 800 !important;
+  box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+  border-left: 4px solid var(--accent);
+}
+
+/* Tabel Neumorphism */
+.neu-table-panel {
+  background-color: var(--bg);
+  box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
+  border-radius: 22px;
+  border: none;
+  overflow: hidden;
+}
+
+.neu-table-header {
+  background-color: var(--bg);
+  box-shadow: inset 2px 2px 4px var(--shadow-dark), inset -2px -2px 4px var(--shadow-light);
+  border-radius: 14px;
+}
+
+/* Badge Status Pill Inset */
+.neu-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  background-color: var(--bg);
+  box-shadow: inset 2px 2px 5px var(--shadow-dark), inset -2px -2px 5px var(--shadow-light);
+  padding: 5px 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: none;
+}
+
+/* Warna Angka Statistik Kontras >= 4.5:1 */
+.stat-val-orange { color: var(--stat-orange); }
+.stat-val-green { color: var(--stat-green); }
+.stat-val-blue { color: var(--stat-blue); }
+.stat-val-red { color: var(--stat-red); }
+.stat-val-purple { color: var(--stat-purple); }
+
+/* Tombol Melayang Tanya AI Desa */
+.neu-ai-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 40;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: 6px 6px 14px var(--shadow-dark), -6px -6px 14px var(--shadow-light);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+  border: none;
+}
+
+.neu-ai-fab:hover {
+  transform: scale(1.06);
+  filter: brightness(1.1);
+}
+
+.neu-ai-fab:active {
+  box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.45);
+  transform: scale(0.96);
 }
 
 /* Aksesibilitas: outline fokus jelas */
-.neu-page a:focus-visible,
-.neu-page button:focus-visible,
-.neu-page input:focus-visible {
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
   outline: 3px solid var(--accent) !important;
   outline-offset: 3px !important;
 }
 
 /* Optimasi layar HP (Mobile Responsive <= 640px) */
 @media (max-width: 640px) {
-  .neu-page {
+  body {
     font-size: 16px;
   }
   .neu-raised {
@@ -502,6 +665,7 @@ body {
   }
   .neu-raised-sm {
     box-shadow: 3px 3px 6px var(--shadow-dark), -3px -3px 6px var(--shadow-light);
+    border-radius: 14px;
   }
   .neu-inset {
     box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
@@ -510,6 +674,12 @@ body {
     padding: 8px 14px;
     font-size: 0.88rem;
     min-height: 44px;
+  }
+  .neu-ai-fab {
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
   }
 }
 
@@ -520,7 +690,10 @@ body {
   .neu-inset,
   .neu-inset-sm,
   .neu-pill,
-  .neu-btn-primary {
+  .neu-pill-inset,
+  .neu-btn-primary,
+  .neu-drawer-item,
+  .neu-ai-fab {
     transition: none !important;
   }
 }

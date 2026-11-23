@@ -95,20 +95,20 @@ export default function VillageDatabasePanel() {
   ];
 
   return (
-    <section className="overflow-hidden rounded-3xl border border-white dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 shadow-xl shadow-slate-900/[0.05] space-y-0">
+    <section className="overflow-hidden neu-raised space-y-0">
 
       {/* ── Header ── */}
-      <div className="flex items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 sm:p-6">
+      <div className="flex items-center justify-between gap-3 border-b border-[var(--shadow-dark)]/20 p-5 sm:p-6">
         <div className="flex items-center gap-2.5">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-900 text-emerald-400">
+          <div className="flex h-9 w-9 items-center justify-center neu-circle-inset-sm text-[var(--accent)]">
             <Home className="h-5 w-5" />
           </div>
           <div>
-            <h3 className="text-sm font-bold text-slate-900 dark:text-white">Database Wilayah {DESA.nama}</h3>
-            <p className="text-xs text-slate-500 dark:text-slate-400">{DESA.kecamatan}, {DESA.kabupaten}, {DESA.provinsi}</p>
+            <h3 className="text-sm font-bold">Database Wilayah {DESA.nama}</h3>
+            <p className="text-xs text-[var(--muted)]">{DESA.kecamatan}, {DESA.kabupaten}, {DESA.provinsi}</p>
           </div>
         </div>
-        <span className="hidden sm:inline-flex shrink-0 items-center gap-1.5 rounded-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3 py-1 text-[11px] font-bold text-slate-500 dark:text-slate-300">
+        <span className="hidden sm:inline-flex shrink-0 items-center gap-1.5 neu-pill-inset px-3 py-1 text-[11px] font-bold text-[var(--muted)]">
           <MapPin className="h-3.5 w-3.5" /> Kode Pos {DESA.kodePos}
         </span>
       </div>
@@ -118,15 +118,15 @@ export default function VillageDatabasePanel() {
         {/* ── Tiles ringkasan ── */}
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           {tiles.map((tile) => (
-            <div key={tile.label} className="flex items-center justify-between rounded-2xl border border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900/90 p-4 shadow-sm">
+            <div key={tile.label} className="flex items-center justify-between neu-raised-sm p-4">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">{tile.label}</p>
-                <h3 className="mt-1 text-2xl font-black text-slate-900 dark:text-white">
+                <p className="text-[10px] font-bold uppercase tracking-wider text-[var(--muted)]">{tile.label}</p>
+                <h3 className="mt-1 text-2xl font-black">
                   {tile.value}
-                  <span className="ml-1 text-xs font-bold text-slate-400 dark:text-slate-500">{tile.suffix}</span>
+                  <span className="ml-1 text-xs font-bold text-[var(--muted)]">{tile.suffix}</span>
                 </h3>
               </div>
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+              <div className="flex h-10 w-10 items-center justify-center neu-circle-inset-sm text-[var(--accent)]">
                 {tile.icon}
               </div>
             </div>

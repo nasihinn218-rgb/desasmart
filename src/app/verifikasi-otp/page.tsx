@@ -106,41 +106,41 @@ function VerifyOtpContent() {
   }, [email, router]);
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 font-sans">
+    <div className="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 font-sans" style={{ backgroundColor: 'var(--bg)', color: 'var(--ink)' }}>
       <div className="fixed right-4 top-4 z-50">
         <ThemeToggle />
       </div>
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
         <Link href="/" className="inline-flex items-center gap-2.5 group">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-700 to-teal-600 flex items-center justify-center text-white shadow-lg group-hover:scale-105 transition-transform">
+          <div className="w-12 h-12 neu-circle-inset flex items-center justify-center text-[var(--accent)] group-hover:scale-105 transition-transform">
             <Home className="w-6 h-6" />
           </div>
           <div className="text-left">
-            <h1 className="font-extrabold text-xl tracking-tight text-slate-900">
+            <h1 className="font-extrabold text-xl tracking-tight text-[var(--ink)]">
               Pelayanan Desa
             </h1>
-            <p className="text-xs text-slate-500 font-medium">Verifikasi Akun Warga {DESA.nama}</p>
+            <p className="text-xs text-[var(--muted)] font-medium">Verifikasi Akun Warga {DESA.nama}</p>
           </div>
         </Link>
-        <h2 className="mt-6 text-2xl font-black text-slate-900 tracking-tight flex items-center justify-center gap-2">
-          <ShieldCheck className="w-6 h-6 text-emerald-600" />
+        <h2 className="mt-6 text-2xl font-black text-[var(--ink)] tracking-tight flex items-center justify-center gap-2">
+          <ShieldCheck className="w-6 h-6 text-[var(--accent)]" />
           Verifikasi Akun Anda
         </h2>
-        <p className="mt-1 text-xs text-slate-500">
+        <p className="mt-1 text-xs text-[var(--muted)]">
           Masukkan kode OTP 6 digit yang dikirim ke WhatsApp dan Email pendaftaran
         </p>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md px-4 sm:px-0">
-        <div className="bg-white py-8 px-6 shadow-xl rounded-3xl border border-slate-200 sm:px-10">
+        <div className="neu-raised py-8 px-6 sm:px-10">
           {error && (
-            <div className="mb-5 p-3.5 bg-rose-50 border border-rose-200 text-rose-700 text-xs rounded-2xl flex items-center gap-2">
+            <div className="mb-5 p-3.5 neu-inset-sm text-[var(--stat-red)] text-xs rounded-2xl flex items-center gap-2">
               <AlertTriangle className="w-4 h-4 shrink-0" />
               <span>{error}</span>
             </div>
           )}
           {notice && (
-            <div className="mb-5 p-3.5 bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs rounded-2xl flex items-center gap-2">
+            <div className="mb-5 p-3.5 neu-inset-sm text-[var(--stat-green)] text-xs rounded-2xl flex items-center gap-2">
               <Mail className="w-4 h-4 shrink-0" />
               <span>{notice}</span>
             </div>
@@ -149,20 +149,20 @@ function VerifyOtpContent() {
           <form onSubmit={handleVerify} className="space-y-5">
             {!initialEmail && (
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">Email Akun</label>
+                <label className="block text-xs font-bold text-[var(--ink)] mb-1">Email Akun</label>
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="email@anda.com"
                   required
-                  className="w-full py-2.5 px-3.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
+                  className="w-full py-2.5 px-3.5 text-xs sm:text-sm neu-inset text-[var(--ink)] placeholder:text-[var(--muted)]"
                 />
               </div>
             )}
 
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">Kode OTP (6 digit)</label>
+              <label className="block text-xs font-bold text-[var(--ink)] mb-1">Kode OTP (6 digit)</label>
               <input
                 ref={codeInputRef}
                 type="text"
@@ -173,14 +173,14 @@ function VerifyOtpContent() {
                 onChange={(e) => setCode(e.target.value.replace(/\D/g, ''))}
                 placeholder="000000"
                 required
-                className="w-full py-3.5 px-4 text-center text-2xl sm:text-3xl font-black tracking-[0.5em] indent-[0.5em] bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 font-mono"
+                className="w-full py-3.5 px-4 text-center text-2xl sm:text-3xl font-black tracking-[0.5em] indent-[0.5em] neu-inset text-[var(--ink)] font-mono"
               />
-              <p className="mt-2 text-[11px] text-slate-500 flex items-center gap-1.5">
-                <MessageSquareText className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+              <p className="mt-2 text-[11px] text-[var(--muted)] flex items-center gap-1.5">
+                <MessageSquareText className="w-3.5 h-3.5 text-[var(--accent)] shrink-0" />
                 Cek pesan &quot;Kode verifikasi akun DesaSmart&quot; di WhatsApp / Email Anda.
               </p>
-              <p className="mt-1 text-[11px] text-slate-500 flex items-center gap-1.5">
-                <TimerReset className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+              <p className="mt-1 text-[11px] text-[var(--muted)] flex items-center gap-1.5">
+                <TimerReset className="w-3.5 h-3.5 text-[var(--stat-orange)] shrink-0" />
                 Kode berlaku 10 menit sejak dikirim.
               </p>
             </div>
@@ -188,7 +188,7 @@ function VerifyOtpContent() {
             <button
               type="submit"
               disabled={loading || code.length !== 6}
-              className="w-full py-3.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+              className="neu-btn-primary w-full py-3.5 px-4 font-bold text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
             >
               {loading ? (
                 <>
@@ -204,13 +204,13 @@ function VerifyOtpContent() {
             </button>
           </form>
 
-          <div className="text-center pt-5 border-t border-slate-100 mt-6 space-y-2">
-            <p className="text-xs text-slate-500">Tidak menerima kode?</p>
+          <div className="text-center pt-5 border-t border-[var(--shadow-dark)]/20 mt-6 space-y-2">
+            <p className="text-xs text-[var(--muted)]">Tidak menerima kode?</p>
             <button
               type="button"
               onClick={handleResend}
               disabled={resending || cooldown > 0}
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-600 hover:text-emerald-700 hover:underline disabled:cursor-not-allowed disabled:opacity-50 disabled:no-underline"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-[var(--accent)] hover:underline disabled:cursor-not-allowed disabled:opacity-50 disabled:no-underline"
             >
               {resending ? (
                 <>
@@ -223,8 +223,8 @@ function VerifyOtpContent() {
                 'Kirim ulang kode OTP'
               )}
             </button>
-            <p className="text-[11px] text-slate-400 pt-1">
-              <Link href="/login" className="font-bold text-slate-600 hover:text-emerald-600">
+            <p className="text-[11px] text-[var(--muted)] pt-1">
+              <Link href="/login" className="font-bold text-[var(--ink)] hover:text-[var(--accent)]">
                 Kembali ke halaman login
               </Link>
             </p>

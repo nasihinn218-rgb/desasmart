@@ -125,7 +125,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-10 sm:px-6 lg:px-8 font-sans">
+    <div className="min-h-screen flex flex-col justify-center py-10 sm:px-6 lg:px-8 font-sans" style={{ backgroundColor: 'var(--bg)', color: 'var(--ink)' }}>
       <div className="fixed right-4 top-4 z-50">
         <ThemeToggle />
       </div>
@@ -133,27 +133,27 @@ export default function RegisterPage() {
       {/* Header */}
       <div className="sm:mx-auto sm:w-full sm:max-w-2xl text-center">
         <Link href="/" className="inline-flex items-center gap-2.5 group">
-          <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-emerald-700 to-teal-600 flex items-center justify-center text-white shadow-lg">
+          <div className="w-12 h-12 neu-circle-inset flex items-center justify-center text-[var(--accent)] group-hover:scale-105 transition-transform">
             <Home className="w-6 h-6" />
           </div>
           <div className="text-left">
-            <h1 className="font-extrabold text-xl tracking-tight text-slate-900">Pelayanan Desa</h1>
-            <p className="text-xs text-slate-500 font-medium">Pendaftaran Warga {DESA.nama}</p>
+            <h1 className="font-extrabold text-xl tracking-tight text-[var(--ink)]">Pelayanan Desa</h1>
+            <p className="text-xs text-[var(--muted)] font-medium">Pendaftaran Warga {DESA.nama}</p>
           </div>
         </Link>
-        <h2 className="mt-4 text-2xl font-black text-slate-900 tracking-tight">
+        <h2 className="mt-4 text-2xl font-black text-[var(--ink)] tracking-tight">
           Buat Akun Pemohon Baru
         </h2>
-        <p className="mt-1 text-xs text-slate-500">
+        <p className="mt-1 text-xs text-[var(--muted)]">
           Lengkapi data identitas kependudukan — kode verifikasi (OTP) akan dikirim ke WhatsApp dan Email Anda
         </p>
       </div>
 
       <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-2xl px-4 sm:px-0">
-        <div className="bg-white py-8 px-6 shadow-xl rounded-3xl border border-slate-200 sm:px-10">
+        <div className="neu-raised py-8 px-6 sm:px-10">
 
           {error && (
-            <div className="mb-6 p-3.5 bg-rose-50 border border-rose-200 text-rose-700 text-xs rounded-2xl flex items-center gap-2">
+            <div className="mb-6 p-3.5 neu-inset-sm text-[var(--stat-red)] text-xs rounded-2xl flex items-center gap-2">
               <AlertTriangle className="w-4 h-4 shrink-0" />
               <span>{error}</span>
             </div>
@@ -163,12 +163,12 @@ export default function RegisterPage() {
 
             {/* Section 1: Kependudukan */}
             <div>
-              <h3 className="text-xs font-bold uppercase tracking-wider text-emerald-800 pb-2 border-b border-emerald-100 flex items-center gap-1.5">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--accent)] pb-2 border-b border-[var(--shadow-dark)]/20 flex items-center gap-1.5">
                 <IdCard className="w-4 h-4" /> 1. Data Kependudukan & Akun
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-3">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Nama Lengkap (Sesuai KTP) *</label>
+                  <label className="block text-xs font-bold text-[var(--ink)] mb-1">Nama Lengkap (Sesuai KTP) *</label>
                   <input
                     type="text"
                     name="name"
@@ -176,12 +176,12 @@ export default function RegisterPage() {
                     onChange={handleChange}
                     placeholder="Contoh: Ahmad Dahlan"
                     required
-                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
+                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm neu-inset text-[var(--ink)] placeholder:text-[var(--muted)]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Email Aktif *</label>
+                  <label className="block text-xs font-bold text-[var(--ink)] mb-1">Email Aktif *</label>
                   <input
                     type="email"
                     name="email"
@@ -189,12 +189,12 @@ export default function RegisterPage() {
                     onChange={handleChange}
                     placeholder="ahmad@gmail.com"
                     required
-                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
+                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm neu-inset text-[var(--ink)] placeholder:text-[var(--muted)]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">NIK (16 Digit) *</label>
+                  <label className="block text-xs font-bold text-[var(--ink)] mb-1">NIK (16 Digit) *</label>
                   <input
                     type="text"
                     name="nik"
@@ -203,12 +203,12 @@ export default function RegisterPage() {
                     onChange={handleChange}
                     placeholder="320101XXXXXXXXXX"
                     required
-                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 font-mono"
+                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm neu-inset text-[var(--ink)] placeholder:text-[var(--muted)] font-mono"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">No. KK (16 Digit) *</label>
+                  <label className="block text-xs font-bold text-[var(--ink)] mb-1">No. KK (16 Digit) *</label>
                   <input
                     type="text"
                     name="noKk"
@@ -217,24 +217,24 @@ export default function RegisterPage() {
                     onChange={handleChange}
                     placeholder="320101XXXXXXXXXX"
                     required
-                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 font-mono"
+                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm neu-inset text-[var(--ink)] placeholder:text-[var(--muted)] font-mono"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">No. Telepon / WhatsApp</label>
+                  <label className="block text-xs font-bold text-[var(--ink)] mb-1">No. Telepon / WhatsApp</label>
                   <input
                     type="tel"
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder="0812XXXXXXXX"
-                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
+                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm neu-inset text-[var(--ink)] placeholder:text-[var(--muted)]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Kata Sandi *</label>
+                  <label className="block text-xs font-bold text-[var(--ink)] mb-1">Kata Sandi *</label>
                   <div className="relative">
                     <input
                       type={showPassword ? 'text' : 'password'}
@@ -243,14 +243,14 @@ export default function RegisterPage() {
                       onChange={handleChange}
                       placeholder="Minimal 6 karakter"
                       required
-                      className="w-full py-2.5 pl-3.5 pr-11 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
+                      className="w-full py-2.5 pl-3.5 pr-11 text-xs sm:text-sm neu-inset text-[var(--ink)] placeholder:text-[var(--muted)]"
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword((v) => !v)}
                       aria-label={showPassword ? 'Sembunyikan' : 'Lihat kata sandi'}
                       className={`absolute right-3 top-1/2 -translate-y-1/2 transition-colors focus:outline-none ${
-                        showPassword ? 'text-emerald-600' : 'text-slate-500 hover:text-emerald-600'
+                        showPassword ? 'text-[var(--accent)]' : 'text-[var(--muted)] hover:text-[var(--accent)]'
                       }`}
                     >
                       {showPassword ? <EyeOff className="w-5 h-5" strokeWidth={2.25} /> : <Eye className="w-5 h-5" strokeWidth={2.25} />}
@@ -259,24 +259,24 @@ export default function RegisterPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Tempat Lahir</label>
+                  <label className="block text-xs font-bold text-[var(--ink)] mb-1">Tempat Lahir</label>
                   <input
                     type="text"
                     name="birthPlace"
                     value={formData.birthPlace}
                     onChange={handleChange}
-                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
+                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm neu-inset text-[var(--ink)] placeholder:text-[var(--muted)]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Tanggal Lahir</label>
+                  <label className="block text-xs font-bold text-[var(--ink)] mb-1">Tanggal Lahir</label>
                   <input
                     type="date"
                     name="birthDate"
                     value={formData.birthDate}
                     onChange={handleChange}
-                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
+                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm neu-inset text-[var(--ink)] placeholder:text-[var(--muted)]"
                   />
                 </div>
               </div>
@@ -284,38 +284,38 @@ export default function RegisterPage() {
 
             {/* Section 2: Alamat */}
             <div>
-              <h3 className="text-xs font-bold uppercase tracking-wider text-emerald-800 pb-2 border-b border-emerald-100 flex items-center gap-1.5">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--accent)] pb-2 border-b border-[var(--shadow-dark)]/20 flex items-center gap-1.5">
                 <MapPin className="w-4 h-4" /> 2. Alamat Domisili di {DESA.nama}
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-3">
                 <div className="sm:col-span-3">
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Alamat Jalan / Kampung</label>
+                  <label className="block text-xs font-bold text-[var(--ink)] mb-1">Alamat Jalan / Kampung</label>
                   <input
                     type="text"
                     name="address"
                     value={formData.address}
                     onChange={handleChange}
-                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl"
+                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm neu-inset text-[var(--ink)] placeholder:text-[var(--muted)]"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">RT</label>
+                  <label className="block text-xs font-bold text-[var(--ink)] mb-1">RT</label>
                   <select name="rt" value={formData.rt} onChange={handleWilayahChange}
-                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl">
+                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm neu-inset text-[var(--ink)]">
                     {rtOptions.map((rt) => <option key={rt} value={rt}>RT {rt}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">RW</label>
+                  <label className="block text-xs font-bold text-[var(--ink)] mb-1">RW</label>
                   <select name="rw" value={formData.rw} onChange={handleWilayahChange}
-                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl">
+                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm neu-inset text-[var(--ink)]">
                     {DESA.petaRWRT.map((row) => <option key={row.rw} value={row.rw}>RW {row.rw}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Dusun / Lingkungan</label>
+                  <label className="block text-xs font-bold text-[var(--ink)] mb-1">Dusun / Lingkungan</label>
                   <select name="dusun" value={formData.dusun} onChange={handleChange}
-                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl">
+                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm neu-inset text-[var(--ink)]">
                     {DESA.dusun.map((row) => <option key={row.nama} value={row.nama}>{row.nama}</option>)}
                   </select>
                 </div>
@@ -324,24 +324,24 @@ export default function RegisterPage() {
 
             {/* Section 3: Sosial Ekonomi */}
             <div>
-              <h3 className="text-xs font-bold uppercase tracking-wider text-emerald-800 pb-2 border-b border-emerald-100 flex items-center gap-1.5">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--accent)] pb-2 border-b border-[var(--shadow-dark)]/20 flex items-center gap-1.5">
                 <Home className="w-4 h-4" /> 3. Data Sosial & Ekonomi
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-3">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Pekerjaan</label>
+                  <label className="block text-xs font-bold text-[var(--ink)] mb-1">Pekerjaan</label>
                   <input type="text" name="occupation" value={formData.occupation} onChange={handleChange}
-                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl" />
+                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm neu-inset text-[var(--ink)] placeholder:text-[var(--muted)]" />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Penghasilan / Bulan (Rp)</label>
+                  <label className="block text-xs font-bold text-[var(--ink)] mb-1">Penghasilan / Bulan (Rp)</label>
                   <input type="number" name="monthlyIncome" value={formData.monthlyIncome} onChange={handleChange}
-                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl" />
+                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm neu-inset text-[var(--ink)] placeholder:text-[var(--muted)]" />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Jml Tanggungan Keluarga</label>
+                  <label className="block text-xs font-bold text-[var(--ink)] mb-1">Jml Tanggungan Keluarga</label>
                   <input type="number" name="familyMembersCount" value={formData.familyMembersCount} onChange={handleChange}
-                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl" />
+                    className="w-full py-2.5 px-3.5 text-xs sm:text-sm neu-inset text-[var(--ink)] placeholder:text-[var(--muted)]" />
                 </div>
               </div>
             </div>
@@ -349,7 +349,7 @@ export default function RegisterPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+              className="neu-btn-primary w-full py-3.5 px-4 font-bold text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
             >
               {loading ? (
                 <><Loader2 className="w-4 h-4 animate-spin" /> Mendaftarkan Akun...</>
@@ -359,10 +359,10 @@ export default function RegisterPage() {
             </button>
           </form>
 
-          <div className="text-center pt-6 border-t border-slate-100 mt-6">
-            <p className="text-xs text-slate-600">
+          <div className="text-center pt-6 border-t border-[var(--shadow-dark)]/20 mt-6">
+            <p className="text-xs text-[var(--muted)]">
               Sudah memiliki akun?{' '}
-              <Link href="/login" className="font-bold text-emerald-600 hover:underline">
+              <Link href="/login" className="font-bold text-[var(--accent)] hover:underline">
                 Masuk di sini
               </Link>
             </p>
