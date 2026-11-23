@@ -142,44 +142,41 @@ export default function DashboardHeader({ user }: DashboardHeaderProps) {
 
   return (
     <header className="sticky top-0 z-30 w-full neu-raised-sm !rounded-none backdrop-blur-md transition-all">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between gap-3">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-18 flex items-center justify-between gap-2 sm:gap-3">
         {/* Sisi Kiri: Hamburger & Brand */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-1.5 sm:gap-3 min-w-0">
           {/* Tombol Hamburger di kiri sebelum logo */}
           <button
             type="button"
             onClick={() => window.dispatchEvent(new CustomEvent('toggle-desasmart-drawer'))}
             aria-label="Buka menu navigasi"
             title="Buka menu navigasi"
-            className="neu-raised-sm flex h-11 w-11 shrink-0 items-center justify-center text-[var(--ink)] cursor-pointer active:shadow-[inset_3px_3px_6px_var(--shadow-dark),inset_-3px_-3px_6px_var(--shadow-light)]"
+            className="neu-raised-sm flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center text-[var(--ink)] cursor-pointer active:shadow-[inset_3px_3px_6px_var(--shadow-dark),inset_-3px_-3px_6px_var(--shadow-light)]"
           >
             <Menu className="h-5 w-5" />
           </button>
 
           {/* Brand & Village Identity */}
-          <Link href="/" className="flex items-center gap-2.5 no-underline">
+          <Link href="/" className="flex items-center gap-2 sm:gap-2.5 no-underline min-w-0">
             <div
-              className="neu-raised-sm flex h-11 w-11 shrink-0 items-center justify-center font-extrabold text-xl text-[var(--accent)]"
+              className="neu-raised-sm flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center font-extrabold text-lg sm:text-xl text-[var(--accent)]"
               aria-hidden="true"
             >
               D
             </div>
-            <div>
-              <div className="flex items-center gap-1.5">
-                <span className="font-extrabold text-sm sm:text-base tracking-tight text-[var(--ink)]">
-                  DesaSmart
-                </span>
-                <span className="neu-status-badge stat-val-green !text-[9px] !py-0.5 !px-2">
-                  SKTM + AI
-                </span>
-              </div>
-              <p className="text-[11px] text-[var(--muted)] font-medium">Pemerintah {DESA.nama}</p>
+            <div className="min-w-0">
+              <span className="block font-extrabold text-sm sm:text-base tracking-tight text-[var(--ink)] truncate">
+                DesaSmart
+              </span>
+              <p className="text-[10px] sm:text-[11px] text-[var(--muted)] font-medium truncate max-w-[100px] xs:max-w-[150px] sm:max-w-none">
+                Pemerintah {DESA.nama}
+              </p>
             </div>
           </Link>
         </div>
 
         {/* Sisi Kanan: Action Buttons seragam raised-sm */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
           <Link
             href="/verify"
             className="neu-raised-sm hidden md:inline-flex items-center gap-1.5 min-h-[44px] px-3.5 py-2 text-xs font-bold text-[var(--ink)] no-underline active:shadow-[inset_3px_3px_6px_var(--shadow-dark),inset_-3px_-3px_6px_var(--shadow-light)]"
@@ -192,13 +189,13 @@ export default function DashboardHeader({ user }: DashboardHeaderProps) {
           <NotificationBell />
 
           {/* Mode terang/gelap */}
-          <ThemeToggle className="neu-raised-sm !h-11 !w-11 !min-h-[44px] !min-w-[44px] !p-0 !border-none text-[var(--ink)]" />
+          <ThemeToggle className="neu-raised-sm !h-10 !w-10 sm:!h-11 sm:!w-11 !min-h-[40px] !min-w-[40px] sm:!min-h-[44px] sm:!min-w-[44px] !p-0 !border-none text-[var(--ink)]" />
 
           {/* Profil Button */}
           <button
             type="button"
             onClick={openProfile}
-            className="neu-raised-sm flex min-h-[44px] items-center gap-2.5 px-3 py-1 text-left cursor-pointer active:shadow-[inset_3px_3px_6px_var(--shadow-dark),inset_-3px_-3px_6px_var(--shadow-light)]"
+            className="neu-raised-sm flex h-10 min-w-[40px] sm:h-11 sm:min-w-[44px] items-center gap-2 px-1.5 sm:px-3 py-1 text-left cursor-pointer active:shadow-[inset_3px_3px_6px_var(--shadow-dark),inset_-3px_-3px_6px_var(--shadow-light)]"
             aria-label="Buka pengaturan profil"
           >
             {user.avatarUrl ? (

@@ -32,24 +32,26 @@ export default function VerifySearchPage() {
   return (
     <div className="min-h-screen flex flex-col font-sans" style={{ backgroundColor: 'var(--bg)', color: 'var(--ink)' }}>
       <header className="neu-raised border-none">
-        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2.5">
-            <div className="w-10 h-10 neu-circle-inset-sm flex items-center justify-center text-[var(--accent)]">
-              <Home className="w-5 h-5" />
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 h-16 flex items-center justify-between gap-2">
+          <Link href="/" className="flex items-center gap-2 sm:gap-2.5 min-w-0">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 neu-circle-inset-sm flex items-center justify-center text-[var(--accent)] shrink-0">
+              <Home className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
-            <div>
-              <span className="font-extrabold text-sm tracking-tight text-[var(--ink)]">
+            <div className="min-w-0">
+              <span className="block font-extrabold text-xs sm:text-sm tracking-tight text-[var(--ink)] truncate">
                 Pemerintah Desa Silihasih
               </span>
-              <p className="text-[10px] text-[var(--muted)]">Layanan Cek Keaslian Dokumen Publik</p>
+              <p className="text-[9px] sm:text-[10px] text-[var(--muted)] truncate">Layanan Cek Keaslian Dokumen</p>
             </div>
           </Link>
 
           <Link
             href="/"
-            className="neu-pill px-4 py-2 text-xs font-semibold text-[var(--ink)] flex items-center gap-1.5"
+            className="neu-pill !px-3 sm:!px-4 !py-1.5 sm:!py-2 text-xs font-semibold text-[var(--ink)] flex items-center gap-1.5 shrink-0 whitespace-nowrap !min-h-[38px]"
           >
-            <ArrowLeft className="w-3.5 h-3.5" /> Kembali ke Beranda
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Kembali ke Beranda</span>
+            <span className="sm:hidden">Beranda</span>
           </Link>
         </div>
       </header>

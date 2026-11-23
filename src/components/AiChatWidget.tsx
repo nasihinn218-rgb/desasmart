@@ -324,7 +324,7 @@ export default function AiChatWidget() {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-50">
+    <div className="fixed bottom-3 right-3 sm:bottom-5 sm:right-5 z-50">
       {!isOpen && (
         <button
           id="open-ai-chat-btn"
@@ -333,30 +333,30 @@ export default function AiChatWidget() {
             setError('');
             setIsOpen(true);
           }}
-          className="group neu-btn-primary flex items-center gap-2.5 !rounded-full !px-5 !py-3.5 shadow-xl transition-all hover:-translate-y-1 cursor-pointer dark:!bg-gradient-to-r dark:!from-emerald-700 dark:!via-teal-700 dark:!to-emerald-800 dark:!text-white dark:border dark:border-emerald-400/30 dark:shadow-2xl dark:shadow-emerald-950/80"
+          className="group neu-btn-primary flex items-center gap-2 !rounded-full !px-3.5 !py-2.5 sm:!px-5 sm:!py-3.5 shadow-xl transition-all hover:-translate-y-1 cursor-pointer dark:!bg-gradient-to-r dark:!from-emerald-700 dark:!via-teal-700 dark:!to-emerald-800 dark:!text-white dark:border dark:border-emerald-400/30 dark:shadow-2xl dark:shadow-emerald-950/80"
           aria-label="Buka AI Assistant"
         >
           <span className="relative">
-            <Bot className="h-5 w-5 text-white transition-transform group-hover:rotate-12 group-hover:scale-110" />
-            <span className="absolute -right-1 -top-1 flex h-2.5 w-2.5">
+            <Bot className="h-4 w-4 sm:h-5 sm:w-5 text-white transition-transform group-hover:rotate-12 group-hover:scale-110" />
+            <span className="absolute -right-1 -top-1 flex h-2 w-2 sm:h-2.5 sm:w-2.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-300 opacity-75" />
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
+              <span className="relative inline-flex h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full bg-emerald-400" />
             </span>
           </span>
-          <span className="text-sm font-bold tracking-wide text-white">Tanya AI Desa</span>
-          <Sparkles className="h-4 w-4 text-emerald-200 transition-transform group-hover:rotate-12" />
+          <span className="text-xs sm:text-sm font-bold tracking-wide text-white">Tanya AI Desa</span>
+          <Sparkles className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-emerald-200 transition-transform group-hover:rotate-12" />
         </button>
       )}
 
       {isOpen && (
-        <section className="fixed bottom-4 right-4 z-50 flex h-[min(34rem,75dvh)] w-[min(26rem,calc(100vw-2rem))] flex-col overflow-hidden neu-raised bg-[var(--bg)] text-[var(--ink)] shadow-2xl">
+        <section className="fixed inset-x-2 bottom-2 top-12 sm:inset-auto sm:bottom-5 sm:right-5 z-50 flex sm:h-[min(38rem,82dvh)] sm:w-[26rem] flex-col overflow-hidden neu-raised bg-[var(--bg)] text-[var(--ink)] shadow-2xl rounded-2xl sm:rounded-3xl border border-[var(--shadow-dark)]/25">
           <div className="relative isolate flex min-h-0 flex-1 flex-col overflow-hidden bg-[var(--bg)]">
-            <header className="relative z-10 flex h-16 shrink-0 items-center justify-between border-b border-[var(--shadow-dark)]/20 bg-[var(--bg)] px-4">
-              <div className="flex min-w-0 items-center gap-2">
-                <div className="neu-circle-inset-sm !h-8 !w-8 flex items-center justify-center">
-                  <Sparkles className="h-4 w-4 text-[var(--accent)]" />
+            <header className="relative z-10 flex h-14 sm:h-16 shrink-0 items-center justify-between border-b border-[var(--shadow-dark)]/20 bg-[var(--bg)] px-3 sm:px-4">
+              <div className="flex min-w-0 items-center gap-1.5 sm:gap-2">
+                <div className="neu-circle-inset-sm !h-7 !w-7 sm:!h-8 sm:!w-8 flex items-center justify-center">
+                  <Sparkles className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-[var(--accent)]" />
                 </div>
-                <span className="truncate text-sm font-extrabold tracking-tight text-[var(--ink)]">DesaSmart AI</span>
+                <span className="truncate text-xs sm:text-sm font-extrabold tracking-tight text-[var(--ink)]">DesaSmart AI</span>
                 {modelProfiles.length > 0 ? (
                   <button
                     type="button"
@@ -367,15 +367,15 @@ export default function AiChatWidget() {
                     aria-expanded={pickerOpen}
                     aria-haspopup="listbox"
                     title="Pilih model AI tersimpan sebelum bertanya"
-                    className="inline-flex max-w-[10rem] shrink-0 items-center gap-1 rounded-full neu-inset-sm px-2 py-1 text-[10px] font-bold text-[var(--accent)] transition-colors"
+                    className="inline-flex max-w-[7.5rem] xs:max-w-[10rem] sm:max-w-[12rem] shrink-0 items-center gap-1 rounded-full neu-inset-sm px-2 py-0.5 sm:py-1 text-[9px] sm:text-[10px] font-bold text-[var(--accent)] transition-colors"
                   >
-                    <Cpu className="h-3 w-3 shrink-0" />
+                    <Cpu className="h-2.5 w-2.5 sm:h-3 sm:w-3 shrink-0" />
                     <span className="truncate">
                       {providerName.toUpperCase()}
                       {modelName ? ` · ${modelName}` : ''}
                     </span>
                     <ChevronDown
-                      className={`h-3 w-3 shrink-0 transition-transform ${pickerOpen ? 'rotate-180' : ''}`}
+                      className={`h-2.5 w-2.5 sm:h-3 sm:w-3 shrink-0 transition-transform ${pickerOpen ? 'rotate-180' : ''}`}
                     />
                   </button>
                 ) : (
@@ -385,24 +385,24 @@ export default function AiChatWidget() {
                   </span>
                 )}
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5 sm:gap-2">
                 <button
                   type="button"
                   onClick={startNewChat}
                   disabled={loading}
                   title="Reset percakapan ini. Riwayat tersimpan tidak dihapus."
-                  className="neu-raised-sm flex h-9 w-9 items-center justify-center text-[var(--muted)] cursor-pointer active:shadow-[inset_2px_2px_4px_var(--shadow-dark),inset_-2px_-2px_4px_var(--shadow-light)] disabled:cursor-not-allowed disabled:opacity-40"
+                  className="neu-raised-sm flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center text-[var(--muted)] cursor-pointer active:shadow-[inset_2px_2px_4px_var(--shadow-dark),inset_-2px_-2px_4px_var(--shadow-light)] disabled:cursor-not-allowed disabled:opacity-40"
                   aria-label="Reset chat"
                 >
-                  <RotateCcw className="h-4 w-4" />
+                  <RotateCcw className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                 </button>
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}
-                  className="neu-raised-sm flex h-9 w-9 items-center justify-center text-[var(--muted)] hover:text-rose-600 transition-colors cursor-pointer active:shadow-[inset_2px_2px_4px_var(--shadow-dark),inset_-2px_-2px_4px_var(--shadow-light)]"
+                  className="neu-raised-sm flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center text-[var(--muted)] hover:text-rose-600 transition-colors cursor-pointer active:shadow-[inset_2px_2px_4px_var(--shadow-dark),inset_-2px_-2px_4px_var(--shadow-light)]"
                   aria-label="Tutup AI"
                 >
-                  <X className="h-4 w-4" />
+                  <X className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                 </button>
               </div>
             </header>

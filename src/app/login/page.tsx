@@ -62,8 +62,8 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 font-sans" style={{ backgroundColor: 'var(--bg)', color: 'var(--ink)' }}>
-      <div className="fixed right-4 top-4 z-50">
-        <ThemeToggle />
+      <div className="fixed right-3 top-3 sm:right-4 sm:top-4 z-50">
+        <ThemeToggle className="neu-raised-sm !h-10 !w-10 !p-0 !border-none text-[var(--ink)]" />
       </div>
 
       {/* Header */}
@@ -82,9 +82,6 @@ export default function LoginPage() {
         <h2 className="mt-6 text-2xl font-black text-[var(--ink)] tracking-tight">
           Masuk ke Akun Anda
         </h2>
-        <p className="mt-1 text-xs text-[var(--muted)]">
-          Gunakan email dan kata sandi akun Anda (warga maupun petugas desa)
-        </p>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md px-4 sm:px-0">

@@ -126,8 +126,8 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen flex flex-col justify-center py-10 sm:px-6 lg:px-8 font-sans" style={{ backgroundColor: 'var(--bg)', color: 'var(--ink)' }}>
-      <div className="fixed right-4 top-4 z-50">
-        <ThemeToggle />
+      <div className="fixed right-3 top-3 sm:right-4 sm:top-4 z-50">
+        <ThemeToggle className="neu-raised-sm !h-10 !w-10 !p-0 !border-none text-[var(--ink)]" />
       </div>
 
       {/* Header */}

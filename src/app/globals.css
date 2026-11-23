@@ -671,9 +671,10 @@ textarea:focus-visible {
     box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
   }
   .neu-pill {
-    padding: 8px 14px;
-    font-size: 0.88rem;
-    min-height: 44px;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    min-height: 38px;
+    white-space: nowrap;
   }
   .neu-ai-fab {
     bottom: 20px;
