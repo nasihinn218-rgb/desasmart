@@ -8,7 +8,7 @@
 ## 📌 Identitas Mahasiswa & Pengembang
 - **Nama Mahasiswa**: Nasihin
 - **NIM**: 41257143
-- **Kelas / Kelompok**: 1B 2025 (Mandiri)
+- **Kelas / Kelompok**: 1B 2025 (DEVLIN)
 - **Tema Topik Kelompok**: *Smart Public Service & Public Health Intelligence (Layanan Administrasi Desa Cerdas Berbasis AI)*
 - **Nama Sistem**: **DesaSmart Desa Silihasih**
 

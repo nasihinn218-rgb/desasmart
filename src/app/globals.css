@@ -15,6 +15,28 @@
   --border: #d9dbd2;
   --accent-mint: #b9dcd3;
   --accent-peach: #edc9aa;
+
+  /* Neumorphism Design Tokens - Light Mode */
+  --bg: #e6eae6;
+  --shadow-light: #ffffff;
+  --shadow-dark: #b9c1bb;
+  --ink: #16201c;
+  --muted: #4b5852;
+  --accent: #3a5a4a;
+  --accent-ink: #ffffff;
+}
+
+html.dark,
+:root.dark,
+.dark {
+  /* Neumorphism Design Tokens - Dark Mode */
+  --bg: #1c2420;
+  --shadow-light: #27312c;
+  --shadow-dark: #111715;
+  --ink: #eef1ec;
+  --muted: #a8b4ad;
+  --accent: #7fb095;
+  --accent-ink: #10170f;
 }
 
 @theme inline {
@@ -317,4 +339,189 @@ body {
 .dark .text-emerald-100 { color: #dcfce7 !important; }
 .dark .text-emerald-200 { color: #bbf7d0 !important; }
 .dark .text-emerald-300 { color: #86efac !important; }
+
+/* ==========================================================================
+   NEUMORPHISM (SOFT UI) DESIGN UTILITIES
+   ========================================================================== */
+
+.neu-page {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: "Nunito Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 17px;
+  line-height: 1.7;
+  letter-spacing: 0.005em;
+  min-height: 100vh;
+}
+
+.neu-page h1,
+.neu-page h2,
+.neu-page h3,
+.neu-page h4 {
+  line-height: 1.2;
+}
+
+/* Menonjol (Raised) */
+.neu-raised {
+  background-color: var(--bg);
+  box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
+  border-radius: 20px;
+  border: none;
+  transition: box-shadow 180ms ease, transform 180ms ease;
+}
+
+/* Menonjol Kecil (Raised-SM) */
+.neu-raised-sm {
+  background-color: var(--bg);
+  box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+  border-radius: 16px;
+  border: none;
+  transition: box-shadow 180ms ease, transform 180ms ease;
+}
+
+/* Menekan (Inset) */
+.neu-inset {
+  background-color: var(--bg);
+  box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+  border-radius: 16px;
+  border: none;
+  transition: box-shadow 180ms ease;
+}
+
+/* Menekan Kecil (Inset-SM) */
+.neu-inset-sm {
+  background-color: var(--bg);
+  box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
+  border-radius: 12px;
+  border: none;
+  transition: box-shadow 180ms ease;
+}
+
+/* Tombol Pill Header */
+.neu-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 999px;
+  background-color: var(--bg);
+  color: var(--ink);
+  box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+  border: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  min-height: 44px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: box-shadow 180ms ease, transform 180ms ease;
+}
+
+.neu-pill:hover {
+  transform: translateY(-1px);
+}
+
+.neu-pill:active {
+  box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+  transform: translateY(1px);
+}
+
+/* Tombol Utama Hero & Cek Keaslian (Solid Accent) */
+.neu-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 700;
+  font-size: 1.05rem;
+  border-radius: 16px;
+  border: none;
+  min-height: 48px;
+  padding: 16px 32px;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 6px 6px 14px var(--shadow-dark), -6px -6px 14px var(--shadow-light);
+  transition: box-shadow 180ms ease, transform 180ms ease, filter 180ms ease;
+}
+
+.neu-btn-primary:hover {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+}
+
+.neu-btn-primary:active {
+  box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.45), inset -2px -2px 5px rgba(255, 255, 255, 0.2);
+  transform: translateY(1px);
+}
+
+/* Lingkaran Inset untuk Angka Langkah */
+.neu-circle-inset {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--bg);
+  box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+/* Lingkaran Inset Kecil untuk Ikon */
+.neu-circle-inset-sm {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--bg);
+  box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+/* Aksesibilitas: outline fokus jelas */
+.neu-page a:focus-visible,
+.neu-page button:focus-visible,
+.neu-page input:focus-visible {
+  outline: 3px solid var(--accent) !important;
+  outline-offset: 3px !important;
+}
+
+/* Optimasi layar HP (Mobile Responsive <= 640px) */
+@media (max-width: 640px) {
+  .neu-page {
+    font-size: 16px;
+  }
+  .neu-raised {
+    box-shadow: 5px 5px 10px var(--shadow-dark), -5px -5px 10px var(--shadow-light);
+    border-radius: 18px;
+  }
+  .neu-raised-sm {
+    box-shadow: 3px 3px 6px var(--shadow-dark), -3px -3px 6px var(--shadow-light);
+  }
+  .neu-inset {
+    box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
+  }
+  .neu-pill {
+    padding: 8px 14px;
+    font-size: 0.88rem;
+    min-height: 44px;
+  }
+}
+
+/* Hormati prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .neu-raised,
+  .neu-raised-sm,
+  .neu-inset,
+  .neu-inset-sm,
+  .neu-pill,
+  .neu-btn-primary {
+    transition: none !important;
+  }
+}
 
