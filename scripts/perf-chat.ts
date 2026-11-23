@@ -12,8 +12,8 @@ const CASES: Array<{ label: string; message: string }> = [
   { label: 'LLM panjang', message: 'jelaskan alur pengajuan sktm di aplikasi ini secara lengkap' },
 ];
 
-const ms = (t: [number, number]) => Math.round((process.hrtimeBigInt ? 0 : 0) + (Number(t[0]) * 1e3 + t[1] / 1e6));
-function start() { return process.hrtime(); }
+const ms = (t: [number, number]) => Math.round(Number(t[0]) * 1e3 + t[1] / 1e6);
+function start(diff?: [number, number]) { return process.hrtime(diff); }
 
 async function main() {
   let cookie = '';
@@ -41,7 +41,7 @@ async function main() {
     });
     const data = (await res.json()) as { reply?: string; source?: string; error?: string };
     console.log(
-      `${c.label.padEnd(26)} ${String(ms(start() - t)).padStart(6)}ms  http=${res.status}  chars=${(data.reply ?? data.error ?? '').length}  src=${data.source ?? '-'}`
+      `${c.label.padEnd(26)} ${String(ms(start(t))).padStart(6)}ms  http=${res.status}  chars=${(data.reply ?? data.error ?? '').length}  src=${data.source ?? '-'}`
     );
   }
 
@@ -50,7 +50,7 @@ async function main() {
     if (!looksLikeFactualQuestion(q)) { console.log('web  -> tidak faktual:', q); continue; }
     const t = start();
     const w = await searchWebContext(q);
-    console.log(`wikipedia ${String(ms(start() - t)).padStart(6)}ms  ${w ? `${w.source} :: ${w.snippet.length} char` : 'NULL'}`);
+    console.log(`wikipedia ${String(ms(start(t))).padStart(6)}ms  ${w ? `${w.source} :: ${w.snippet.length} char` : 'NULL'}`);
   }
 
   // Komponen: panggilan model mentah, prompt kecil vs prompt besar.
@@ -69,7 +69,7 @@ async function main() {
         signal: AbortSignal.timeout(120000),
       });
       const j = await res.json();
-      console.log(`${label.padEnd(22)} ${String(ms(start() - t)).padStart(6)}ms  http=${res.status}  tokens=${j?.usage?.prompt_tokens ?? '?'}->${j?.usage?.completion_tokens ?? '?'}`);
+      console.log(`${label.padEnd(22)} ${String(ms(start(t))).padStart(6)}ms  http=${res.status}  tokens=${j?.usage?.prompt_tokens ?? '?'}->${j?.usage?.completion_tokens ?? '?'}`);
     }
   }
 
