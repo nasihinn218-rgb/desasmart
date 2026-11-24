@@ -7,7 +7,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import {
-  LogOut,
   User,
   Shield,
   Camera,
@@ -130,15 +129,6 @@ export default function DashboardHeader({ user }: DashboardHeaderProps) {
     }
   };
 
-  const handleLogout = async () => {
-    try {
-      await fetch('/api/auth/logout', { method: 'POST' });
-      router.push('/login');
-      router.refresh();
-    } catch (e) {
-      console.error(e);
-    }
-  };
 
   return (
     <header className="sticky top-0 z-30 w-full neu-raised-sm !rounded-none backdrop-blur-md transition-all">
@@ -159,16 +149,16 @@ export default function DashboardHeader({ user }: DashboardHeaderProps) {
           {/* Brand & Village Identity */}
           <Link href="/" className="flex items-center gap-2 sm:gap-2.5 no-underline min-w-0">
             <div
-              className="neu-raised-sm flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center font-extrabold text-lg sm:text-xl text-[var(--accent)]"
+              className="neu-raised-sm flex h-9 w-9 sm:h-11 sm:w-11 shrink-0 items-center justify-center font-extrabold text-base sm:text-xl text-[var(--accent)]"
               aria-hidden="true"
             >
               D
             </div>
             <div className="min-w-0">
-              <span className="block font-extrabold text-sm sm:text-base tracking-tight text-[var(--ink)] truncate">
+              <span className="block font-extrabold text-sm sm:text-base tracking-tight text-[var(--ink)] leading-tight">
                 DesaSmart
               </span>
-              <p className="text-[10px] sm:text-[11px] text-[var(--muted)] font-medium truncate max-w-[100px] xs:max-w-[150px] sm:max-w-none">
+              <p className="text-[10px] sm:text-[11px] text-[var(--muted)] font-medium leading-tight whitespace-nowrap">
                 Pemerintah {DESA.nama}
               </p>
             </div>
@@ -189,13 +179,13 @@ export default function DashboardHeader({ user }: DashboardHeaderProps) {
           <NotificationBell />
 
           {/* Mode terang/gelap */}
-          <ThemeToggle className="neu-raised-sm !h-10 !w-10 sm:!h-11 sm:!w-11 !min-h-[40px] !min-w-[40px] sm:!min-h-[44px] sm:!min-w-[44px] !p-0 !border-none text-[var(--ink)]" />
+          <ThemeToggle className="neu-raised-sm !h-9 !w-9 sm:!h-11 sm:!w-11 !min-h-[36px] !min-w-[36px] sm:!min-h-[44px] sm:!min-w-[44px] !p-0 !border-none text-[var(--ink)]" />
 
           {/* Profil Button */}
           <button
             type="button"
             onClick={openProfile}
-            className="neu-raised-sm flex h-10 min-w-[40px] sm:h-11 sm:min-w-[44px] items-center gap-2 px-1.5 sm:px-3 py-1 text-left cursor-pointer active:shadow-[inset_3px_3px_6px_var(--shadow-dark),inset_-3px_-3px_6px_var(--shadow-light)]"
+            className="neu-raised-sm flex h-9 min-w-[36px] sm:h-11 sm:min-w-[44px] items-center gap-2 px-1 sm:px-3 py-1 text-left cursor-pointer active:shadow-[inset_3px_3px_6px_var(--shadow-dark),inset_-3px_-3px_6px_var(--shadow-light)]"
             aria-label="Buka pengaturan profil"
           >
             {user.avatarUrl ? (
@@ -205,10 +195,10 @@ export default function DashboardHeader({ user }: DashboardHeaderProps) {
                 width={32}
                 height={32}
                 unoptimized
-                className="h-8 w-8 rounded-full object-cover"
+                className="h-7 w-7 sm:h-8 sm:w-8 rounded-full object-cover"
               />
             ) : (
-              <div className="neu-circle-inset-sm !h-8 !w-8 text-xs font-bold">
+              <div className="neu-circle-inset-sm !h-7 !w-7 sm:!h-8 sm:!w-8 text-[11px] sm:text-xs font-bold">
                 {user.name.charAt(0).toUpperCase()}
               </div>
             )}
@@ -366,33 +356,22 @@ export default function DashboardHeader({ user }: DashboardHeaderProps) {
                   )}
                 </div>
 
-                <div className="shrink-0 flex items-center justify-between pt-4 border-t border-[var(--shadow-dark)]/20">
+                <div className="shrink-0 flex items-center justify-end gap-2 pt-4 border-t border-[var(--shadow-dark)]/20">
                   <button
                     type="button"
-                    onClick={handleLogout}
-                    className="neu-raised-sm inline-flex items-center gap-1.5 px-3 py-2 text-xs font-bold text-rose-600 hover:text-rose-700 cursor-pointer active:shadow-[inset_3px_3px_6px_var(--shadow-dark),inset_-3px_-3px_6px_var(--shadow-light)]"
-                    title="Keluar dari akun ini"
+                    onClick={() => setProfileOpen(false)}
+                    className="neu-raised-sm px-4 py-2 text-xs font-bold text-[var(--muted)] cursor-pointer"
                   >
-                    <LogOut className="h-3.5 w-3.5" />
-                    Keluar akun
+                    Batal
                   </button>
-                  <div className="flex items-center gap-2">
-                    <button
-                      type="button"
-                      onClick={() => setProfileOpen(false)}
-                      className="neu-raised-sm px-4 py-2 text-xs font-bold text-[var(--muted)] cursor-pointer"
-                    >
-                      Batal
-                    </button>
-                    <button
-                      type="submit"
-                      disabled={profileSaving}
-                      className="neu-btn-primary !min-h-[42px] !py-2 !px-5 text-xs"
-                    >
-                      {profileSaving ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
-                      Simpan profil
-                    </button>
-                  </div>
+                  <button
+                    type="submit"
+                    disabled={profileSaving}
+                    className="neu-btn-primary !min-h-[42px] !py-2 !px-5 text-xs"
+                  >
+                    {profileSaving ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
+                    Simpan profil
+                  </button>
                 </div>
               </form>
             </div>

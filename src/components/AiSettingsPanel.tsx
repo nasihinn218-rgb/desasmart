@@ -56,41 +56,41 @@ const PROVIDER_PRESETS: {
   models: string[];
   keyHint: string;
 }[] = [
-  {
-    // Aggregator: satu key bisa memakai model OpenAI, DeepSeek, Claude, Gemini, Qwen.
-    name: 'OpenRouter',
-    baseUrl: 'https://openrouter.ai/api/v1',
-    models: [
-      'openai/gpt-5.6-luna',
-      'openai/gpt-5.4-mini',
-      'openai/gpt-4o-mini',
-      'deepseek/deepseek-v4-flash',
-      'deepseek/deepseek-v4-pro',
-      'anthropic/claude-sonnet-5.5',
-      'google/gemini-3.5-flash',
-      'qwen/qwen3.8-27b',
-    ],
-    keyHint: 'sk-or-... (openrouter.ai/keys). Satu key ini bisa memanggil model OpenAI, DeepSeek, Claude, Gemini. Tekan "Ambil Daftar Model" untuk 400+ model lain.',
-  },
-  {
-    name: 'GroqCloud',
-    baseUrl: 'https://api.groq.com/openai/v1',
-    models: ['openai/gpt-oss-120b', 'openai/gpt-oss-20b', 'qwen/qwen3.8-27b'],
-    keyHint: 'gsk_... (console.groq.com/keys)',
-  },
-  {
-    name: 'Google Gemini',
-    baseUrl: 'https://generativelanguage.googleapis.com/v1beta/openai',
-    models: ['gemini-flash-lite-latest', 'gemini-3.8-flash', 'gemini-3.6-flash', 'gemini-3.1-flash-lite'],
-    keyHint: 'AIza... (aistudio.google.com/apikey)',
-  },
-  {
-    name: 'Lainnya (kompatibel OpenAI)',
-    baseUrl: '',
-    models: [],
-    keyHint: 'API key penyedia lain (Ollama lokal, vLLM, dll). Untuk lokal cukup isi apa saja.',
-  },
-];
+    {
+      // Aggregator: satu key bisa memakai model OpenAI, DeepSeek, Claude, Gemini, Qwen.
+      name: 'OpenRouter',
+      baseUrl: 'https://openrouter.ai/api/v1',
+      models: [
+        'openai/gpt-5.6-luna',
+        'openai/gpt-5.4-mini',
+        'openai/gpt-4o-mini',
+        'deepseek/deepseek-v4-flash',
+        'deepseek/deepseek-v4-pro',
+        'anthropic/claude-sonnet-5.5',
+        'google/gemini-3.5-flash',
+        'qwen/qwen3.8-27b',
+      ],
+      keyHint: 'sk-or-... (openrouter.ai/keys). Satu key ini bisa memanggil model OpenAI, DeepSeek, Claude, Gemini. Tekan "Ambil Daftar Model" untuk 400+ model lain.',
+    },
+    {
+      name: 'GroqCloud',
+      baseUrl: 'https://api.groq.com/openai/v1',
+      models: ['openai/gpt-oss-120b', 'openai/gpt-oss-20b', 'qwen/qwen3.8-27b'],
+      keyHint: 'gsk_... (console.groq.com/keys)',
+    },
+    {
+      name: 'Google Gemini',
+      baseUrl: 'https://generativelanguage.googleapis.com/v1beta/openai',
+      models: ['gemini-flash-lite-latest', 'gemini-3.8-flash', 'gemini-3.6-flash', 'gemini-3.1-flash-lite'],
+      keyHint: 'AIza... (aistudio.google.com/apikey)',
+    },
+    {
+      name: 'Lainnya (kompatibel OpenAI)',
+      baseUrl: '',
+      models: [],
+      keyHint: 'API key penyedia lain (Ollama lokal, vLLM, dll). Untuk lokal cukup isi apa saja.',
+    },
+  ];
 
 const CUSTOM_PRESET = PROVIDER_PRESETS[PROVIDER_PRESETS.length - 1];
 const CUSTOM_MODEL_VALUE = '__ketik_sendiri__';
@@ -380,21 +380,24 @@ export default function AiSettingsPanel({ accent = 'emerald' }: { accent?: 'emer
     if (!status) return null;
     if (status.source === 'DATABASE') {
       return (
-        <span className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-bold ${styles.statusOk}`}>
-          <CheckCircle2 className="h-3.5 w-3.5" /> Aktif — {status.providerName} · {status.model}
+        <span className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10px] sm:text-[11px] font-bold max-w-full ${styles.statusOk}`}>
+          <CheckCircle2 className="h-3.5 w-3.5 shrink-0" />
+          <span className="truncate">Aktif — {status.providerName} · {status.model}</span>
         </span>
       );
     }
     if (status.source === 'ENV') {
       return (
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 px-2.5 py-1 text-[11px] font-bold text-amber-700">
-          <Info className="h-3.5 w-3.5" /> Aktif — {status.providerName} (ENV/.env)
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 px-2.5 py-1 text-[10px] sm:text-[11px] font-bold text-amber-700 max-w-full">
+          <Info className="h-3.5 w-3.5 shrink-0" />
+          <span className="truncate">Aktif — {status.providerName} (ENV/.env)</span>
         </span>
       );
     }
     return (
-      <span className="inline-flex items-center gap-1.5 rounded-full border border-rose-200 bg-rose-50 px-2.5 py-1 text-[11px] font-bold text-rose-700">
-        <XCircle className="h-3.5 w-3.5" /> Belum dikonfigurasi
+      <span className="inline-flex items-center gap-1.5 rounded-full border border-rose-200 bg-rose-50 px-2.5 py-1 text-[10px] sm:text-[11px] font-bold text-rose-700 max-w-full">
+        <XCircle className="h-3.5 w-3.5 shrink-0" />
+        <span className="truncate">Belum dikonfigurasi</span>
       </span>
     );
   };
@@ -408,27 +411,43 @@ export default function AiSettingsPanel({ accent = 'emerald' }: { accent?: 'emer
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="flex w-full cursor-pointer items-center justify-between gap-3 border-b border-[var(--shadow-dark)]/15 bg-transparent p-4 sm:p-6 text-left transition hover:bg-[var(--shadow-dark)]/5"
+        className="flex w-full cursor-pointer flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[var(--shadow-dark)]/15 bg-transparent p-4 sm:p-6 text-left transition hover:bg-[var(--shadow-dark)]/5"
       >
-        <div className="flex items-center gap-3">
-          <span className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl neu-inset-sm ${styles.iconChip}`}>
-            <Sparkles className="h-5 w-5" />
-          </span>
-          <div>
-            <h3 className="text-sm font-bold text-[var(--ink)]">Pengaturan AI Chatbot</h3>
-            <p className="text-xs text-[var(--muted)]">
-              Ganti atau simpan API key (Groq, OpenRouter, Gemini, OpenAI) untuk asisten AI
-            </p>
+        <div className="flex items-start sm:items-center justify-between w-full sm:w-auto gap-3 min-w-0">
+          <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+            <span className={`inline-flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-xl neu-inset-sm ${styles.iconChip}`}>
+              <Sparkles className="h-4 w-4 sm:h-5 sm:w-5" />
+            </span>
+            <div className="min-w-0">
+              <h3 className="text-sm font-bold text-[var(--ink)] leading-tight">Pengaturan AI Chatbot</h3>
+              <p className="text-[11px] sm:text-xs text-[var(--muted)] mt-0.5 leading-tight">
+                Ganti atau simpan API key (Groq, OpenRouter, Gemini, OpenAI) untuk asisten AI
+              </p>
+            </div>
+          </div>
+          <div className="sm:hidden shrink-0 mt-0.5">
+            {open ? (
+              <ChevronUp className="h-5 w-5 text-[var(--muted)]" />
+            ) : (
+              <ChevronDown className="h-5 w-5 text-[var(--muted)]" />
+            )}
           </div>
         </div>
-        <span className="flex shrink-0 items-center gap-2 sm:gap-3">
-          {!loadingStatus && sourceBadge()}
-          {open ? (
-            <ChevronUp className="h-5 w-5 text-[var(--muted)]" />
-          ) : (
-            <ChevronDown className="h-5 w-5 text-[var(--muted)]" />
+
+        <div className="flex items-center justify-between sm:justify-end gap-2 sm:gap-3 w-full sm:w-auto">
+          {!loadingStatus && (
+            <div className="min-w-0 max-w-full">
+              {sourceBadge()}
+            </div>
           )}
-        </span>
+          <div className="hidden sm:block shrink-0">
+            {open ? (
+              <ChevronUp className="h-5 w-5 text-[var(--muted)]" />
+            ) : (
+              <ChevronDown className="h-5 w-5 text-[var(--muted)]" />
+            )}
+          </div>
+        </div>
       </button>
 
       {open && (
@@ -449,11 +468,10 @@ export default function AiSettingsPanel({ accent = 'emerald' }: { accent?: 'emer
                     {credentials.map((credential) => (
                       <div
                         key={credential.id}
-                        className={`rounded-2xl p-3.5 transition ${
-                          credential.isActive
-                            ? 'border-2 border-[var(--accent)] neu-raised-sm bg-[var(--accent)]/10'
-                            : 'neu-raised-sm border border-[var(--shadow-dark)]/15 bg-[var(--bg)]'
-                        }`}
+                        className={`rounded-2xl p-3.5 transition ${credential.isActive
+                          ? 'border-2 border-[var(--accent)] neu-raised-sm bg-[var(--accent)]/10'
+                          : 'neu-raised-sm border border-[var(--shadow-dark)]/15 bg-[var(--bg)]'
+                          }`}
                       >
                         <div className="flex items-start justify-between gap-2">
                           <div className="min-w-0">
@@ -657,11 +675,10 @@ export default function AiSettingsPanel({ accent = 'emerald' }: { accent?: 'emer
               {feedback && (
                 <div
                   role="alert"
-                  className={`flex items-start gap-2 rounded-xl border px-4 py-3 text-sm font-medium ${
-                    feedback.type === 'success'
-                      ? 'border-emerald-200 bg-emerald-50/60 text-emerald-800'
-                      : 'border-rose-200 bg-rose-50/60 text-rose-800'
-                  }`}
+                  className={`flex items-start gap-2 rounded-xl border px-4 py-3 text-sm font-medium ${feedback.type === 'success'
+                    ? 'border-emerald-200 bg-emerald-50/60 text-emerald-800'
+                    : 'border-rose-200 bg-rose-50/60 text-rose-800'
+                    }`}
                 >
                   {feedback.type === 'success' ? (
                     <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" />
