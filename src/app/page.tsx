@@ -74,20 +74,20 @@ export default function LandingPage() {
     <div className="neu-page flex min-h-screen flex-col selection:bg-[var(--accent)] selection:text-[var(--accent-ink)]">
       {/* 1. Header */}
       <header className="sticky top-0 z-40 w-full backdrop-blur-md transition-all">
-        <div className="mx-auto flex max-w-[1100px] items-center justify-between gap-2 sm:gap-3 px-3 sm:px-5 py-3 sm:py-4">
+        <div className="mx-auto flex max-w-[1100px] items-center justify-between gap-2 sm:gap-3 px-3 sm:px-5 py-2.5 sm:py-4">
           <Link href="/" className="flex items-center gap-2 sm:gap-3 no-underline min-w-0">
             <div
-              className="neu-raised-sm flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center font-extrabold text-lg sm:text-xl text-[var(--accent)]"
+              className="neu-raised-sm flex h-9 w-9 sm:h-11 sm:w-11 shrink-0 items-center justify-center font-extrabold text-base sm:text-xl text-[var(--accent)]"
               aria-hidden="true"
             >
               D
             </div>
             <div className="min-w-0">
-              <b className="block text-sm sm:text-base font-extrabold leading-tight text-[var(--ink)] truncate">
+              <b className="block text-sm sm:text-base font-extrabold leading-tight text-[var(--ink)]">
                 DesaSmart
               </b>
-              <span className="block text-[10px] sm:text-xs text-[var(--muted)] truncate max-w-[110px] xs:max-w-[170px] sm:max-w-none">
-                {DESA.nama}, {DESA.kabupaten}
+              <span className="block text-[10px] sm:text-xs text-[var(--muted)] font-medium leading-tight whitespace-nowrap">
+                {DESA.nama}, {DESA.kecamatan}
               </span>
             </div>
           </Link>
@@ -95,17 +95,17 @@ export default function LandingPage() {
           <nav className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
             <a
               href="#cek"
-              className="neu-pill !text-xs sm:!text-sm !px-3 sm:!px-4 !py-1.5 sm:!py-2 !min-h-[38px] sm:!min-h-[44px] whitespace-nowrap"
+              className="neu-pill hidden sm:inline-flex !text-xs sm:!text-sm !px-3 sm:!px-4 !py-1.5 sm:!py-2 !min-h-[38px] sm:!min-h-[44px] whitespace-nowrap"
             >
               Cek Surat
             </a>
             <Link
               href="/login"
-              className="neu-pill !text-xs sm:!text-sm !px-3.5 sm:!px-5 !py-1.5 sm:!py-2 !min-h-[38px] sm:!min-h-[44px] whitespace-nowrap"
+              className="neu-pill !text-xs sm:!text-sm !px-3 sm:!px-5 !py-1.5 sm:!py-2 !min-h-[36px] sm:!min-h-[44px] whitespace-nowrap"
             >
               Masuk
             </Link>
-            <ThemeToggle className="neu-pill !h-9 !w-9 sm:!h-11 sm:!w-11 !min-h-[38px] !min-w-[38px] sm:!min-h-[44px] sm:!min-w-[44px] !p-0 !border-0 text-[var(--ink)]" />
+            <ThemeToggle className="neu-pill !h-9 !w-9 sm:!h-11 sm:!w-11 !min-h-[36px] !min-w-[36px] sm:!min-h-[44px] sm:!min-w-[44px] !p-0 !border-0 text-[var(--ink)]" />
           </nav>
         </div>
       </header>

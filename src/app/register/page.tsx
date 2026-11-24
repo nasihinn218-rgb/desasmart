@@ -15,10 +15,7 @@ import {
   Eye,
   EyeOff
 } from 'lucide-react';
-import dynamic from 'next/dynamic';
 import { DESA, findRtWilayah, findRwWilayah } from '@/lib/desa-config';
-
-const AiChatWidget = dynamic(() => import('@/components/AiChatWidget'), { ssr: false });
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -373,8 +370,6 @@ export default function RegisterPage() {
           </div>
         </div>
       </div>
-
-      <AiChatWidget />
     </div>
   );
 }
