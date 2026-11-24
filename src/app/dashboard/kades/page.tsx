@@ -116,35 +116,35 @@ export default function KepalaDesaDashboardPage() {
           </div>
 
           {/* 5 Summary Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-4">
-            <div className="neu-raised p-5 text-center flex flex-col items-center justify-center">
-              <span className="text-3xl font-black text-[var(--stat-blue)] leading-tight">{stats?.total ?? 0}</span>
-              <p className="mt-2 text-xs font-bold text-[var(--muted)] uppercase tracking-wider">Total Pengajuan</p>
-              <span className="text-[11px] text-[var(--muted)] mt-0.5">Tahun berjalan</span>
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-5">
+            <div className="neu-raised p-3.5 sm:p-5 text-center flex flex-col items-center justify-center">
+              <span className="text-2xl sm:text-3xl font-black text-[var(--stat-blue)] leading-tight">{stats?.total ?? 0}</span>
+              <p className="mt-1.5 sm:mt-2 text-xs font-bold text-[var(--muted)] uppercase tracking-wider">Total Pengajuan</p>
+              <span className="text-[10px] sm:text-[11px] text-[var(--muted)] mt-0.5">Tahun berjalan</span>
             </div>
 
-            <div className="neu-raised p-5 text-center flex flex-col items-center justify-center">
-              <span className="text-3xl font-black text-[var(--stat-orange)] leading-tight">{stats?.headReview ?? 0}</span>
-              <p className="mt-2 text-xs font-bold text-[var(--muted)] uppercase tracking-wider">Menunggu Persetujuan</p>
-              <span className="text-[11px] text-[var(--muted)] mt-0.5">Antrean Kepala Desa</span>
+            <div className="neu-raised p-3.5 sm:p-5 text-center flex flex-col items-center justify-center">
+              <span className="text-2xl sm:text-3xl font-black text-[var(--stat-orange)] leading-tight">{stats?.headReview ?? 0}</span>
+              <p className="mt-1.5 sm:mt-2 text-xs font-bold text-[var(--muted)] uppercase tracking-wider">Menunggu Persetujuan</p>
+              <span className="text-[10px] sm:text-[11px] text-[var(--muted)] mt-0.5">Antrean Kepala Desa</span>
             </div>
 
-            <div className="neu-raised p-5 text-center flex flex-col items-center justify-center">
-              <span className="text-3xl font-black text-[var(--stat-green)] leading-tight">{stats?.completed ?? 0}</span>
-              <p className="mt-2 text-xs font-bold text-[var(--muted)] uppercase tracking-wider">Disetujui</p>
-              <span className="text-[11px] text-[var(--muted)] mt-0.5">Selesai diterbitkan</span>
+            <div className="neu-raised p-3.5 sm:p-5 text-center flex flex-col items-center justify-center">
+              <span className="text-2xl sm:text-3xl font-black text-[var(--stat-green)] leading-tight">{stats?.completed ?? 0}</span>
+              <p className="mt-1.5 sm:mt-2 text-xs font-bold text-[var(--muted)] uppercase tracking-wider">Disetujui</p>
+              <span className="text-[10px] sm:text-[11px] text-[var(--muted)] mt-0.5">Selesai diterbitkan</span>
             </div>
 
-            <div className="neu-raised p-5 text-center flex flex-col items-center justify-center">
-              <span className="text-3xl font-black text-[var(--stat-red)] leading-tight">{stats?.rejected ?? 0}</span>
-              <p className="mt-2 text-xs font-bold text-[var(--muted)] uppercase tracking-wider">Ditolak</p>
-              <span className="text-[11px] text-[var(--muted)] mt-0.5">Tidak memenuhi syarat</span>
+            <div className="neu-raised p-3.5 sm:p-5 text-center flex flex-col items-center justify-center">
+              <span className="text-2xl sm:text-3xl font-black text-[var(--stat-red)] leading-tight">{stats?.rejected ?? 0}</span>
+              <p className="mt-1.5 sm:mt-2 text-xs font-bold text-[var(--muted)] uppercase tracking-wider">Ditolak</p>
+              <span className="text-[10px] sm:text-[11px] text-[var(--muted)] mt-0.5">Tidak memenuhi syarat</span>
             </div>
 
-            <div className="neu-raised p-5 text-center flex flex-col items-center justify-center">
-              <span className="text-3xl font-black text-[var(--stat-green)] leading-tight">{stats?.issuedDocs ?? 0}</span>
-              <p className="mt-2 text-xs font-bold text-[var(--muted)] uppercase tracking-wider">SKTM Diterbitkan</p>
-              <span className="text-[11px] text-[var(--muted)] mt-0.5">Ber-QR Code resmi</span>
+            <div className="neu-raised p-3.5 sm:p-5 text-center flex flex-col items-center justify-center col-span-2 sm:col-span-1">
+              <span className="text-2xl sm:text-3xl font-black text-[var(--stat-green)] leading-tight">{stats?.issuedDocs ?? 0}</span>
+              <p className="mt-1.5 sm:mt-2 text-xs font-bold text-[var(--muted)] uppercase tracking-wider">SKTM Diterbitkan</p>
+              <span className="text-[10px] sm:text-[11px] text-[var(--muted)] mt-0.5">Ber-QR Code resmi</span>
             </div>
           </div>
 

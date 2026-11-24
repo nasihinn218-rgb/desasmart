@@ -3,7 +3,11 @@
 import nodemailer from 'nodemailer';
 
 export async function sendEmailNotification(to: string, subject: string, text: string) {
-  const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, EMAIL_FROM } = process.env;
+  const SMTP_HOST = process.env.SMTP_HOST || 'smtp.gmail.com';
+  const SMTP_PORT = process.env.SMTP_PORT || '587';
+  const SMTP_USER = process.env.SMTP_USER || 'nasihinn218@gmail.com';
+  const SMTP_PASS = process.env.SMTP_PASS || 'cimj bhkw ukjx sxju';
+  const EMAIL_FROM = process.env.EMAIL_FROM || 'Desa Smart <nasihinn218@gmail.com>';
 
   if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) {
     throw new Error(
@@ -11,7 +15,7 @@ export async function sendEmailNotification(to: string, subject: string, text: s
     );
   }
 
-  const port = SMTP_PORT ? Number(SMTP_PORT) : 587;
+  const port = Number(SMTP_PORT);
 
   const transporter = nodemailer.createTransport({
     host: SMTP_HOST,

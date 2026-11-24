@@ -11,6 +11,12 @@ if (!fs.existsSync(envPath)) {
     'DATABASE_URL="file:./prisma/seed.db"',
     'JWT_SECRET="desasmart-super-secure-secret-key-indonesia-2026-sktm"',
     'NEXT_PUBLIC_APP_URL="https://desasmart.vercel.app"',
+    'FONNTE_API_KEY="4BhTRV8eEiPE6xFGsLZE"',
+    'SMTP_HOST="smtp.gmail.com"',
+    'SMTP_PORT="587"',
+    'SMTP_USER="nasihinn218@gmail.com"',
+    'SMTP_PASS="cimj bhkw ukjx sxju"',
+    'EMAIL_FROM="Desa Smart <nasihinn218@gmail.com>"',
     'AI_PROVIDER="rule"',
     ''
   ].join('\n');
@@ -28,4 +34,13 @@ if (!process.env.DATABASE_URL) {
 }
 if (!process.env.JWT_SECRET) {
   process.env.JWT_SECRET = 'desasmart-super-secure-secret-key-indonesia-2026-sktm';
+}
+if (!process.env.FONNTE_API_KEY) {
+  process.env.FONNTE_API_KEY = '4BhTRV8eEiPE6xFGsLZE';
+}
+if (!process.env.SMTP_USER) {
+  process.env.SMTP_USER = 'nasihinn218@gmail.com';
+}
+if (!process.env.SMTP_PASS) {
+  process.env.SMTP_PASS = 'cimj bhkw ukjx sxju';
 }

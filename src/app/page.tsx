@@ -113,11 +113,11 @@ export default function LandingPage() {
       {/* Main Content */}
       <main className="flex-1">
         {/* 2. Hero Section (Rata Tengah) */}
-        <section className="mx-auto max-w-[820px] px-5 pb-14 pt-16 text-center sm:pt-20 lg:pt-24">
-          <h1 className="mb-5 text-3xl font-extrabold tracking-normal text-[var(--ink)] sm:text-5xl lg:text-[3.25rem]">
+        <section className="mx-auto max-w-[820px] px-4 sm:px-5 pb-10 sm:pb-14 pt-8 sm:pt-20 lg:pt-24 text-center">
+          <h1 className="mb-4 sm:mb-5 text-2xl xs:text-3xl font-extrabold tracking-normal text-[var(--ink)] sm:text-5xl lg:text-[3.25rem]">
             Urus surat desa tanpa antre, semua lewat HP.
           </h1>
-          <p className="mx-auto mb-8 max-w-[60ch] text-base leading-[1.7] text-[var(--muted)] sm:text-lg">
+          <p className="mx-auto mb-6 sm:mb-8 max-w-[60ch] text-sm sm:text-base lg:text-lg leading-relaxed text-[var(--muted)]">
             Ajukan surat keterangan dari rumah dan pantau prosesnya sampai surat terbit.
           </p>
 
@@ -131,47 +131,47 @@ export default function LandingPage() {
           </div>
 
           {/* Tiga Poin Kepercayaan (Pill Inset) */}
-          <ul className="mt-8 flex flex-wrap items-center justify-center gap-3 p-0 list-none">
+          <ul className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-2 sm:gap-3 p-0 list-none">
             <li className="neu-pill-inset">
-              <CheckCircle2 className="h-4 w-4 text-[var(--accent)]" />
+              <CheckCircle2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-[var(--accent)]" />
               <span>Selesai 1–2 hari kerja</span>
             </li>
             <li className="neu-pill-inset">
-              <CheckCircle2 className="h-4 w-4 text-[var(--accent)]" />
+              <CheckCircle2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-[var(--accent)]" />
               <span>Diperiksa staf dan Kepala Desa</span>
             </li>
             <li className="neu-pill-inset">
-              <CheckCircle2 className="h-4 w-4 text-[var(--accent)]" />
+              <CheckCircle2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-[var(--accent)]" />
               <span>Bebas pungli</span>
             </li>
           </ul>
         </section>
 
         {/* 3. Bagian: 4 Langkah Mudah Ajukan Surat Online */}
-        <section className="mx-auto max-w-[1100px] px-5 py-12 lg:py-16" aria-labelledby="alur-judul">
+        <section className="mx-auto max-w-[1100px] px-4 sm:px-5 py-8 sm:py-12 lg:py-16" aria-labelledby="alur-judul">
           <h2
             id="alur-judul"
-            className="mb-2 text-center text-2xl font-extrabold text-[var(--ink)] sm:text-3xl"
+            className="mb-2 text-center text-xl sm:text-3xl font-extrabold text-[var(--ink)]"
           >
             4 langkah mudah ajukan surat online
           </h2>
-          <p className="mx-auto mb-10 max-w-[60ch] text-center text-base leading-[1.7] text-[var(--muted)]">
+          <p className="mx-auto mb-8 sm:mb-10 max-w-[60ch] text-center text-xs sm:text-base leading-relaxed text-[var(--muted)]">
             Tanpa antre di balai desa. Semua tahap tercatat dan bisa Anda pantau.
           </p>
 
-          <ol className="grid list-none grid-cols-1 gap-5 p-0 sm:grid-cols-2 lg:grid-cols-4">
+          <ol className="grid list-none grid-cols-1 gap-4 sm:gap-5 p-0 sm:grid-cols-2 lg:grid-cols-4">
             {WORK_STEPS.map((step) => (
               <li
                 key={step.step}
-                className="neu-raised flex flex-col items-start p-6 text-left"
+                className="neu-raised flex flex-col items-start p-4 sm:p-6 text-left"
               >
-                <div className="neu-circle-inset mb-4 flex items-center justify-center">
+                <div className="neu-circle-inset mb-3 sm:mb-4 flex items-center justify-center">
                   {step.step}
                 </div>
-                <b className="mb-2 block text-base font-bold text-[var(--ink)] sm:text-lg">
+                <b className="mb-1.5 sm:mb-2 block text-sm sm:text-lg font-bold text-[var(--ink)]">
                   {step.title}
                 </b>
-                <span className="text-sm leading-[1.65] text-[var(--muted)]">
+                <span className="text-xs sm:text-sm leading-relaxed text-[var(--muted)]">
                   {step.description}
                 </span>
               </li>
@@ -180,30 +180,30 @@ export default function LandingPage() {
         </section>
 
         {/* 4. Bagian: Jelas dan Aman untuk Warga */}
-        <section className="mx-auto max-w-[1100px] px-5 py-12 lg:py-16" aria-labelledby="aman-judul">
+        <section className="mx-auto max-w-[1100px] px-4 sm:px-5 py-8 sm:py-12 lg:py-16" aria-labelledby="aman-judul">
           <h2
             id="aman-judul"
-            className="mb-2 text-center text-2xl font-extrabold text-[var(--ink)] sm:text-3xl"
+            className="mb-2 text-center text-xl sm:text-3xl font-extrabold text-[var(--ink)]"
           >
             Jelas dan aman untuk warga
           </h2>
-          <p className="mx-auto mb-10 max-w-[60ch] text-center text-base leading-[1.7] text-[var(--muted)]">
+          <p className="mx-auto mb-8 sm:mb-10 max-w-[60ch] text-center text-xs sm:text-base leading-relaxed text-[var(--muted)]">
             Dibuat supaya urusan surat desa lebih mudah dan transparan.
           </p>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-3">
             {ADVANTAGES.map((item) => (
               <div
                 key={item.title}
-                className="neu-raised p-6 text-left"
+                className="neu-raised p-4 sm:p-6 text-left"
               >
-                <div className="neu-circle-inset-sm mb-4 flex items-center justify-center">
+                <div className="neu-circle-inset-sm mb-3 sm:mb-4 flex items-center justify-center">
                   <item.icon className="h-5 w-5" />
                 </div>
-                <b className="mb-2 block text-base font-bold text-[var(--ink)] sm:text-lg">
+                <b className="mb-1.5 sm:mb-2 block text-sm sm:text-lg font-bold text-[var(--ink)]">
                   {item.title}
                 </b>
-                <p className="m-0 text-sm leading-[1.65] text-[var(--muted)]">
+                <p className="m-0 text-xs sm:text-sm leading-relaxed text-[var(--muted)]">
                   {item.description}
                 </p>
               </div>
@@ -214,17 +214,17 @@ export default function LandingPage() {
         {/* 5. Bagian: Cek Keaslian Surat */}
         <section
           id="cek"
-          className="mx-auto max-w-[680px] px-5 py-12 lg:py-16 text-center"
+          className="mx-auto max-w-[680px] px-4 sm:px-5 py-8 sm:py-12 lg:py-16 text-center"
           aria-labelledby="cek-judul"
         >
-          <div className="neu-raised p-7 sm:p-10">
+          <div className="neu-raised p-5 sm:p-10">
             <h2
               id="cek-judul"
-              className="mb-2 text-2xl font-extrabold text-[var(--ink)] sm:text-3xl"
+              className="mb-2 text-xl sm:text-3xl font-extrabold text-[var(--ink)]"
             >
               Cek keaslian surat
             </h2>
-            <p className="mx-auto mb-7 max-w-[50ch] text-sm text-[var(--muted)] sm:text-base">
+            <p className="mx-auto mb-6 max-w-[50ch] text-xs sm:text-base text-[var(--muted)]">
               Untuk bank, sekolah, atau instansi yang menerima surat dari warga.
             </p>
 
@@ -235,11 +235,11 @@ export default function LandingPage() {
                 value={verifyNumber}
                 onChange={(e) => setVerifyNumber(e.target.value)}
                 placeholder="Contoh: 470/028/SKTM/X/2026"
-                className="neu-inset min-h-[50px] flex-1 min-w-0 px-4 py-3 text-base text-[var(--ink)] placeholder:text-[var(--muted)] focus:outline-none"
+                className="neu-inset min-h-[46px] sm:min-h-[50px] flex-1 min-w-0 px-4 py-2.5 sm:py-3 text-xs sm:text-base text-[var(--ink)] placeholder:text-[var(--muted)] focus:outline-none"
               />
               <button
                 type="submit"
-                className="neu-btn-primary shrink-0 !py-3 !px-7"
+                className="neu-btn-primary shrink-0 !py-2.5 sm:!py-3 !px-5 sm:!px-7"
               >
                 Cek keaslian
               </button>

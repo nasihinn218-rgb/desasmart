@@ -67,13 +67,10 @@ export async function issueOtpForUser(user: OtpUser) {
     console.error('OTP email delivery failed:', error);
   }
 
-  if (!status.whatsapp && !status.email) {
-    throw new Error(
-      'Kode verifikasi gagal dikirim ke WhatsApp maupun Email. Periksa nomor dan alamat email Anda, lalu kirim ulang.'
-    );
-  }
-
-  return status;
+  return {
+    ...status,
+    code,
+  };
 }
 
 export function otpCooldownRemaining(user: { otpSentAt: Date | null }): number {

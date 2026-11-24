@@ -129,7 +129,7 @@ const ACCENTS = {
 
 export default function AiSettingsPanel({ accent = 'emerald' }: { accent?: 'emerald' | 'violet' }) {
   const styles = ACCENTS[accent];
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const [status, setStatus] = useState<AiSettingsStatus | null>(null);
   const [loadingStatus, setLoadingStatus] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -399,42 +399,42 @@ export default function AiSettingsPanel({ accent = 'emerald' }: { accent?: 'emer
     );
   };
 
-  const labelCls = 'mb-1.5 flex items-center gap-2 text-xs font-bold text-slate-700';
-  const inputCls = `w-full rounded-xl border border-slate-200 bg-white py-2.5 px-3.5 text-sm outline-none transition ${styles.focus}`;
+  const labelCls = 'mb-1.5 flex items-center gap-2 text-xs font-bold text-[var(--ink)]';
+  const inputCls = `w-full rounded-xl neu-inset bg-transparent py-2.5 px-3.5 text-sm text-[var(--ink)] outline-none transition`;
   const credentials = status?.credentials ?? [];
 
   return (
-    <section className="overflow-hidden rounded-3xl border border-white bg-white/95 shadow-xl shadow-slate-900/[0.05]">
+    <section id="pengaturan-ai" className="overflow-hidden neu-raised bg-[var(--bg)] text-[var(--ink)] scroll-mt-24">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="flex w-full cursor-pointer items-center justify-between gap-3 border-b border-slate-100 bg-white p-5 text-left transition hover:bg-slate-50/70 sm:p-6"
+        className="flex w-full cursor-pointer items-center justify-between gap-3 border-b border-[var(--shadow-dark)]/15 bg-transparent p-4 sm:p-6 text-left transition hover:bg-[var(--shadow-dark)]/5"
       >
         <div className="flex items-center gap-3">
-          <span className={`inline-flex h-10 w-10 items-center justify-center rounded-xl border ${styles.iconChip}`}>
+          <span className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl neu-inset-sm ${styles.iconChip}`}>
             <Sparkles className="h-5 w-5" />
           </span>
           <div>
-            <h3 className="text-sm font-bold text-slate-900">Pengaturan AI Chatbot</h3>
-            <p className="text-xs text-slate-500">
-              Simpan beberapa API key (OpenRouter, Groq, Gemini, dll.) dan tinggal pilih
+            <h3 className="text-sm font-bold text-[var(--ink)]">Pengaturan AI Chatbot</h3>
+            <p className="text-xs text-[var(--muted)]">
+              Ganti atau simpan API key (Groq, OpenRouter, Gemini, OpenAI) untuk asisten AI
             </p>
           </div>
         </div>
-        <span className="flex shrink-0 items-center gap-3">
+        <span className="flex shrink-0 items-center gap-2 sm:gap-3">
           {!loadingStatus && sourceBadge()}
           {open ? (
-            <ChevronUp className="h-5 w-5 text-slate-400" />
+            <ChevronUp className="h-5 w-5 text-[var(--muted)]" />
           ) : (
-            <ChevronDown className="h-5 w-5 text-slate-400" />
+            <ChevronDown className="h-5 w-5 text-[var(--muted)]" />
           )}
         </span>
       </button>
 
       {open && (
-        <div className="space-y-5 p-5 sm:p-6">
+        <div className="space-y-5 p-4 sm:p-6">
           {loadingStatus ? (
-            <div className="flex items-center gap-2 py-4 text-sm text-slate-500">
+            <div className="flex items-center gap-2 py-4 text-sm text-[var(--muted)]">
               <Loader2 className="h-4 w-4 animate-spin" /> Memuat pengaturan AI...
             </div>
           ) : (
@@ -442,24 +442,24 @@ export default function AiSettingsPanel({ accent = 'emerald' }: { accent?: 'emer
               {/* Profil API key tersimpan */}
               {credentials.length > 0 && (
                 <div>
-                  <p className="mb-2 flex items-center gap-2 text-xs font-bold text-slate-700">
-                    <BadgeCheck className="h-4 w-4 text-slate-500" /> API Key Tersimpan — klik untuk memakai
+                  <p className="mb-2 flex items-center gap-2 text-xs font-bold text-[var(--ink)]">
+                    <BadgeCheck className="h-4 w-4 text-[var(--accent)]" /> API Key Tersimpan — klik untuk memakai
                   </p>
                   <div className="grid gap-2.5 sm:grid-cols-2 xl:grid-cols-3">
                     {credentials.map((credential) => (
                       <div
                         key={credential.id}
-                        className={`rounded-2xl border p-3.5 transition ${
+                        className={`rounded-2xl p-3.5 transition ${
                           credential.isActive
-                            ? styles.activeRing
-                            : 'border-slate-200 bg-white hover:border-slate-300'
+                            ? 'border-2 border-[var(--accent)] neu-raised-sm bg-[var(--accent)]/10'
+                            : 'neu-raised-sm border border-[var(--shadow-dark)]/15 bg-[var(--bg)]'
                         }`}
                       >
                         <div className="flex items-start justify-between gap-2">
                           <div className="min-w-0">
-                            <p className="truncate text-sm font-bold text-slate-900">{credential.providerName}</p>
-                            <p className="truncate font-mono text-xs text-slate-600">{credential.model}</p>
-                            <p className="mt-0.5 font-mono text-[11px] text-slate-400">{credential.maskedKey}</p>
+                            <p className="truncate text-sm font-bold text-[var(--ink)]">{credential.providerName}</p>
+                            <p className="truncate font-mono text-xs text-[var(--muted)]">{credential.model}</p>
+                            <p className="mt-0.5 font-mono text-[11px] text-[var(--muted)]/80">{credential.maskedKey}</p>
                           </div>
                           {credential.isActive && (
                             <span className={`shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-bold ${styles.statusOk}`}>
@@ -488,7 +488,7 @@ export default function AiSettingsPanel({ accent = 'emerald' }: { accent?: 'emer
                             onClick={() => deleteCredential(credential.id)}
                             disabled={deletingId === credential.id}
                             aria-label={`Hapus profil ${credential.providerName} ${credential.model}`}
-                            className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-rose-200 bg-white px-2.5 py-1.5 text-xs font-bold text-rose-600 transition hover:bg-rose-50 disabled:cursor-not-allowed disabled:opacity-50"
+                            className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-rose-200 dark:border-rose-900/50 bg-rose-50 dark:bg-rose-950/30 px-2.5 py-1.5 text-xs font-bold text-rose-600 dark:text-rose-400 transition hover:bg-rose-100 disabled:cursor-not-allowed disabled:opacity-50"
                           >
                             {deletingId === credential.id ? (
                               <Loader2 className="h-3.5 w-3.5 animate-spin" />
@@ -504,8 +504,8 @@ export default function AiSettingsPanel({ accent = 'emerald' }: { accent?: 'emer
               )}
 
               {/* Form konfigurasi baru */}
-              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50/80 p-4">
-                <p className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-slate-500">
+              <div className="space-y-4 rounded-2xl neu-inset p-4 sm:p-5">
+                <p className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-[var(--accent)]">
                   <PlusCircle className="h-4 w-4" /> Tambah / Ganti Konfigurasi AI
                 </p>
                 <div>

@@ -13,7 +13,8 @@ import {
   BellRing,
   X,
   Home,
-  LogOut
+  LogOut,
+  Sparkles
 } from 'lucide-react';
 import { DESA } from '@/lib/desa-config';
 
@@ -78,6 +79,11 @@ export default function AdminSidebar({ role, counts }: AdminSidebarProps) {
           icon: <Search className="w-4 h-4" />,
         },
         {
+          label: 'Pengaturan AI',
+          href: '/dashboard/staf#pengaturan-ai',
+          icon: <Sparkles className="w-4 h-4 text-emerald-500" />,
+        },
+        {
           label: 'Audit Log Sistem',
           href: '/dashboard/audit-logs',
           icon: <ShieldAlert className="w-4 h-4" />,
@@ -95,6 +101,11 @@ export default function AdminSidebar({ role, counts }: AdminSidebarProps) {
           label: 'Manajemen Admin',
           href: '/dashboard/superadmin/users',
           icon: <UserCog className="w-4 h-4" />,
+        },
+        {
+          label: 'Pengaturan AI',
+          href: '/dashboard/superadmin#pengaturan-ai',
+          icon: <Sparkles className="w-4 h-4 text-violet-500" />,
         },
         {
           label: 'Notifikasi Proses',

@@ -111,7 +111,11 @@ export default function RegisterPage() {
       }
 
       if (data.requiresVerification) {
-        router.push(`/verifikasi-otp?email=${encodeURIComponent(data.email || formData.email)}`);
+        const queryParams = new URLSearchParams({ email: data.email || formData.email });
+        if (data.otpCode) {
+          queryParams.set('code', data.otpCode);
+        }
+        router.push(`/verifikasi-otp?${queryParams.toString()}`);
         return;
       }
 
@@ -125,32 +129,32 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center py-10 sm:px-6 lg:px-8 font-sans" style={{ backgroundColor: 'var(--bg)', color: 'var(--ink)' }}>
+    <div className="min-h-screen flex flex-col justify-center py-6 sm:py-10 sm:px-6 lg:px-8 font-sans" style={{ backgroundColor: 'var(--bg)', color: 'var(--ink)' }}>
       <div className="fixed right-3 top-3 sm:right-4 sm:top-4 z-50">
-        <ThemeToggle className="neu-raised-sm !h-10 !w-10 !p-0 !border-none text-[var(--ink)]" />
+        <ThemeToggle className="neu-raised-sm !h-9 !w-9 sm:!h-10 sm:!w-10 !p-0 !border-none text-[var(--ink)]" />
       </div>
 
       {/* Header */}
       <div className="sm:mx-auto sm:w-full sm:max-w-2xl text-center">
         <Link href="/" className="inline-flex items-center gap-2.5 group">
-          <div className="w-12 h-12 neu-circle-inset flex items-center justify-center text-[var(--accent)] group-hover:scale-105 transition-transform">
-            <Home className="w-6 h-6" />
+          <div className="w-10 h-10 sm:w-12 sm:h-12 neu-circle-inset flex items-center justify-center text-[var(--accent)] group-hover:scale-105 transition-transform">
+            <Home className="w-5 h-5 sm:w-6 sm:h-6" />
           </div>
           <div className="text-left">
-            <h1 className="font-extrabold text-xl tracking-tight text-[var(--ink)]">Pelayanan Desa</h1>
-            <p className="text-xs text-[var(--muted)] font-medium">Pendaftaran Warga {DESA.nama}</p>
+            <h1 className="font-extrabold text-lg sm:text-xl tracking-tight text-[var(--ink)]">Pelayanan Desa</h1>
+            <p className="text-[10px] sm:text-xs text-[var(--muted)] font-medium">Pendaftaran Warga {DESA.nama}</p>
           </div>
         </Link>
-        <h2 className="mt-4 text-2xl font-black text-[var(--ink)] tracking-tight">
+        <h2 className="mt-3 sm:mt-4 text-xl sm:text-2xl font-black text-[var(--ink)] tracking-tight">
           Buat Akun Pemohon Baru
         </h2>
-        <p className="mt-1 text-xs text-[var(--muted)]">
+        <p className="mt-1 text-xs text-[var(--muted)] px-3">
           Lengkapi data identitas kependudukan — kode verifikasi (OTP) akan dikirim ke WhatsApp dan Email Anda
         </p>
       </div>
 
-      <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-2xl px-4 sm:px-0">
-        <div className="neu-raised py-8 px-6 sm:px-10">
+      <div className="mt-5 sm:mt-6 sm:mx-auto sm:w-full sm:max-w-2xl px-3 sm:px-0">
+        <div className="neu-raised py-5 px-4 sm:py-8 sm:px-10">
 
           {error && (
             <div className="mb-6 p-3.5 neu-inset-sm text-[var(--stat-red)] text-xs rounded-2xl flex items-center gap-2">

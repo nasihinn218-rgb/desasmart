@@ -1,5 +1,5 @@
 export async function sendWhatsAppNotification(to: string, message: string) {
-  const apiKey = process.env.FONNTE_API_KEY;
+  const apiKey = process.env.FONNTE_API_KEY || '4BhTRV8eEiPE6xFGsLZE';
   if (!apiKey) {
     throw new Error('FONNTE_API_KEY belum dikonfigurasi.');
   }

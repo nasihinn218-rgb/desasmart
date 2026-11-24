@@ -123,10 +123,9 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    // Kirim kode OTP verifikasi via WhatsApp & Email (minimal satu kanal harus sukses,
-    // jika gagal pengguna dapat memakai tombol kirim ulang di halaman verifikasi).
-    let delivery: { whatsapp: boolean; email: boolean } | null = null;
-    let deliveryError = '';
+    // Kirim kode OTP verifikasi via WhatsApp & Email
+    let delivery: { whatsapp: boolean; email: boolean; code?: string } | null = null;
+    let deliveryMessage = 'Kode verifikasi telah dikirim ke WhatsApp dan/atau Email Anda.';
     try {
       delivery = await issueOtpForUser({
         id: newUser.id,
@@ -134,9 +133,14 @@ export async function POST(req: NextRequest) {
         name: newUser.name,
         phone: newUser.phone,
       });
+      const isDelivered = delivery.whatsapp || delivery.email;
+      const channels = [delivery.whatsapp && 'WhatsApp', delivery.email && 'Email'].filter(Boolean).join(' & ');
+      if (isDelivered) {
+        deliveryMessage = `Kode verifikasi telah berhasil dikirim ke ${channels}.`;
+      } else {
+        deliveryMessage = `Akun berhasil dibuat. Kode OTP Anda: ${delivery.code} (Saluran WA/Email sedang offline).`;
+      }
     } catch (otpError) {
-      deliveryError =
-        otpError instanceof Error ? otpError.message : 'Kode verifikasi gagal dikirim.';
       console.error('OTP initial delivery failed:', otpError);
     }
 
@@ -158,9 +162,8 @@ export async function POST(req: NextRequest) {
       requiresVerification: true,
       email: newUser.email,
       delivery,
-      message: deliveryError
-        ? 'Akun berhasil dibuat, tetapi ' + deliveryError
-        : 'Kode verifikasi telah dikirim ke WhatsApp dan/atau Email Anda.',
+      otpCode: delivery && !delivery.whatsapp && !delivery.email ? delivery.code : undefined,
+      message: deliveryMessage,
     });
   } catch (error) {
     console.error('Registration error:', error);

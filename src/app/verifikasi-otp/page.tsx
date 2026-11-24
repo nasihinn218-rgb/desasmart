@@ -19,13 +19,14 @@ function VerifyOtpContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const initialEmail = searchParams.get('email') || '';
+  const initialCode = searchParams.get('code') || '';
 
   const [email, setEmail] = useState(initialEmail);
-  const [code, setCode] = useState('');
+  const [code, setCode] = useState(initialCode);
   const [loading, setLoading] = useState(false);
   const [resending, setResending] = useState(false);
   const [error, setError] = useState('');
-  const [notice, setNotice] = useState('');
+  const [notice, setNotice] = useState(initialCode ? `Kode verifikasi akun Anda: ${initialCode}` : '');
   const [cooldown, setCooldown] = useState(60);
   const codeInputRef = useRef<HTMLInputElement>(null);
 
@@ -97,6 +98,9 @@ function VerifyOtpContent() {
         throw new Error(data.error || 'Kode gagal dikirim ulang.');
       }
       setNotice(data.message || 'Kode OTP baru telah dikirim.');
+      if (data.code) {
+        setCode(data.code);
+      }
       setCooldown(60);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Gagal mengirim ulang kode.');
@@ -106,33 +110,33 @@ function VerifyOtpContent() {
   }, [email, router]);
 
   return (
-    <div className="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 font-sans" style={{ backgroundColor: 'var(--bg)', color: 'var(--ink)' }}>
-      <div className="fixed right-4 top-4 z-50">
-        <ThemeToggle />
+    <div className="min-h-screen flex flex-col justify-center py-8 sm:py-12 sm:px-6 lg:px-8 font-sans" style={{ backgroundColor: 'var(--bg)', color: 'var(--ink)' }}>
+      <div className="fixed right-3 top-3 sm:right-4 sm:top-4 z-50">
+        <ThemeToggle className="neu-raised-sm !h-9 !w-9 sm:!h-10 sm:!w-10 !p-0 !border-none text-[var(--ink)]" />
       </div>
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
         <Link href="/" className="inline-flex items-center gap-2.5 group">
-          <div className="w-12 h-12 neu-circle-inset flex items-center justify-center text-[var(--accent)] group-hover:scale-105 transition-transform">
-            <Home className="w-6 h-6" />
+          <div className="w-10 h-10 sm:w-12 sm:h-12 neu-circle-inset flex items-center justify-center text-[var(--accent)] group-hover:scale-105 transition-transform">
+            <Home className="w-5 h-5 sm:w-6 sm:h-6" />
           </div>
           <div className="text-left">
-            <h1 className="font-extrabold text-xl tracking-tight text-[var(--ink)]">
+            <h1 className="font-extrabold text-lg sm:text-xl tracking-tight text-[var(--ink)]">
               Pelayanan Desa
             </h1>
-            <p className="text-xs text-[var(--muted)] font-medium">Verifikasi Akun Warga {DESA.nama}</p>
+            <p className="text-[10px] sm:text-xs text-[var(--muted)] font-medium">Verifikasi Akun Warga {DESA.nama}</p>
           </div>
         </Link>
-        <h2 className="mt-6 text-2xl font-black text-[var(--ink)] tracking-tight flex items-center justify-center gap-2">
-          <ShieldCheck className="w-6 h-6 text-[var(--accent)]" />
+        <h2 className="mt-4 sm:mt-6 text-xl sm:text-2xl font-black text-[var(--ink)] tracking-tight flex items-center justify-center gap-2">
+          <ShieldCheck className="w-5 h-5 sm:w-6 sm:h-6 text-[var(--accent)]" />
           Verifikasi Akun Anda
         </h2>
-        <p className="mt-1 text-xs text-[var(--muted)]">
+        <p className="mt-1 text-xs text-[var(--muted)] px-3">
           Masukkan kode OTP 6 digit yang dikirim ke WhatsApp dan Email pendaftaran
         </p>
       </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md px-4 sm:px-0">
-        <div className="neu-raised py-8 px-6 sm:px-10">
+      <div className="mt-6 sm:mt-8 sm:mx-auto sm:w-full sm:max-w-md px-3 sm:px-0">
+        <div className="neu-raised py-6 px-4 sm:py-8 sm:px-10">
           {error && (
             <div className="mb-5 p-3.5 neu-inset-sm text-[var(--stat-red)] text-xs rounded-2xl flex items-center gap-2">
               <AlertTriangle className="w-4 h-4 shrink-0" />

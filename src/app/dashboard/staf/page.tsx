@@ -112,29 +112,29 @@ export default function StaffDashboardPage() {
           </div>
 
           {/* 4 Summary Cards (Raised, Angka besar di tengah atas, label di bawah) */}
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
-            <div className="neu-raised p-6 text-center space-y-1">
-              <h3 className="text-4xl font-extrabold text-[var(--ink)]">{stats?.total ?? 0}</h3>
+          <div className="grid grid-cols-2 gap-3 sm:gap-5 xl:grid-cols-4">
+            <div className="neu-raised p-3.5 sm:p-6 text-center space-y-1">
+              <h3 className="text-2xl sm:text-4xl font-extrabold text-[var(--ink)]">{stats?.total ?? 0}</h3>
               <p className="text-xs font-bold text-[var(--muted)]">Total Pengajuan</p>
-              <p className="text-[11px] text-[var(--muted)]">Semua permohonan</p>
+              <p className="text-[10px] sm:text-[11px] text-[var(--muted)]">Semua permohonan</p>
             </div>
 
-            <div className="neu-raised p-6 text-center space-y-1">
-              <h3 className="text-4xl font-extrabold stat-val-blue">{stats?.staffReview ?? 0}</h3>
+            <div className="neu-raised p-3.5 sm:p-6 text-center space-y-1">
+              <h3 className="text-2xl sm:text-4xl font-extrabold stat-val-blue">{stats?.staffReview ?? 0}</h3>
               <p className="text-xs font-bold text-[var(--muted)]">Perlu Pemeriksaan</p>
-              <p className="text-[11px] text-[var(--muted)]">Antrean meja staf loket</p>
+              <p className="text-[10px] sm:text-[11px] text-[var(--muted)]">Antrean meja staf loket</p>
             </div>
 
-            <div className="neu-raised p-6 text-center space-y-1">
-              <h3 className="text-4xl font-extrabold stat-val-orange">{stats?.needRevision ?? 6}</h3>
+            <div className="neu-raised p-3.5 sm:p-6 text-center space-y-1">
+              <h3 className="text-2xl sm:text-4xl font-extrabold stat-val-orange">{stats?.needRevision ?? 6}</h3>
               <p className="text-xs font-bold text-[var(--muted)]">Perlu Perbaikan</p>
-              <p className="text-[11px] text-[var(--muted)]">Menunggu pembaruan warga</p>
+              <p className="text-[10px] sm:text-[11px] text-[var(--muted)]">Menunggu pembaruan warga</p>
             </div>
 
-            <div className="neu-raised p-6 text-center space-y-1">
-              <h3 className="text-4xl font-extrabold stat-val-green">{stats?.completed ?? 0}</h3>
+            <div className="neu-raised p-3.5 sm:p-6 text-center space-y-1">
+              <h3 className="text-2xl sm:text-4xl font-extrabold stat-val-green">{stats?.completed ?? 0}</h3>
               <p className="text-xs font-bold text-[var(--muted)]">Selesai</p>
-              <p className="text-[11px] text-[var(--muted)]">SKTM diterbitkan</p>
+              <p className="text-[10px] sm:text-[11px] text-[var(--muted)]">SKTM diterbitkan</p>
             </div>
           </div>
 

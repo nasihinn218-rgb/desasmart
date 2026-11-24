@@ -128,23 +128,23 @@ export default function MasyarakatDashboard() {
         </div>
 
         {/* 3 Summary Cards (Raised, Angka besar di tengah atas, label di bawah) */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-          <div className="neu-raised p-6 text-center space-y-1">
-            <h3 className="text-4xl font-extrabold stat-val-blue">{activeApps.length}</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-5">
+          <div className="neu-raised p-3.5 sm:p-6 text-center space-y-1">
+            <h3 className="text-2xl sm:text-4xl font-extrabold stat-val-blue">{activeApps.length}</h3>
             <p className="text-xs font-bold text-[var(--muted)]">Pengajuan Aktif</p>
-            <p className="text-[11px] text-[var(--muted)]">Sedang dalam proses</p>
+            <p className="text-[10px] sm:text-[11px] text-[var(--muted)]">Sedang dalam proses</p>
           </div>
 
-          <div className="neu-raised p-6 text-center space-y-1">
-            <h3 className="text-4xl font-extrabold stat-val-orange">{waitingReview.length}</h3>
+          <div className="neu-raised p-3.5 sm:p-6 text-center space-y-1">
+            <h3 className="text-2xl sm:text-4xl font-extrabold stat-val-orange">{waitingReview.length}</h3>
             <p className="text-xs font-bold text-[var(--muted)]">Menunggu Pemeriksaan</p>
-            <p className="text-[11px] text-[var(--muted)]">Staf / Superadmin / Kades</p>
+            <p className="text-[10px] sm:text-[11px] text-[var(--muted)]">Staf / Superadmin / Kades</p>
           </div>
 
-          <div className="neu-raised p-6 text-center space-y-1">
-            <h3 className="text-4xl font-extrabold stat-val-green">{completedApps.length}</h3>
+          <div className="neu-raised p-3.5 sm:p-6 text-center space-y-1">
+            <h3 className="text-2xl sm:text-4xl font-extrabold stat-val-green">{completedApps.length}</h3>
             <p className="text-xs font-bold text-[var(--muted)]">SKTM Selesai</p>
-            <p className="text-[11px] text-[var(--muted)]">Siap diunduh / dicetak</p>
+            <p className="text-[10px] sm:text-[11px] text-[var(--muted)]">Siap diunduh / dicetak</p>
           </div>
         </div>
 

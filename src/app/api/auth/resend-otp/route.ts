@@ -34,25 +34,23 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    let delivery: { whatsapp: boolean; email: boolean };
-    try {
-      delivery = await issueOtpForUser({
-        id: user.id,
-        email: user.email,
-        name: user.name,
-        phone: user.phone,
-      });
-    } catch (error) {
-      return NextResponse.json(
-        { error: error instanceof Error ? error.message : 'Kode OTP gagal dikirim.' },
-        { status: 502 }
-      );
-    }
+    const delivery = await issueOtpForUser({
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      phone: user.phone,
+    });
+
+    const isDelivered = delivery.whatsapp || delivery.email;
+    const channels = [delivery.whatsapp && 'WhatsApp', delivery.email && 'Email'].filter(Boolean).join(' & ');
 
     return NextResponse.json({
       success: true,
       delivery,
-      message: 'Kode OTP baru berhasil dikirim ke WhatsApp/Email Anda.',
+      code: isDelivered ? undefined : delivery.code,
+      message: isDelivered
+        ? `Kode OTP baru berhasil dikirim ke ${channels}.`
+        : `Saluran WA/Email sedang offline. Kode OTP verifikasi Anda: ${delivery.code}`,
     });
   } catch (error) {
     console.error('Resend OTP error:', error);
