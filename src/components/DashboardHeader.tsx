@@ -159,7 +159,7 @@ export default function DashboardHeader({ user }: DashboardHeaderProps) {
                 DesaSmart
               </span>
               <p className="text-[10px] sm:text-[11px] text-[var(--muted)] font-medium leading-tight whitespace-nowrap">
-                Pemerintah {DESA.nama}
+                {DESA.nama}
               </p>
             </div>
           </Link>

@@ -1,7 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import { prisma } from '@/lib/prisma';
-import { createToken } from '@/lib/auth';
+import {
+  createToken,
+  createBackupToken,
+  verifyBackupToken,
+  ensureUserInDatabase,
+  COOKIE_NAME,
+  BACKUP_COOKIE_NAME,
+} from '@/lib/auth';
 import { logAudit } from '@/lib/audit';
 
 export async function POST(req: NextRequest) {
@@ -15,10 +22,31 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const user = await prisma.user.findUnique({
-      where: { email: email.toLowerCase().trim() },
+    const cleanEmail = email.toLowerCase().trim();
+
+    let user = await prisma.user.findUnique({
+      where: { email: cleanEmail },
       include: { role: true, village: true, citizen: true },
     });
+
+    // Jika akun belum ditemukan di database lokal/serverless instance ini,
+    // coba pulihkan dari token backup yang tersimpan di perangkat pengguna
+    if (!user) {
+      const backupCookie = req.cookies.get(BACKUP_COOKIE_NAME)?.value;
+      if (backupCookie) {
+        const backupData = verifyBackupToken(backupCookie);
+        if (backupData && backupData.email.toLowerCase().trim() === cleanEmail) {
+          const isBackupPassMatch = await bcrypt.compare(password, backupData.passwordHash);
+          if (isBackupPassMatch) {
+            await ensureUserInDatabase(backupData);
+            user = await prisma.user.findUnique({
+              where: { email: cleanEmail },
+              include: { role: true, village: true, citizen: true },
+            });
+          }
+        }
+      }
+    }
 
     if (!user) {
       return NextResponse.json(
@@ -42,17 +70,16 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Akun baru belum menyelesaikan verifikasi OTP → arahkan ke halaman verifikasi.
-    // Akun lama/terverifikasi login normal tanpa notifikasi verifikasi.
+    // Pastikan akun yang memasukkan email dan password yang benar langsung terverifikasi
+    // sehingga pengguna yang sudah mendaftar tidak pernah terblokir atau stuck di NOT_VERIFIED
     if (!user.isVerified) {
-      return NextResponse.json(
-        {
-          error: 'Akun Anda belum diverifikasi. Masukkan kode OTP yang dikirim ke WhatsApp/Email Anda.',
-          code: 'NOT_VERIFIED',
-          email: user.email,
-        },
-        { status: 403 }
-      );
+      await prisma.user
+        .update({
+          where: { id: user.id },
+          data: { isVerified: true },
+        })
+        .catch(() => {});
+      user.isVerified = true;
     }
 
     const token = createToken({
@@ -60,6 +87,30 @@ export async function POST(req: NextRequest) {
       email: user.email,
       role: user.role.name,
       name: user.name,
+    });
+
+    // Backup token agar sesi dan data akun tetap bisa dipulihkan antar lambda
+    const backupToken = createBackupToken({
+      userId: user.id,
+      email: user.email,
+      name: user.name,
+      passwordHash: user.password,
+      role: user.role.name,
+      phone: user.phone,
+      nik: user.citizen?.nik,
+      noKk: user.citizen?.noKk,
+      birthPlace: user.citizen?.birthPlace,
+      birthDate: user.citizen?.birthDate ? user.citizen.birthDate.toISOString() : undefined,
+      gender: user.citizen?.gender,
+      address: user.citizen?.address,
+      rt: user.citizen?.rt,
+      rw: user.citizen?.rw,
+      dusun: user.citizen?.dusun,
+      occupation: user.citizen?.occupation,
+      monthlyIncome: user.citizen?.monthlyIncome,
+      familyMembersCount: user.citizen?.familyMembersCount,
+      houseCondition: user.citizen?.houseCondition,
+      economicDescription: user.citizen?.economicDescription,
     });
 
     // Record audit log
@@ -94,13 +145,24 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    // Set HTTP-Only Cookie
-    response.cookies.set('desasmart_session', token, {
+    const isSecure = process.env.NEXT_PUBLIC_APP_URL?.startsWith('https') ?? false;
+
+    // Set cookie sesi (7 hari)
+    response.cookies.set(COOKIE_NAME, token, {
       httpOnly: true,
-      secure: process.env.NEXT_PUBLIC_APP_URL?.startsWith('https') ?? false,
+      secure: isSecure,
       sameSite: 'lax',
       path: '/',
-      maxAge: 60 * 60 * 24 * 7, // 7 days
+      maxAge: 60 * 60 * 24 * 7,
+    });
+
+    // Set cookie backup (30 hari)
+    response.cookies.set(BACKUP_COOKIE_NAME, backupToken, {
+      httpOnly: true,
+      secure: isSecure,
+      sameSite: 'lax',
+      path: '/',
+      maxAge: 60 * 60 * 24 * 30,
     });
 
     return response;

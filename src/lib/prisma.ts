@@ -47,7 +47,20 @@ function resolveDatabaseUrl(): string {
     return `file:${normalizedPath}`;
   }
 
-  return envUrl || 'file:./prisma/dev.db';
+  if (envUrl && envUrl.startsWith('file:')) {
+    const cleanRelative = envUrl.slice(5).replace(/^\.\/prisma\//, '').replace(/^\.\//, '');
+    const inPrisma = path.join(process.cwd(), 'prisma', cleanRelative);
+    if (fs.existsSync(inPrisma)) {
+      return `file:${inPrisma.replace(/\\/g, '/')}`;
+    }
+    const inRoot = path.join(process.cwd(), cleanRelative);
+    if (fs.existsSync(inRoot)) {
+      return `file:${inRoot.replace(/\\/g, '/')}`;
+    }
+  }
+
+  const defaultDev = path.resolve(process.cwd(), 'prisma', 'dev.db').replace(/\\/g, '/');
+  return envUrl || `file:${defaultDev}`;
 }
 
 const activeDbUrl = resolveDatabaseUrl();

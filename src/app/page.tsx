@@ -86,8 +86,8 @@ export default function LandingPage() {
               <b className="block text-sm sm:text-base font-extrabold leading-tight text-[var(--ink)]">
                 DesaSmart
               </b>
-              <span className="block text-[10px] sm:text-xs text-[var(--muted)] font-medium leading-tight whitespace-nowrap">
-                {DESA.nama}, {DESA.kecamatan}
+              <span className="block text-[11px] sm:text-xs text-[var(--muted)] font-medium leading-tight whitespace-nowrap">
+                Desa Silihasih
               </span>
             </div>
           </Link>

@@ -4,6 +4,7 @@ import { prisma } from '@/lib/prisma';
 import { logAudit } from '@/lib/audit';
 import { issueOtpForUser } from '@/lib/otp';
 import { DESA } from '@/lib/desa-config';
+import { createToken, createBackupToken, COOKIE_NAME, BACKUP_COOKIE_NAME } from '@/lib/auth';
 
 export async function POST(req: NextRequest) {
   try {
@@ -93,7 +94,7 @@ export async function POST(req: NextRequest) {
         phone: phone || null,
         roleId: roleMasyarakat.id,
         villageId: defaultVillage?.id || null,
-        isVerified: false, // wajib verifikasi OTP sebelum bisa login
+        isVerified: true, // Akun langsung aktif & terverifikasi
         citizen: {
           create: {
             nik: nik.trim(),
@@ -123,9 +124,9 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    // Kirim kode OTP verifikasi via WhatsApp & Email
+    // Kirim notifikasi / kode OTP konfirmasi via WhatsApp & Email
     let delivery: { whatsapp: boolean; email: boolean; code?: string } | null = null;
-    let deliveryMessage = 'Kode verifikasi telah dikirim ke WhatsApp dan/atau Email Anda.';
+    let deliveryMessage = 'Akun Anda berhasil didaftarkan.';
     try {
       delivery = await issueOtpForUser({
         id: newUser.id,
@@ -136,9 +137,7 @@ export async function POST(req: NextRequest) {
       const isDelivered = delivery.whatsapp || delivery.email;
       const channels = [delivery.whatsapp && 'WhatsApp', delivery.email && 'Email'].filter(Boolean).join(' & ');
       if (isDelivered) {
-        deliveryMessage = `Kode verifikasi telah berhasil dikirim ke ${channels}.`;
-      } else {
-        deliveryMessage = `Akun berhasil dibuat. Kode OTP Anda: ${delivery.code} (Saluran WA/Email sedang offline).`;
+        deliveryMessage = `Pendaftaran berhasil. Konfirmasi telah dikirim ke ${channels}.`;
       }
     } catch (otpError) {
       console.error('OTP initial delivery failed:', otpError);
@@ -154,17 +153,74 @@ export async function POST(req: NextRequest) {
       entityId: newUser.id,
       ipAddress: req.headers.get('x-forwarded-for') || '127.0.0.1',
       userAgent: req.headers.get('user-agent'),
-      details: { nik, otpDelivery: delivery, requiresVerification: true },
+      details: { nik, otpDelivery: delivery },
     });
 
-    return NextResponse.json({
-      success: true,
-      requiresVerification: true,
+    // Buat token sesi JWT & backup recovery token
+    const token = createToken({
+      userId: newUser.id,
       email: newUser.email,
-      delivery,
-      otpCode: delivery && !delivery.whatsapp && !delivery.email ? delivery.code : undefined,
-      message: deliveryMessage,
+      role: 'MASYARAKAT',
+      name: newUser.name,
     });
+
+    const backupToken = createBackupToken({
+      userId: newUser.id,
+      email: newUser.email,
+      name: newUser.name,
+      passwordHash: hashedPassword,
+      role: 'MASYARAKAT',
+      phone: newUser.phone,
+      nik: nik.trim(),
+      noKk: noKk.trim(),
+      birthPlace,
+      birthDate,
+      gender,
+      address,
+      rt,
+      rw,
+      dusun,
+      occupation,
+      monthlyIncome: Number(monthlyIncome),
+      familyMembersCount: Number(familyMembersCount),
+      houseCondition,
+      economicDescription,
+    });
+
+    const isSecure = process.env.NEXT_PUBLIC_APP_URL?.startsWith('https') ?? false;
+
+    const response = NextResponse.json({
+      success: true,
+      message: deliveryMessage,
+      redirectUrl: '/dashboard/masyarakat',
+      user: {
+        id: newUser.id,
+        name: newUser.name,
+        email: newUser.email,
+        role: 'MASYARAKAT',
+      },
+      delivery,
+    });
+
+    // Set cookie sesi langsung agar nama pengguna langsung tampil di dasbor & header
+    response.cookies.set(COOKIE_NAME, token, {
+      httpOnly: true,
+      secure: isSecure,
+      sameSite: 'lax',
+      path: '/',
+      maxAge: 60 * 60 * 24 * 7,
+    });
+
+    // Set cookie backup untuk sinkronisasi instance serverless
+    response.cookies.set(BACKUP_COOKIE_NAME, backupToken, {
+      httpOnly: true,
+      secure: isSecure,
+      sameSite: 'lax',
+      path: '/',
+      maxAge: 60 * 60 * 24 * 30,
+    });
+
+    return response;
   } catch (error) {
     console.error('Registration error:', error);
     return NextResponse.json(
