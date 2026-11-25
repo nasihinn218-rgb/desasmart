@@ -58,15 +58,6 @@ export async function GET() {
 
     response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
     return response;
-        occupation: c.occupation,
-        gender: c.gender,
-        phone: c.phone,
-        email: c.user?.email ?? null,
-        hasAccount: !!c.user,
-        isVerified: c.user?.isVerified ?? false,
-        isActive: c.user?.isActive ?? false,
-      })),
-    });
   } catch (error) {
     console.error('Fetch wilayah error:', error);
     return NextResponse.json({ error: 'Gagal memuat data wilayah.' }, { status: 500 });
