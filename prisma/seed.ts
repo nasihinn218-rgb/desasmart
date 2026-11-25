@@ -207,6 +207,7 @@ async function main() {
       roleId: roleMasyarakat.id,
       villageId: village.id,
       isActive: true,
+      isVerified: true,
     },
   });
 
@@ -232,6 +233,272 @@ async function main() {
       familyMembersCount: 5,
       houseCondition: 'Rumah bilik sederhana peninggalan keluarga',
       economicDescription: 'Menggarap lahan sawah sewa musiman, membutuhkan bantuan keringanan biaya pengobatan rawat inap puskesmas.',
+    },
+  });
+
+  // Warga 4: James
+  const userJames = await prisma.user.create({
+    data: {
+      email: 'edunasihin@gmail.com',
+      password: hashedPassword,
+      name: 'James',
+      phone: '081298765432',
+      roleId: roleMasyarakat.id,
+      villageId: village.id,
+      isActive: true,
+      isVerified: true,
+    },
+  });
+  await prisma.citizen.create({
+    data: {
+      userId: userJames.id,
+      nik: '3209211204950004',
+      noKk: '3209210101900004',
+      fullName: 'James',
+      birthPlace: 'Cirebon',
+      birthDate: new Date('1995-04-12'),
+      gender: 'LAKI_LAKI',
+      phone: '081298765432',
+      address: 'Desa Silihasih RT 002 / RW 001, Dusun Wage',
+      rt: '002',
+      rw: '001',
+      dusun: 'Dusun Wage',
+      desa: 'Desa Silihasih',
+      kecamatan: 'Kecamatan Pabedilan',
+      kabupaten: 'Kabupaten Cirebon',
+      occupation: 'Wiraswasta',
+      monthlyIncome: 1200000,
+      familyMembersCount: 4,
+      houseCondition: 'Milik Sendiri',
+      economicDescription: 'Keluarga warga Desa Silihasih.',
+    },
+  });
+
+  // Warga 5: Wildan Prastio
+  const userWildan = await prisma.user.create({
+    data: {
+      email: 'prastiowildan15@gmail.com',
+      password: hashedPassword,
+      name: 'Wildan Prastio',
+      phone: '081388990011',
+      roleId: roleMasyarakat.id,
+      villageId: village.id,
+      isActive: true,
+      isVerified: true,
+    },
+  });
+  await prisma.citizen.create({
+    data: {
+      userId: userWildan.id,
+      nik: '3209212006930005',
+      noKk: '3209210101900005',
+      fullName: 'Wildan Prastio',
+      birthPlace: 'Cirebon',
+      birthDate: new Date('1993-06-20'),
+      gender: 'LAKI_LAKI',
+      phone: '081388990011',
+      address: 'Desa Silihasih RT 005 / RW 002, Dusun Wage',
+      rt: '005',
+      rw: '002',
+      dusun: 'Dusun Wage',
+      desa: 'Desa Silihasih',
+      kecamatan: 'Kecamatan Pabedilan',
+      kabupaten: 'Kabupaten Cirebon',
+      occupation: 'Karyawan Swasta',
+      monthlyIncome: 1500000,
+      familyMembersCount: 3,
+      houseCondition: 'Milik Sendiri',
+      economicDescription: 'Keluarga warga Desa Silihasih.',
+    },
+  });
+
+  // Warga 6: Ikin Nasihin
+  const userIkin = await prisma.user.create({
+    data: {
+      email: 'ikin11886@gmail.com',
+      password: hashedPassword,
+      name: 'Ikin Nasihin',
+      phone: '081223344556',
+      roleId: roleMasyarakat.id,
+      villageId: village.id,
+      isActive: true,
+      isVerified: true,
+    },
+  });
+  await prisma.citizen.create({
+    data: {
+      userId: userIkin.id,
+      nik: '3209210808980006',
+      noKk: '3209210101900006',
+      fullName: 'Ikin Nasihin',
+      birthPlace: 'Cirebon',
+      birthDate: new Date('1998-08-08'),
+      gender: 'LAKI_LAKI',
+      phone: '081223344556',
+      address: 'Desa Silihasih RT 003 / RW 001, Dusun Wage',
+      rt: '003',
+      rw: '001',
+      dusun: 'Dusun Wage',
+      desa: 'Desa Silihasih',
+      kecamatan: 'Kecamatan Pabedilan',
+      kabupaten: 'Kabupaten Cirebon',
+      occupation: 'Wiraswasta',
+      monthlyIncome: 1200000,
+      familyMembersCount: 4,
+      houseCondition: 'Milik Sendiri',
+      economicDescription: 'Keluarga warga Desa Silihasih.',
+    },
+  });
+
+  // Warga 7: Siti Aminah
+  const userSiti = await prisma.user.create({
+    data: {
+      email: 'siti.aminah@desa.test',
+      password: hashedPassword,
+      name: 'Siti Aminah',
+      phone: '081344556677',
+      roleId: roleMasyarakat.id,
+      villageId: village.id,
+      isActive: true,
+      isVerified: true,
+    },
+  });
+  await prisma.citizen.create({
+    data: {
+      userId: userSiti.id,
+      nik: '3209214502940007',
+      noKk: '3209210101900007',
+      fullName: 'Siti Aminah',
+      birthPlace: 'Cirebon',
+      birthDate: new Date('1994-02-15'),
+      gender: 'PEREMPUAN',
+      phone: '081344556677',
+      address: 'Desa Silihasih RT 007 / RW 003, Dusun Kliwon',
+      rt: '007',
+      rw: '003',
+      dusun: 'Dusun Kliwon',
+      desa: 'Desa Silihasih',
+      kecamatan: 'Kecamatan Pabedilan',
+      kabupaten: 'Kabupaten Cirebon',
+      occupation: 'Ibu Rumah Tangga',
+      monthlyIncome: 1000000,
+      familyMembersCount: 4,
+      houseCondition: 'Milik Sendiri',
+      economicDescription: 'Keluarga warga Desa Silihasih.',
+    },
+  });
+
+  // Warga 8: Rahmat Hidayat
+  const userRahmat = await prisma.user.create({
+    data: {
+      email: 'rahmat.hidayat@desa.test',
+      password: hashedPassword,
+      name: 'Rahmat Hidayat',
+      phone: '081266778899',
+      roleId: roleMasyarakat.id,
+      villageId: village.id,
+      isActive: true,
+      isVerified: true,
+    },
+  });
+  await prisma.citizen.create({
+    data: {
+      userId: userRahmat.id,
+      nik: '3209211003910008',
+      noKk: '3209210101900008',
+      fullName: 'Rahmat Hidayat',
+      birthPlace: 'Cirebon',
+      birthDate: new Date('1991-03-10'),
+      gender: 'LAKI_LAKI',
+      phone: '081266778899',
+      address: 'Desa Silihasih RT 008 / RW 003, Dusun Kliwon',
+      rt: '008',
+      rw: '003',
+      dusun: 'Dusun Kliwon',
+      desa: 'Desa Silihasih',
+      kecamatan: 'Kecamatan Pabedilan',
+      kabupaten: 'Kabupaten Cirebon',
+      occupation: 'Pedagang',
+      monthlyIncome: 1100000,
+      familyMembersCount: 3,
+      houseCondition: 'Milik Sendiri',
+      economicDescription: 'Keluarga warga Desa Silihasih.',
+    },
+  });
+
+  // Warga 9: Nurhayati
+  const userNur = await prisma.user.create({
+    data: {
+      email: 'nurhayati@desa.test',
+      password: hashedPassword,
+      name: 'Nurhayati',
+      phone: '081377889900',
+      roleId: roleMasyarakat.id,
+      villageId: village.id,
+      isActive: true,
+      isVerified: true,
+    },
+  });
+  await prisma.citizen.create({
+    data: {
+      userId: userNur.id,
+      nik: '3209215207960009',
+      noKk: '3209210101900009',
+      fullName: 'Nurhayati',
+      birthPlace: 'Cirebon',
+      birthDate: new Date('1996-07-22'),
+      gender: 'PEREMPUAN',
+      phone: '081377889900',
+      address: 'Desa Silihasih RT 011 / RW 005, Dusun Kaligandu',
+      rt: '011',
+      rw: '005',
+      dusun: 'Dusun Kaligandu',
+      desa: 'Desa Silihasih',
+      kecamatan: 'Kecamatan Pabedilan',
+      kabupaten: 'Kabupaten Cirebon',
+      occupation: 'Guru Honorer',
+      monthlyIncome: 1300000,
+      familyMembersCount: 3,
+      houseCondition: 'Milik Sendiri',
+      economicDescription: 'Keluarga warga Desa Silihasih.',
+    },
+  });
+
+  // Warga 10: Bambang Irawan
+  const userBambang = await prisma.user.create({
+    data: {
+      email: 'bambang.irawan@desa.test',
+      password: hashedPassword,
+      name: 'Bambang Irawan',
+      phone: '081288990022',
+      roleId: roleMasyarakat.id,
+      villageId: village.id,
+      isActive: true,
+      isVerified: true,
+    },
+  });
+  await prisma.citizen.create({
+    data: {
+      userId: userBambang.id,
+      nik: '3209211809930010',
+      noKk: '3209210101900010',
+      fullName: 'Bambang Irawan',
+      birthPlace: 'Cirebon',
+      birthDate: new Date('1993-09-18'),
+      gender: 'LAKI_LAKI',
+      phone: '081288990022',
+      address: 'Desa Silihasih RT 012 / RW 005, Dusun Kaligandu',
+      rt: '012',
+      rw: '005',
+      dusun: 'Dusun Kaligandu',
+      desa: 'Desa Silihasih',
+      kecamatan: 'Kecamatan Pabedilan',
+      kabupaten: 'Kabupaten Cirebon',
+      occupation: 'Peternak',
+      monthlyIncome: 1200000,
+      familyMembersCount: 4,
+      houseCondition: 'Milik Sendiri',
+      economicDescription: 'Keluarga warga Desa Silihasih.',
     },
   });
 
