@@ -29,7 +29,8 @@ if (!fs.existsSync(envPath)) {
 }
 
 // Also ensure process.env has the variables loaded in the current runtime
-if (!process.env.DATABASE_URL) {
+// Priority: Prisma Postgres Cloud > SQLite fallback
+if (!process.env.POSTGRES_PRISMA_DATABASE_URL && !process.env.DATABASE_URL) {
   process.env.DATABASE_URL = 'file:./seed.db';
 }
 if (!process.env.JWT_SECRET) {

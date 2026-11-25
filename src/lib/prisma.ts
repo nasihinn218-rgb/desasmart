@@ -8,16 +8,20 @@ const globalForPrisma = globalThis as unknown as {
 };
 
 function resolveDatabaseUrl(): string {
-  const envUrl = process.env.DATABASE_URL;
+  // 1. Prisma Postgres Cloud (Vercel/Production) — highest priority
+  const prismaCloudUrl = process.env.POSTGRES_PRISMA_DATABASE_URL;
+  if (prismaCloudUrl && prismaCloudUrl.startsWith('postgres')) {
+    console.log('[Prisma] Using Prisma Postgres Cloud (POSTGRES_PRISMA_DATABASE_URL)');
+    return prismaCloudUrl;
+  }
 
-  // If a real external DB (Postgres, MySQL, Turso) is configured via env
+  // 2. Any other PostgreSQL/MySQL external database
+  const envUrl = process.env.DATABASE_URL;
   if (envUrl && !envUrl.includes('dev.db') && !envUrl.includes('seed.db')) {
     return envUrl;
   }
 
-  // In Vercel / Serverless environment:
-  // Root filesystem is read-only, but os.tmpdir() (/tmp on Linux/Vercel) is writable.
-  // Copy seed database to os.tmpdir() so login, registration, and applications work!
+  // 3. In Vercel / Serverless environment: use SQLite seed copy in /tmp
   if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME) {
     const tmpDbPath = path.join(os.tmpdir(), 'desasmart.db');
     try {
@@ -42,11 +46,11 @@ function resolveDatabaseUrl(): string {
     } catch (err) {
       console.error('[Prisma Vercel] Error initializing temp database:', err);
     }
-    // Forward slashes for SQLite URI
     const normalizedPath = tmpDbPath.replace(/\\/g, '/');
     return `file:${normalizedPath}`;
   }
 
+  // 4. Local development: SQLite dev.db
   if (envUrl && envUrl.startsWith('file:')) {
     const cleanRelative = envUrl.slice(5).replace(/^\.\/prisma\//, '').replace(/^\.\//, '');
     const inPrisma = path.join(process.cwd(), 'prisma', cleanRelative);
@@ -73,3 +77,4 @@ export const prisma =
   });
 
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
+
