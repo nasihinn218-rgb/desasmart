@@ -4,6 +4,9 @@ import { getCurrentUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { logAudit } from '@/lib/audit';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 function unauthorized() {
   return NextResponse.json({ error: 'Akses hanya untuk Superadmin.' }, { status: 403 });
 }
@@ -36,10 +39,13 @@ export async function GET() {
       }),
     ]);
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       users,
       roles,
     });
+
+    response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
+    return response;
   } catch (error) {
     console.error('Fetch admin users error:', error);
     return NextResponse.json({ error: 'Gagal memuat daftar akun.' }, { status: 500 });

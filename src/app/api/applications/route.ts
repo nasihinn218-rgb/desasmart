@@ -6,6 +6,9 @@ import { logAudit } from '@/lib/audit';
 import { DESA } from '@/lib/desa-config';
 import { createNotification } from '@/lib/notifications';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function GET(req: NextRequest) {
   try {
     const user = await getCurrentUser();

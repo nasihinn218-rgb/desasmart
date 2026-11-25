@@ -94,7 +94,7 @@ export async function POST(req: NextRequest) {
         phone: phone || null,
         roleId: roleMasyarakat.id,
         villageId: defaultVillage?.id || null,
-        isVerified: true, // Akun langsung aktif & terverifikasi
+        isVerified: false, // Memerlukan verifikasi kode OTP
         citizen: {
           create: {
             nik: nik.trim(),
@@ -107,7 +107,7 @@ export async function POST(req: NextRequest) {
             address: address || DESA.alamat,
             rt: rt || '001',
             rw: rw || '001',
-            dusun: dusun || 'Dusun 1',
+            dusun: dusun || 'Dusun Wage',
             desa: defaultVillage?.name || DESA.nama,
             kecamatan: defaultVillage?.district || DESA.kecamatan,
             kabupaten: defaultVillage?.regency || DESA.kabupaten,
@@ -126,7 +126,7 @@ export async function POST(req: NextRequest) {
 
     // Kirim notifikasi / kode OTP konfirmasi via WhatsApp & Email
     let delivery: { whatsapp: boolean; email: boolean; code?: string } | null = null;
-    let deliveryMessage = 'Akun Anda berhasil didaftarkan.';
+    let deliveryMessage = 'Kode OTP verifikasi telah dikirim ke WhatsApp dan Email Anda.';
     try {
       delivery = await issueOtpForUser({
         id: newUser.id,
@@ -137,7 +137,7 @@ export async function POST(req: NextRequest) {
       const isDelivered = delivery.whatsapp || delivery.email;
       const channels = [delivery.whatsapp && 'WhatsApp', delivery.email && 'Email'].filter(Boolean).join(' & ');
       if (isDelivered) {
-        deliveryMessage = `Pendaftaran berhasil. Konfirmasi telah dikirim ke ${channels}.`;
+        deliveryMessage = `Pendaftaran berhasil. Kode OTP telah dikirim ke ${channels}.`;
       }
     } catch (otpError) {
       console.error('OTP initial delivery failed:', otpError);
@@ -154,14 +154,6 @@ export async function POST(req: NextRequest) {
       ipAddress: req.headers.get('x-forwarded-for') || '127.0.0.1',
       userAgent: req.headers.get('user-agent'),
       details: { nik, otpDelivery: delivery },
-    });
-
-    // Buat token sesi JWT & backup recovery token
-    const token = createToken({
-      userId: newUser.id,
-      email: newUser.email,
-      role: 'MASYARAKAT',
-      name: newUser.name,
     });
 
     const backupToken = createBackupToken({
@@ -187,31 +179,21 @@ export async function POST(req: NextRequest) {
       economicDescription,
     });
 
-    const isSecure = process.env.NEXT_PUBLIC_APP_URL?.startsWith('https') ?? false;
+    const isSecure =
+      process.env.NODE_ENV === 'production' ||
+      req.headers.get('x-forwarded-proto') === 'https' ||
+      (process.env.NEXT_PUBLIC_APP_URL?.startsWith('https') ?? false);
 
     const response = NextResponse.json({
       success: true,
+      requiresVerification: true,
+      email: newUser.email,
+      otpCode: process.env.NODE_ENV === 'development' || !delivery?.whatsapp ? delivery?.code : undefined,
       message: deliveryMessage,
-      redirectUrl: '/dashboard/masyarakat',
-      user: {
-        id: newUser.id,
-        name: newUser.name,
-        email: newUser.email,
-        role: 'MASYARAKAT',
-      },
       delivery,
     });
 
-    // Set cookie sesi langsung agar nama pengguna langsung tampil di dasbor & header
-    response.cookies.set(COOKIE_NAME, token, {
-      httpOnly: true,
-      secure: isSecure,
-      sameSite: 'lax',
-      path: '/',
-      maxAge: 60 * 60 * 24 * 7,
-    });
-
-    // Set cookie backup untuk sinkronisasi instance serverless
+    // Set cookie backup identitas pengguna agar tidak hilang antar instance serverless
     response.cookies.set(BACKUP_COOKIE_NAME, backupToken, {
       httpOnly: true,
       secure: isSecure,

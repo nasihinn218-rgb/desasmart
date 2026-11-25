@@ -64,6 +64,15 @@ export default function StaffDashboardPage() {
 
   useEffect(() => {
     fetchData();
+    const timer = setInterval(() => {
+      fetchData();
+    }, 5000);
+    const onFocus = () => fetchData();
+    window.addEventListener('focus', onFocus);
+    return () => {
+      clearInterval(timer);
+      window.removeEventListener('focus', onFocus);
+    };
   }, [statusFilter, dateFilter]);
 
   const handleSearchSubmit = (e: React.FormEvent) => {

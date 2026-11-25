@@ -86,7 +86,16 @@ export default function SuperadminUsersPage() {
   }, []);
 
   useEffect(() => {
-    void Promise.resolve().then(loadData);
+    loadData();
+    const timer = setInterval(() => {
+      loadData();
+    }, 5000);
+    const onFocus = () => loadData();
+    window.addEventListener('focus', onFocus);
+    return () => {
+      clearInterval(timer);
+      window.removeEventListener('focus', onFocus);
+    };
   }, [loadData]);
 
   const openEditor = (user: ManagedUser) => {

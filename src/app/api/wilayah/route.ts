@@ -2,6 +2,9 @@ import { NextResponse } from 'next/server';
 import { getCurrentUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 const ALLOWED_ROLES = ['STAFF', 'SUPERADMIN', 'KEPALA_DESA'];
 
 export async function GET() {
@@ -34,7 +37,7 @@ export async function GET() {
       },
     });
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       citizens: citizens.map((c) => ({
         id: c.id,
         fullName: c.fullName,
@@ -43,6 +46,18 @@ export async function GET() {
         rw: c.rw,
         dusun: c.dusun,
         address: c.address,
+        occupation: c.occupation,
+        gender: c.gender,
+        phone: c.phone,
+        email: c.user?.email ?? null,
+        hasAccount: !!c.user,
+        isVerified: c.user?.isVerified ?? false,
+        isActive: c.user?.isActive ?? false,
+      })),
+    });
+
+    response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
+    return response;
         occupation: c.occupation,
         gender: c.gender,
         phone: c.phone,

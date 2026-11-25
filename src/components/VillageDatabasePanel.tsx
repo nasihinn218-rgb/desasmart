@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { MapPin, Home, Users, Network, UserCheck, ChevronDown, ChevronUp, Search } from 'lucide-react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { MapPin, Home, Users, Network, UserCheck, ChevronDown, ChevronUp, Search, RotateCw } from 'lucide-react';
 import { DESA, DESA_RW_RT } from '@/lib/desa-config';
 
 // ── Data pejabat wilayah (3 kadus, 5 ketua RW, 12 ketua RT) ──────────────────
@@ -64,18 +64,43 @@ interface Citizen {
 export default function VillageDatabasePanel() {
   const [citizens, setCitizens] = useState<Citizen[]>([]);
   const [loadingCitizens, setLoadingCitizens] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [search, setSearch] = useState('');
   const [filterDusun, setFilterDusun] = useState('ALL');
   const [expandedRw, setExpandedRw] = useState<string | null>(null);
   const [showWarga, setShowWarga] = useState(false);
 
-  useEffect(() => {
-    fetch('/api/wilayah')
-      .then((r) => r.json())
-      .then((d) => setCitizens(d.citizens || []))
-      .catch(() => {})
-      .finally(() => setLoadingCitizens(false));
+  const loadCitizens = useCallback(async (isManual = false) => {
+    if (isManual) setRefreshing(true);
+    try {
+      const res = await fetch('/api/wilayah', { cache: 'no-store' });
+      if (res.ok) {
+        const data = await res.json();
+        setCitizens(data.citizens || []);
+      }
+    } catch (e) {
+      console.warn('Gagal memuat data warga:', e);
+    } finally {
+      setLoadingCitizens(false);
+      if (isManual) setRefreshing(false);
+    }
   }, []);
+
+  useEffect(() => {
+    loadCitizens();
+    // Sinkronisasi realtime otomatis setiap 5 detik agar data warga pendaftar langsung muncul
+    const timer = setInterval(() => {
+      loadCitizens();
+    }, 5000);
+
+    const onFocus = () => loadCitizens();
+    window.addEventListener('focus', onFocus);
+
+    return () => {
+      clearInterval(timer);
+      window.removeEventListener('focus', onFocus);
+    };
+  }, [loadCitizens]);
 
   const filteredCitizens = citizens.filter((c) => {
     const matchSearch =
@@ -108,9 +133,21 @@ export default function VillageDatabasePanel() {
             <p className="text-xs text-[var(--muted)]">{DESA.kecamatan}, {DESA.kabupaten}, {DESA.provinsi}</p>
           </div>
         </div>
-        <span className="hidden sm:inline-flex shrink-0 items-center gap-1.5 neu-pill-inset px-3 py-1 text-[11px] font-bold text-[var(--muted)]">
-          <MapPin className="h-3.5 w-3.5" /> Kode Pos {DESA.kodePos}
-        </span>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => loadCitizens(true)}
+            disabled={refreshing}
+            title="Segarkan data warga secara real-time"
+            className="neu-raised-sm inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-[var(--ink)] cursor-pointer active:shadow-[inset_2px_2px_4px_var(--shadow-dark)]"
+          >
+            <RotateCw className={`h-3.5 w-3.5 text-[var(--accent)] ${refreshing ? 'animate-spin' : ''}`} />
+            <span className="hidden sm:inline">{refreshing ? 'Memuat...' : 'Segarkan Data'}</span>
+          </button>
+          <span className="hidden md:inline-flex shrink-0 items-center gap-1.5 neu-pill-inset px-3 py-1 text-[11px] font-bold text-[var(--muted)]">
+            <MapPin className="h-3.5 w-3.5" /> Kode Pos {DESA.kodePos}
+          </span>
+        </div>
       </div>
 
       <div className="space-y-6 p-5 sm:p-6">

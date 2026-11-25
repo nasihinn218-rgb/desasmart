@@ -70,16 +70,16 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Pastikan akun yang memasukkan email dan password yang benar langsung terverifikasi
-    // sehingga pengguna yang sudah mendaftar tidak pernah terblokir atau stuck di NOT_VERIFIED
+    // Jika akun belum menyelesaikan verifikasi OTP, arahkan pengguna ke verifikasi OTP
     if (!user.isVerified) {
-      await prisma.user
-        .update({
-          where: { id: user.id },
-          data: { isVerified: true },
-        })
-        .catch(() => {});
-      user.isVerified = true;
+      return NextResponse.json(
+        {
+          error: 'Akun Anda belum diverifikasi. Masukkan kode OTP yang dikirim ke WhatsApp/Email Anda.',
+          code: 'NOT_VERIFIED',
+          email: user.email,
+        },
+        { status: 403 }
+      );
     }
 
     const token = createToken({
@@ -145,7 +145,10 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    const isSecure = process.env.NEXT_PUBLIC_APP_URL?.startsWith('https') ?? false;
+    const isSecure =
+      process.env.NODE_ENV === 'production' ||
+      req.headers.get('x-forwarded-proto') === 'https' ||
+      (process.env.NEXT_PUBLIC_APP_URL?.startsWith('https') ?? false);
 
     // Set cookie sesi (7 hari)
     response.cookies.set(COOKIE_NAME, token, {
