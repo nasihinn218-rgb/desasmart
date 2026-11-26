@@ -187,15 +187,12 @@ export async function POST(req: NextRequest) {
       }).slice(-12);
     }
 
-    let databaseContext: Awaited<ReturnType<typeof getAiDatabaseContext>> | null;
+    let databaseContext: Awaited<ReturnType<typeof getAiDatabaseContext>> | null = null;
     try {
       databaseContext = user ? await getAiDatabaseContext(user) : null;
     } catch (error) {
-      console.error('Read AI database context error:', error);
-      return NextResponse.json(
-        { error: 'Gagal membaca data aplikasi dari database. Silakan coba lagi.' },
-        { status: 500 }
-      );
+      console.warn('Read AI database context error (fallback to general AI context):', error);
+      databaseContext = null;
     }
     const databaseAnswer = answerAiDatabaseQuestion(message, databaseContext);
     const localAnswer =

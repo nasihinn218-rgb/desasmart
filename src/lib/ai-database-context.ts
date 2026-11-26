@@ -187,6 +187,40 @@ const STAFF_QUEUE_STATUSES = ['SUBMITTED', 'STAFF_REVIEW', 'NEED_REVISION'];
 const SUPERADMIN_QUEUE_STATUSES = ['SUPERADMIN_REVIEW', 'HEAD_REVIEW', 'NEED_REVISION'];
 const HEAD_QUEUE_STATUSES = ['HEAD_REVIEW'];
 
+const DEFAULT_TABLE_NAMES = [
+  'users', 'roles', 'citizens', 'applications', 'application_documents',
+  'application_reviews', 'application_status_histories', 'notifications',
+  'generated_documents', 'villages', 'rukun_warga', 'rukun_tetangga',
+  'audit_logs', 'ai_conversations', 'ai_messages', 'ai_settings', 'ai_credentials'
+];
+
+async function getDatabaseTableNames(): Promise<Array<{ name: string }>> {
+  try {
+    const isPostgres = Boolean(
+      process.env.POSTGRES_PRISMA_DATABASE_URL ||
+      process.env.DATABASE_URL?.startsWith('postgres')
+    );
+    if (isPostgres) {
+      return await prisma.$queryRaw<Array<{ name: string }>>`
+        SELECT table_name AS name FROM information_schema.tables
+        WHERE table_schema = 'public'
+          AND table_type = 'BASE TABLE'
+          AND table_name != '_prisma_migrations'
+        ORDER BY table_name
+      `;
+    }
+    return await prisma.$queryRaw<Array<{ name: string }>>`
+      SELECT name FROM sqlite_master
+      WHERE type = 'table'
+        AND name NOT LIKE 'sqlite_%'
+        AND name != '_prisma_migrations'
+      ORDER BY name
+    `;
+  } catch {
+    return DEFAULT_TABLE_NAMES.map((name) => ({ name }));
+  }
+}
+
 export async function getAiDatabaseContext(
   user: AiDatabaseUser
 ): Promise<AiDatabaseQuestionContext> {
@@ -202,13 +236,7 @@ export async function getAiDatabaseContext(
     issuedDocs,
     wilayah,
   ] = await Promise.all([
-    prisma.$queryRaw<Array<{ name: string }>>`
-      SELECT name FROM sqlite_master
-      WHERE type = 'table'
-        AND name NOT LIKE 'sqlite_%'
-        AND name != '_prisma_migrations'
-      ORDER BY name
-    `,
+    getDatabaseTableNames(),
     prisma.citizen.count(),
     prisma.user.count({
       where: {
