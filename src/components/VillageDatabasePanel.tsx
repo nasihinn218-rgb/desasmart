@@ -9,39 +9,39 @@ const PEJABAT: {
   rt?: string; rw?: string; dusun?: string;
   ketua: string; jabatan: string;
 }[] = [
-  // 12 Ketua RT
-  { rt: '001', rw: '001', dusun: 'Dusun Wage',      ketua: 'Bpk. Sarwono',           jabatan: 'Ketua RT 001' },
-  { rt: '002', rw: '001', dusun: 'Dusun Wage',      ketua: 'Bpk. Darmawan',          jabatan: 'Ketua RT 002' },
-  { rt: '003', rw: '001', dusun: 'Dusun Wage',      ketua: 'Bpk. Rahmat Hidayat',    jabatan: 'Ketua RT 003' },
-  { rt: '004', rw: '002', dusun: 'Dusun Wage',      ketua: 'Bpk. Suroso',            jabatan: 'Ketua RT 004' },
-  { rt: '005', rw: '002', dusun: 'Dusun Wage',      ketua: 'Bpk. Hendra Gunawan',    jabatan: 'Ketua RT 005' },
-  { rt: '006', rw: '002', dusun: 'Dusun Wage',      ketua: 'Ibu Suminah',            jabatan: 'Ketua RT 006' },
-  { rt: '007', rw: '003', dusun: 'Dusun Kliwon',    ketua: 'Bpk. Jaelani',           jabatan: 'Ketua RT 007' },
-  { rt: '008', rw: '003', dusun: 'Dusun Kliwon',    ketua: 'Bpk. Wahyu Prabowo',     jabatan: 'Ketua RT 008' },
-  { rt: '009', rw: '004', dusun: 'Dusun Kliwon',    ketua: 'Bpk. Ruslan Effendi',    jabatan: 'Ketua RT 009' },
-  { rt: '010', rw: '004', dusun: 'Dusun Kliwon',    ketua: 'Ibu Marwati',            jabatan: 'Ketua RT 010' },
-  { rt: '011', rw: '005', dusun: 'Dusun Kaligandu', ketua: 'Bpk. Sutrisno',          jabatan: 'Ketua RT 011' },
-  { rt: '012', rw: '005', dusun: 'Dusun Kaligandu', ketua: 'Bpk. Bambang Irawan',    jabatan: 'Ketua RT 012' },
-  // 5 Ketua RW
-  { rw: '001', dusun: 'Dusun Wage',      ketua: 'Bpk. H. Sobirin',       jabatan: 'Ketua RW 001' },
-  { rw: '002', dusun: 'Dusun Wage',      ketua: 'Bpk. Yusuf Hakim',      jabatan: 'Ketua RW 002' },
-  { rw: '003', dusun: 'Dusun Kliwon',    ketua: 'Bpk. Edi Purnomo',      jabatan: 'Ketua RW 003' },
-  { rw: '004', dusun: 'Dusun Kliwon',    ketua: 'Bpk. Maman Suherman',   jabatan: 'Ketua RW 004' },
-  { rw: '005', dusun: 'Dusun Kaligandu', ketua: 'Bpk. Sugianto, S.Pd',   jabatan: 'Ketua RW 005' },
-  // 3 Kepala Dusun
-  { dusun: 'Dusun Wage',      ketua: 'Bpk. Agus Setiawan, S.IP',  jabatan: 'Kepala Dusun Wage' },
-  { dusun: 'Dusun Kliwon',    ketua: 'Bpk. Deden Suhendi',         jabatan: 'Kepala Dusun Kliwon' },
-  { dusun: 'Dusun Kaligandu', ketua: 'Ibu Nurhayati, A.Md',        jabatan: 'Kepala Dusun Kaligandu' },
-];
+    // 12 Ketua RT
+    { rt: '001', rw: '001', dusun: 'Dusun Wage', ketua: 'Bpk. Sarwono', jabatan: 'Ketua RT 001' },
+    { rt: '002', rw: '001', dusun: 'Dusun Wage', ketua: 'Bpk. Darmawan', jabatan: 'Ketua RT 002' },
+    { rt: '003', rw: '001', dusun: 'Dusun Wage', ketua: 'Bpk. Rahmat Hidayat', jabatan: 'Ketua RT 003' },
+    { rt: '004', rw: '002', dusun: 'Dusun Wage', ketua: 'Bpk. Suroso', jabatan: 'Ketua RT 004' },
+    { rt: '005', rw: '002', dusun: 'Dusun Wage', ketua: 'Bpk. Hendra Gunawan', jabatan: 'Ketua RT 005' },
+    { rt: '006', rw: '002', dusun: 'Dusun Wage', ketua: 'Ibu Suminah', jabatan: 'Ketua RT 006' },
+    { rt: '007', rw: '003', dusun: 'Dusun Kliwon', ketua: 'Bpk. Jaelani', jabatan: 'Ketua RT 007' },
+    { rt: '008', rw: '003', dusun: 'Dusun Kliwon', ketua: 'Bpk. Wahyu Prabowo', jabatan: 'Ketua RT 008' },
+    { rt: '009', rw: '004', dusun: 'Dusun Kliwon', ketua: 'Bpk. Ruslan Effendi', jabatan: 'Ketua RT 009' },
+    { rt: '010', rw: '004', dusun: 'Dusun Kliwon', ketua: 'Ibu Marwati', jabatan: 'Ketua RT 010' },
+    { rt: '011', rw: '005', dusun: 'Dusun Kaligandu', ketua: 'Bpk. Sutrisno', jabatan: 'Ketua RT 011' },
+    { rt: '012', rw: '005', dusun: 'Dusun Kaligandu', ketua: 'Bpk. Bambang Irawan', jabatan: 'Ketua RT 012' },
+    // 5 Ketua RW
+    { rw: '001', dusun: 'Dusun Wage', ketua: 'Bpk. H. Sobirin', jabatan: 'Ketua RW 001' },
+    { rw: '002', dusun: 'Dusun Wage', ketua: 'Bpk. Yusuf Hakim', jabatan: 'Ketua RW 002' },
+    { rw: '003', dusun: 'Dusun Kliwon', ketua: 'Bpk. Edi Purnomo', jabatan: 'Ketua RW 003' },
+    { rw: '004', dusun: 'Dusun Kliwon', ketua: 'Bpk. Maman Suherman', jabatan: 'Ketua RW 004' },
+    { rw: '005', dusun: 'Dusun Kaligandu', ketua: 'Bpk. Sugianto, S.Pd', jabatan: 'Ketua RW 005' },
+    // 3 Kepala Dusun
+    { dusun: 'Dusun Wage', ketua: 'Bpk. Agus Setiawan, S.IP', jabatan: 'Kepala Dusun Wage' },
+    { dusun: 'Dusun Kliwon', ketua: 'Bpk. Deden Suhendi', jabatan: 'Kepala Dusun Kliwon' },
+    { dusun: 'Dusun Kaligandu', ketua: 'Ibu Nurhayati, A.Md', jabatan: 'Kepala Dusun Kaligandu' },
+  ];
 
-const kadusList   = PEJABAT.filter((p) => !p.rt && !p.rw && p.dusun);
+const kadusList = PEJABAT.filter((p) => !p.rt && !p.rw && p.dusun);
 const ketuaRwList = PEJABAT.filter((p) => p.rw && !p.rt);
 const ketuaRtList = PEJABAT.filter((p) => p.rt && p.rw);
 
 // warna badge dusun
 const DUSUN_COLOR: Record<string, string> = {
-  'Dusun Wage':      'bg-emerald-100 text-emerald-800 dark:bg-emerald-950/80 dark:text-emerald-200 dark:border dark:border-emerald-700/60',
-  'Dusun Kliwon':    'bg-sky-100 text-sky-800 dark:bg-sky-950/80 dark:text-sky-200 dark:border dark:border-sky-700/60',
+  'Dusun Wage': 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950/80 dark:text-emerald-200 dark:border dark:border-emerald-700/60',
+  'Dusun Kliwon': 'bg-sky-100 text-sky-800 dark:bg-sky-950/80 dark:text-sky-200 dark:border dark:border-sky-700/60',
   'Dusun Kaligandu': 'bg-amber-100 text-amber-800 dark:bg-amber-950/80 dark:text-amber-200 dark:border dark:border-amber-700/60',
 };
 
@@ -114,8 +114,8 @@ export default function VillageDatabasePanel() {
 
   const tiles = [
     { label: 'Jumlah Dusun', value: DESA.jumlahDusun, suffix: 'dusun', icon: <Home className="h-5 w-5" /> },
-    { label: 'Jumlah RW',    value: DESA.jumlahRW,    suffix: 'RW',    icon: <Network className="h-5 w-5" /> },
-    { label: 'Jumlah RT',    value: DESA.jumlahRT,    suffix: 'RT',    icon: <Users className="h-5 w-5" /> },
+    { label: 'Jumlah RW', value: DESA.jumlahRW, suffix: 'RW', icon: <Network className="h-5 w-5" /> },
+    { label: 'Jumlah RT', value: DESA.jumlahRT, suffix: 'RT', icon: <Users className="h-5 w-5" /> },
     { label: 'Warga Terdaftar', value: loadingCitizens ? '...' : citizens.length, suffix: 'warga', icon: <UserCheck className="h-5 w-5" /> },
   ];
 
@@ -123,17 +123,23 @@ export default function VillageDatabasePanel() {
     <section className="overflow-hidden neu-raised space-y-0">
 
       {/* ── Header ── */}
-      <div className="flex items-center justify-between gap-3 border-b border-[var(--shadow-dark)]/20 p-5 sm:p-6">
-        <div className="flex items-center gap-2.5">
-          <div className="flex h-9 w-9 items-center justify-center neu-circle-inset-sm text-[var(--accent)]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[var(--shadow-dark)]/20 p-4 sm:p-6">
+        <div className="flex items-start sm:items-center gap-2.5 min-w-0">
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center neu-circle-inset-sm text-[var(--accent)] mt-0.5 sm:mt-0">
             <Home className="h-5 w-5" />
           </div>
-          <div>
-            <h3 className="text-sm font-bold">Database Wilayah {DESA.nama}</h3>
-            <p className="text-xs text-[var(--muted)]">{DESA.kecamatan}, {DESA.kabupaten}, {DESA.provinsi}</p>
+          <div className="min-w-0">
+            <h3 className="text-sm font-bold text-[var(--ink)]">Database Wilayah {DESA.nama}</h3>
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs text-[var(--muted)] mt-0.5">
+              <span>{DESA.kecamatan}, {DESA.kabupaten}</span>
+              <span>·</span>
+              <span className="inline-flex items-center gap-1 font-semibold text-[var(--ink)]">
+                <MapPin className="h-3 w-3 text-[var(--accent)]" /> Kode Pos {DESA.kodePos}
+              </span>
+            </div>
           </div>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 shrink-0 self-end sm:self-center">
           <button
             type="button"
             onClick={() => loadCitizens(true)}
@@ -142,11 +148,8 @@ export default function VillageDatabasePanel() {
             className="neu-raised-sm inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-[var(--ink)] cursor-pointer active:shadow-[inset_2px_2px_4px_var(--shadow-dark)]"
           >
             <RotateCw className={`h-3.5 w-3.5 text-[var(--accent)] ${refreshing ? 'animate-spin' : ''}`} />
-            <span className="hidden sm:inline">{refreshing ? 'Memuat...' : 'Segarkan Data'}</span>
+            <span>{refreshing ? 'Memuat...' : 'Segarkan Data'}</span>
           </button>
-          <span className="hidden md:inline-flex shrink-0 items-center gap-1.5 neu-pill-inset px-3 py-1 text-[11px] font-bold text-[var(--muted)]">
-            <MapPin className="h-3.5 w-3.5" /> Kode Pos {DESA.kodePos}
-          </span>
         </div>
       </div>
 
@@ -255,7 +258,7 @@ export default function VillageDatabasePanel() {
                     <div className="divide-y divide-slate-100 dark:divide-slate-800 bg-white dark:bg-slate-900">
                       {row.rt.map((rtCode) => {
                         const ketuaRt = ketuaRtList.find((p) => p.rt === rtCode && p.rw === row.rw);
-                        const wargaCount = citizens.filter((c) => c.rt.padStart(3,'0') === rtCode && c.rw.padStart(3,'0') === row.rw).length;
+                        const wargaCount = citizens.filter((c) => c.rt.padStart(3, '0') === rtCode && c.rw.padStart(3, '0') === row.rw).length;
                         return (
                           <div key={rtCode} className="flex items-center justify-between px-5 py-2.5">
                             <div className="flex items-center gap-3">

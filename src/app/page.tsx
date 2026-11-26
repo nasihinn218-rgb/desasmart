@@ -253,65 +253,65 @@ export default function LandingPage() {
       </main>
 
       {/* 6. Footer (Tetap Gelap) */}
-      <footer className="mt-auto bg-[#131a17] px-5 py-14 text-[#c9d2cc]">
+      <footer className="mt-auto bg-[#131a17] px-4 sm:px-5 py-8 sm:py-14 text-[#c9d2cc]">
         <div className="mx-auto max-w-[1100px]">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-3">
             {/* Kolom 1: Identitas Desa */}
-            <div className="rounded-2xl bg-white/[0.03] p-6 shadow-[inset_2px_2px_5px_rgba(0,0,0,0.5),inset_-2px_-2px_5px_rgba(255,255,255,0.05)]">
-              <div className="mb-3 flex items-center gap-3">
+            <div className="rounded-xl sm:rounded-2xl bg-white/[0.03] p-4 sm:p-6 shadow-[inset_2px_2px_5px_rgba(0,0,0,0.5),inset_-2px_-2px_5px_rgba(255,255,255,0.05)]">
+              <div className="mb-2 sm:mb-3 flex items-center gap-2.5 sm:gap-3">
                 <div
-                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#3a5a4a] text-lg font-extrabold text-white"
+                  className="flex h-8 w-8 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-lg sm:rounded-xl bg-[#3a5a4a] text-base sm:text-lg font-extrabold text-white"
                   aria-hidden="true"
                 >
                   D
                 </div>
-                <b className="text-lg font-extrabold text-white">
+                <b className="text-base sm:text-lg font-extrabold text-white">
                   Pemerintah {DESA.nama}
                 </b>
               </div>
-              <p className="text-sm leading-relaxed text-[#a3afa8]">
+              <p className="text-xs sm:text-sm leading-relaxed text-[#a3afa8]">
                 {DESA.kecamatan}, {DESA.kabupaten}, {DESA.provinsi}. Berkomitmen memberikan
                 pelayanan administrasi publik yang cepat, inklusif, dan bebas pungli.
               </p>
             </div>
 
             {/* Kolom 2: Kontak Kantor */}
-            <div className="rounded-2xl bg-white/[0.03] p-6 shadow-[inset_2px_2px_5px_rgba(0,0,0,0.5),inset_-2px_-2px_5px_rgba(255,255,255,0.05)] space-y-3">
-              <h3 className="text-base font-bold text-white">
+            <div className="rounded-xl sm:rounded-2xl bg-white/[0.03] p-4 sm:p-6 shadow-[inset_2px_2px_5px_rgba(0,0,0,0.5),inset_-2px_-2px_5px_rgba(255,255,255,0.05)] space-y-2.5 sm:space-y-3">
+              <h3 className="text-sm sm:text-base font-bold text-white">
                 Kontak kantor
               </h3>
-              <div className="space-y-2 text-sm text-[#a3afa8]">
+              <div className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-[#a3afa8]">
                 <p className="flex items-center gap-2">
-                  <Phone className="h-4 w-4 shrink-0 text-[#7fb095]" />
+                  <Phone className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0 text-[#7fb095]" />
                   <span>{DESA.telepon || '(0231) 876-5432'}</span>
                 </p>
                 <p className="flex items-center gap-2">
-                  <Mail className="h-4 w-4 shrink-0 text-[#7fb095]" />
+                  <Mail className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0 text-[#7fb095]" />
                   <span>{DESA.email || 'pelayanan@silihasih.desa.id'}</span>
                 </p>
                 <p className="flex items-start gap-2">
-                  <MapPin className="mt-1 h-4 w-4 shrink-0 text-[#7fb095]" />
+                  <MapPin className="mt-0.5 h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0 text-[#7fb095]" />
                   <span>{DESA_ALAMAT_LENGKAP}</span>
                 </p>
               </div>
             </div>
 
             {/* Kolom 3: Jam Pelayanan Loket */}
-            <div className="rounded-2xl bg-white/[0.03] p-6 shadow-[inset_2px_2px_5px_rgba(0,0,0,0.5),inset_-2px_-2px_5px_rgba(255,255,255,0.05)] space-y-3">
-              <h3 className="text-base font-bold text-white">
+            <div className="rounded-xl sm:rounded-2xl bg-white/[0.03] p-4 sm:p-6 shadow-[inset_2px_2px_5px_rgba(0,0,0,0.5),inset_-2px_-2px_5px_rgba(255,255,255,0.05)] space-y-2.5 sm:space-y-3">
+              <h3 className="text-sm sm:text-base font-bold text-white">
                 Jam pelayanan loket
               </h3>
-              <div className="space-y-1.5 text-sm text-[#a3afa8]">
+              <div className="space-y-1 sm:space-y-1.5 text-xs sm:text-sm text-[#a3afa8]">
                 <p>Senin – Kamis: 08.00 – 15.00 WIB</p>
                 <p>Jumat: 08.00 – 14.30 WIB</p>
-                <p className="pt-2 font-bold text-[#a9d4bd]">
+                <p className="pt-1.5 sm:pt-2 font-bold text-[#a9d4bd]">
                   Pengajuan online dibuka setiap hari, 24 jam
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="mt-12 border-t border-[#2b3630] pt-6 text-center text-xs text-[#a3afa8]">
+          <div className="mt-8 sm:mt-12 border-t border-[#2b3630] pt-4 sm:pt-6 text-center text-[11px] sm:text-xs text-[#a3afa8]">
             &copy; {new Date().getFullYear()} Pemerintah {DESA.nama}. Hak Cipta Dilindungi Undang-Undang.
           </div>
         </div>

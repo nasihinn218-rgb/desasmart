@@ -1024,6 +1024,54 @@ async function main() {
     ],
   });
 
+  console.log('--- Seeding AI Configuration ---');
+  const aiApiKey = process.env.GROQ_API_KEY || process.env.AI_API_KEY;
+  if (aiApiKey) {
+    const aiProviderName = 'GroqCloud';
+    const aiBaseUrl = 'https://api.groq.com/openai/v1';
+    const aiModel = 'openai/gpt-oss-120b';
+
+    const defaultAiCred = await prisma.aiCredential.upsert({
+      where: {
+        providerName_model: {
+          providerName: aiProviderName,
+          model: aiModel,
+        },
+      },
+      create: {
+        providerName: aiProviderName,
+        baseUrl: aiBaseUrl,
+        model: aiModel,
+        apiKey: aiApiKey,
+      },
+      update: {
+        baseUrl: aiBaseUrl,
+        apiKey: aiApiKey,
+      },
+    });
+
+    await prisma.aiSetting.upsert({
+      where: { id: 'singleton' },
+      create: {
+        id: 'singleton',
+        providerName: aiProviderName,
+        baseUrl: aiBaseUrl,
+        model: aiModel,
+        apiKey: aiApiKey,
+        activeCredentialId: defaultAiCred.id,
+        updatedByName: 'Superadmin Desa',
+      },
+      update: {
+        providerName: aiProviderName,
+        baseUrl: aiBaseUrl,
+        model: aiModel,
+        apiKey: aiApiKey,
+        activeCredentialId: defaultAiCred.id,
+        updatedByName: 'Superadmin Desa',
+      },
+    });
+  }
+
   console.log('=== Database seeded successfully! ===');
   console.log('Demo Accounts:');
   console.log('1. Kepala Desa: h.mulyadi@gmail.go.id / Password123!');
